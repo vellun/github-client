@@ -7,7 +7,6 @@ export default class RepsService {
     return response.data;
   }
   static async getByRepoName(repoName) {
-    console.log(repoName)
     const response = await axios.get(`https://api.github.com/repos/ktsstudio/${repoName}`);
     return response.data;
   }

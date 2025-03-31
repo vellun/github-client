@@ -16,7 +16,6 @@ const RepoDetailPage = () => {
 
   useEffect(() => {
     fetchRepo();
-    console.log(repo);
   }, [repoName]);
 
   return (
