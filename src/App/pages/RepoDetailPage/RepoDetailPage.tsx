@@ -25,7 +25,7 @@ const RepoDetailPage = () => {
       <div className={styles.Page}>
         <TitleSection repo={repo} />
         {repo && repo.homepage && <RepoLink repo={repo} />}
-        {/* {repo && repo.topics && <TopicSection topics={repo.topics} />} */}
+        {repo && repo.topics && <TopicSection topics={repo.topics} />}
         <Readme repo={repo} />
       </div>
     </div>
