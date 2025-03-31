@@ -4,11 +4,15 @@ import { useFetching } from "hooks/useFetching";
 import RepsService from "api/RepsService";
 import Text from "components/Text";
 
-const Readme = ({ orgName, repoName }) => {
+const Readme = ({ repo }) => {
+  if (!repo) {
+    return null;
+  }
+
   const [readmeHtml, setReadmeHtml] = useState<string>("");
 
   const [fetchReadme, error] = useFetching(async () => {
-    const reps = await RepsService.getReadme(orgName, repoName);
+    const reps = await RepsService.getReadme(repo.name);
     setReadmeHtml(reps);
   });
 

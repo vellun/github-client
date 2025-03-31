@@ -13,7 +13,7 @@ export const routesConfig: RouteObject[] = [
         element: <AllRepsPage />,
       },
       {
-        path: "/repositories/:repo",
+        path: "/repositories/:repoName",
         element: <RepoDetailPage />,
       },
     ],

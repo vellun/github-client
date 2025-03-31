@@ -1,13 +1,30 @@
-import Readme from "./components/Readme";
-import styles from "./RepoDetailPage.module.scss";
+import RepsService from "api/RepsService";
+import { useFetching } from "hooks/useFetching";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
 import TitleSection from "./components/TitleSection";
+import styles from "./RepoDetailPage.module.scss";
+import Readme from "./components/Readme";
 
-const RepoDetailPage = ({ repo }) => {
+const RepoDetailPage = () => {
+  const { repoName } = useParams();
+  const [repo, setRepo] = useState(null);
+  const [fetchRepo, error] = useFetching(async () => {
+    const repo = await RepsService.getByRepoName(repoName);
+    setRepo(repo);
+  });
+
+  useEffect(() => {
+    fetchRepo();
+    console.log(repo);
+  }, [repoName]);
+
   return (
     <div className={styles.RepoDetailPage}>
-      <TitleSection></TitleSection>
-      {/* <Readme orgName={repo.owner.login} repoName={repo.name} /> */}
-      <Readme orgName="ktsstudio" repoName="notific" />
+      <div className={styles.Page}>
+        <TitleSection repo={repo} />
+        <Readme repo={repo} />
+      </div>
     </div>
   );
 };
