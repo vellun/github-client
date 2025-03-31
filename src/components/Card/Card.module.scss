@@ -1,10 +1,11 @@
 @import "styles/variables";
 
 .card {
-  width: 348px;
+  width: 360px;
   background-color: white;
   transition: 0.2s;
   border-radius: $border-radius;
+  height: 500px;
 }
 
 .card:hover {
@@ -21,11 +22,11 @@
 }
 
 .cardBody {
-  padding: var(--space-xl) var(--space-xs);
+  padding: $space-xl $space-xs;
 }
 
 .cardFooter {
-  margin-top: var(--space-l);
+  margin-top: $space-l;
   display: flex;
   align-items: center;
   justify-content: space-between;

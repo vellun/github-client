@@ -1,47 +1,45 @@
-import React from 'react';
-import Button from '../Button';
-import Card, { CardProps } from './Card';
+import Button from "../Button";
+import Card, { CardProps } from "./Card";
 
 export default {
-  title: 'Card',
+  title: "Card",
   component: Card,
   argTypes: {
     className: {
-      control: 'text',
+      control: "text",
     },
     image: {
-      defaultValue: '/picture.svg',
-      control: 'text'
+      defaultValue: "/picture.svg",
+      control: "text",
     },
     captionSlot: {
       mapping: {
-        'undefined': undefined,
+        undefined: undefined,
       },
-      control: 'text'
+      control: "text",
     },
     title: {
       mapping: {
-        'undefined': undefined,
+        undefined: undefined,
       },
-      control: 'text',
-      defaultValue: 'Заголовок карточки в несколько строк Заголовок карточки в несколько строк'
+      control: "text",
+      defaultValue: "Заголовок карточки в несколько строк Заголовок карточки в несколько строк",
     },
     subtitle: {
       mapping: {
-        'undefined': undefined,
+        undefined: undefined,
       },
-      control: 'text',
-      defaultValue: 'Описание карточки Описание карточки Описание карточкиОписание карточкиОписание карточки Описание карточки'
+      control: "text",
+      defaultValue:
+        "Описание карточки Описание карточки Описание карточкиОписание карточкиОписание карточки Описание карточки",
     },
     contentSlot: {
       mapping: {
-        'undefined': undefined,
+        undefined: undefined,
       },
-      control: 'text'
+      control: "text",
     },
   },
 };
 
-export const Default = (props: CardProps) => (
-    <Card {...props} actionSlot={<Button>В корзину</Button>} />
-);
+export const Default = (props: CardProps) => <Card {...props} actionSlot={<Button>В корзину</Button>} />;

@@ -22,7 +22,7 @@ const RepsSection = () => {
     <div className={styles.RepsSection}>
       {reps.map((repo) => (
         <Link className={styles.cardLink} to={`/repositories/${repo.name}`}>
-          <Card image={ktsCat} title={repo.name} subtitle={repo.description}></Card>
+          <Card className={styles.RepoCard} image={ktsCat} title={repo.name} subtitle={repo.description}></Card>
         </Link>
       ))}
     </div>

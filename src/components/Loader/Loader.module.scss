@@ -1,5 +1,4 @@
-/* @import url('../variables.css'); */
-
+@import "styles/variables";
 
 @keyframes rotate {
   0% {
@@ -11,7 +10,7 @@
 }
 
 .loader {
-  fill: white;
+  fill: $brand;
   animation: rotate 2s linear infinite;
 }
 
@@ -20,16 +19,16 @@
 }
 
 .loader-l {
-  width: 60px;
-  height: 60px;
+  width: $loader-l;
+  height: $loader-l;
 }
 
 .loader-m {
-  width: 48px;
-  height: 48px;
+  width: $loader-m;
+  height: $loader-m;
 }
 
 .loader-s {
-  width: 24px;
-  height: 24px;
+  width: $loader-s;
+  height: $loader-s;
 }
