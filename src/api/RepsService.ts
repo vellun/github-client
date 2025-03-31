@@ -6,4 +6,9 @@ export default class RepsService {
     const response = await axios.get("https://jsonplaceholder.typicode.com/posts");
     return response.data;
   }
+  static async getByRepoName(repoName) {
+    // https://api.github.com/repos/ktsstudio/ + repoName
+    const response = await axios.get("https://jsonplaceholder.typicode.com/posts/1");
+    return response;
+  }
 }

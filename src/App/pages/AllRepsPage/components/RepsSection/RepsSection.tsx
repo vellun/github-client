@@ -21,7 +21,7 @@ const RepsSection = () => {
   return (
     <div className={styles.RepsSection}>
       {reps.map((repo) => (
-        <Link className={styles.cardLink} to={`/repositories/${repo.id}`}>
+        <Link className={styles.cardLink} to={`/repositories/${repo.name}`}>
           <Card image={ktsCat} title={repo.title} subtitle={repo.body}></Card>
         </Link>
       ))}

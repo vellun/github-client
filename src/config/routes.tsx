@@ -1,7 +1,7 @@
 import { RouteObject } from "react-router";
 import App from "App";
 import AllRepsPage from "App/pages/AllRepsPage";
-import RepDetailPage from "App/pages/RepDetailPage";
+import RepoDetailPage from "App/pages/RepoDetailPage";
 
 export const routesConfig: RouteObject[] = [
   {
@@ -13,8 +13,8 @@ export const routesConfig: RouteObject[] = [
         element: <AllRepsPage />,
       },
       {
-        path: "/repositories/:id",
-        element: <RepDetailPage />,
+        path: "/repositories/:repo",
+        element: <RepoDetailPage />,
       },
     ],
   },
