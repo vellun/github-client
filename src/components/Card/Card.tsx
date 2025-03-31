@@ -1,7 +1,7 @@
 import React from 'react';
 import cn from 'classnames';
 
-import Text from '../Text';
+import Text from 'components/Text';
 import styles from "./Card.module.scss";
 
 export type CardProps = {
@@ -34,12 +34,12 @@ const Card: React.FC<CardProps> = ({
   actionSlot,
 }) => {
   return (
-    <div className={cn('card', className)} onClick={onClick}>
-      <img className="card__image" src={image} alt="Картинко карточки"></img>
-      <div className="card__body">
+    <div className={cn(styles.card, className)} onClick={onClick}>
+      <img className={styles.cardImage} src={image} alt="Repo's card image"></img>
+      <div className={styles.cardBody}>
         {captionSlot && (
           <Text
-          className={cn('cardText', 'captionSlot')}
+          className={cn(styles.cardText, styles.captionSlot)}
             weight="medium"
             view="p-14"
             color="secondary"
@@ -48,7 +48,7 @@ const Card: React.FC<CardProps> = ({
           </Text>
         )}
         <Text
-          className={cn('cardText', 'cardTitle')}
+          className={cn(styles.cardText, styles.cardTitle)}
           weight="medium"
           view="p-20"
           color="primary"
@@ -57,7 +57,7 @@ const Card: React.FC<CardProps> = ({
           {title}
         </Text>
         <Text
-          className={cn('cardTitle', 'cardSubtitle')}
+          className={cn(styles.cardTitle, styles.cardSubtitle)}
           weight="normal"
           view="p-16"
           color="secondary"
@@ -65,10 +65,10 @@ const Card: React.FC<CardProps> = ({
         >
           {subtitle}
         </Text>
-        <div className="card__footer">
+        <div className={styles.cardFooter}>
           {contentSlot && (
             <Text
-              className={cn('cardTitle', 'contentSlot')}
+              className={cn(styles.cardTitle, styles.contentSlot)}
               weight="bold"
               view="p-18"
               color="primary"
