@@ -1,6 +1,9 @@
+@import 'styles/variables';
+
 .InputDiv {
   height: 52px;
   position: relative;
+  width: 100%;
 }
 
 .input {
@@ -9,6 +12,7 @@
   width: 100%;
   display: block;
   padding: 14px 12px;
+  border-radius: $border-radius;
 }
 
 .input:focus {

@@ -24,7 +24,8 @@ const Button: React.FC<ButtonProps> = ({ loading, children, disabled, className,
     {...props}
   >
     {loading && <Loader className={styles.buttonLoader} size="s"></Loader>}
-    <Text view="p-18">{children}</Text>
+    {children}
+    {/* <Text view="p-18">{children}</Text> */}
   </button>
 );
 

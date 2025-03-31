@@ -9,7 +9,7 @@ const Navbar = () => {
   return (
     <div className={cn(styles.navbar)}>
       <div className={cn(styles.navbarLogo)}>
-        <img src={githubLogo} alt="GitHub Logo" width="32px" height="32px" />
+        <img src={githubLogo} alt="GitHub User Logo" width="32px" height="32px" />
         <Text weight="bold" view="p-20">
           GitHub Client
         </Text>
