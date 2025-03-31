@@ -1,0 +1,36 @@
+.card {
+  width: 348px;
+  background-color: white;
+  transition: 0.2s;
+}
+
+.card:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.card__image {
+  display: block;
+  width: 100%;
+  height: 348px;
+  background-color: #d9d9d9;
+}
+
+.card__body {
+  padding: var(--space-xl) var(--space-xs);
+}
+
+.card__footer {
+  margin-top: var(--space-l);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cardText {
+  margin: 8px 0;
+}
+
+.cardTitle,
+.captionSlot {
+  margin-top: 0;
+}

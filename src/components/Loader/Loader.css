@@ -1,0 +1,35 @@
+/* @import url('../variables.css'); */
+
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loader {
+  fill: white;
+  animation: rotate 2s linear infinite;
+}
+
+.buttonLoader {
+  fill: #fff;
+}
+
+.loader-l {
+  width: 60px;
+  height: 60px;
+}
+
+.loader-m {
+  width: 48px;
+  height: 48px;
+}
+
+.loader-s {
+  width: 24px;
+  height: 24px;
+}

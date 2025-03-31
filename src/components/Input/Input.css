@@ -1,0 +1,28 @@
+.InputDiv {
+  height: 52px;
+  position: relative;
+}
+
+.input {
+  border: none;
+  height: 100%;
+  width: 100%;
+  display: block;
+  padding: 14px 12px;
+}
+
+.input:focus {
+  outline: none;
+  border: 1px solid var(--brand);
+}
+
+.input:disabled {
+  background-color: white;
+}
+
+.inputIcon {
+  position: absolute;
+  right: 12px;
+  bottom: 50%;
+  transform: translateY(50%);
+}

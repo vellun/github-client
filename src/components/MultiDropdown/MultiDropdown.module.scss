@@ -1,0 +1,51 @@
+@import '../../styles/styles.css';
+
+.root {
+  position: relative;
+}
+
+.multi-dropdown {
+  position: relative;
+}
+
+.category {
+  background: #ffffff;
+  box-sizing: border-box;
+  color: #afadb5;
+
+  &:focus {
+    color: #151411;
+  }
+  &:checked {
+    color: #afadb5;
+  }
+
+  &:disabled {
+    color: #151411;
+    opacity: 0.8;
+  }
+}
+
+.menuCategory {
+  position: absolute;
+  background: #ffffff;
+  box-shadow: 0px 4px 10px rgba(#000, 0.25);
+  width: 100%;
+  top: calc(100% + 8px);
+}
+
+.item {
+  padding: 14px 12px;
+  display: flex;
+  align-items: center;
+  color: #000000;
+  cursor: pointer;
+}
+
+.item__selected {
+  color: #518581;
+
+  &:hover{
+    color: #AFADB5
+  }
+}

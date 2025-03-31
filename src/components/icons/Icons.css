@@ -1,0 +1,11 @@
+.IconAccent .iconPath {
+  stroke: #518581;
+}
+
+.IconSecondary .iconPath {
+  stroke: #afadb5;
+}
+
+.IconPrimary .iconPath {
+  stroke: black;
+}
