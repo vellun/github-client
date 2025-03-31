@@ -6,6 +6,9 @@
 }
 
 .titleText {
+  font-size: 44px;
+  line-height: 48px;
+  text-align: center;
 }
 
 .buttonText {

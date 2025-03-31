@@ -1,0 +1,17 @@
+@import "styles/variables";
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: $content-margin;
+  padding-right: $content-margin;
+  border-bottom: 2px solid $brand-secondary;
+}
+
+.navbarLogo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-xl;
+}

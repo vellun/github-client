@@ -6,7 +6,7 @@
   align-items: center;
   border: none;
   outline: none;
-  background-color: $brand;
+  background-color: $button-primary-bg;
   color: #ffff;
   padding: $space-s $space-l;
   transition: 0.2s;
@@ -21,7 +21,7 @@
 }
 
 .button:active {
-  background-color: $brand-active;
+  background-color: $button-primary-bg-active;
 }
 
 .button:disabled {

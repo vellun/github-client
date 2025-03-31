@@ -26,7 +26,8 @@
       "config": ["config/*"],
       "styles": ["styles/*"],
       "utils": ["utils/*"],
-      "App": ["App/*"]
+      "App": ["App/*"],
+      "assets": ["assets/*"]
     }
   },
   "include": ["src"]

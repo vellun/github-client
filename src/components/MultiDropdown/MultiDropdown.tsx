@@ -20,7 +20,7 @@ export type MultiDropdownProps = {
   value: Option[];
   /** Callback, вызываемый при выборе варианта */
   onChange: (value: Option[]) => void;
-  /** Заблокирован ли дропдаун */
+  /** Заблокирован ли дропдаун */ 
   disabled?: boolean;
   /** Возвращает строку которая будет выводится в инпуте. В случае если опции не выбраны, строка должна отображаться как placeholder. */
   getTitle: (value: Option[]) => string;
