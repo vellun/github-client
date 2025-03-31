@@ -1,6 +1,6 @@
 import Card from "components/Card";
 
-import RepsService from "api/RepsService.ts";
+import RepsService from "api/RepsService";
 import ktsCat from "assets/images/kts-cat.png";
 import { useFetching } from "hooks/useFetching.ts";
 import { useEffect, useState } from "react";

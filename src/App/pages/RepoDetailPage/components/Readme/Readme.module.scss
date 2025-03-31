@@ -1,0 +1,14 @@
+@import "styles/variables";
+
+.Readme {
+  border: 1px solid $brand-secondary;
+  border-radius: 4px;
+}
+
+.readmeText {
+  margin: $space-m;
+}
+
+.ReadmeContent {
+  margin: 32px;
+}

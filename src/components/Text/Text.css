@@ -35,6 +35,11 @@
   line-height: 18px;
 }
 
+.p-12 {
+  font-size: 12px;
+  line-height: 14px;
+}
+
 .TextAccent {
   color: #518581;
 }
