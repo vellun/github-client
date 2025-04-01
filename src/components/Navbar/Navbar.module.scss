@@ -1,17 +1,18 @@
-@use 'styles/variables' as *;
+@use "styles/variables" as *;
+@use "styles/mixins" as mixins;
 
 .navbar {
-  display: flex;
-  align-items: center;
+  @include mixins.flex;
+
   justify-content: space-between;
   padding-left: $content-margin;
   padding-right: $content-margin;
   border-bottom: 2px solid $brand-secondary;
-}
 
-.navbarLogo {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: $space-xl;
+  &Logo {
+    @include mixins.flex;
+
+    justify-content: space-between;
+    gap: $space-xl;
+  }
 }

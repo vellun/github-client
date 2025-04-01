@@ -1,4 +1,4 @@
-@use 'styles/variables' as *;
+@use "styles/variables" as *;
 
 .InputDiv {
   height: 52px;
@@ -13,20 +13,20 @@
   display: block;
   padding: 14px 12px;
   border-radius: $border-radius;
-}
 
-.input:focus {
-  outline: none;
-  border: 1px solid var(--brand);
-}
+  &:focus {
+    outline: none;
+    border: 1px solid var(--brand);
+  }
 
-.input:disabled {
-  background-color: white;
-}
+  &:disabled {
+    background-color: white;
+  }
 
-.inputIcon {
-  position: absolute;
-  right: 12px;
-  bottom: 50%;
-  transform: translateY(50%);
+  &Icon {
+    position: absolute;
+    right: 12px;
+    bottom: 50%;
+    transform: translateY(50%);
+  }
 }

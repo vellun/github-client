@@ -1,5 +1,8 @@
+@use "styles/mixins" as mixins;
+
 .TopicSection {
-  display: flex;
+  @include mixins.flex;
+
   gap: 8px;
   margin-bottom: 20px;
 }

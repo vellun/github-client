@@ -1,10 +1,12 @@
-.RepoLinkContainer {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
+@use "styles/mixins" as mixins;
 
 .RepoLink {
   color: #0080ff;
   text-decoration: none;
+
+  &Container {
+    @include mixins.flex;
+
+    gap: 8px;
+  }
 }

@@ -1,14 +1,15 @@
+@use "styles/mixins" as mixins;
+
 .StatsItem {
-  display: flex;
-  align-items: center;
+  @include mixins.flex;
+
   gap: 8px;
-}
 
-.StatsItemText {
-  display: flex;
-  align-items: center;
-}
+  &ItemText {
+    @include mixins.flex;
+  }
 
-.StatsItem {
-  margin: 0;
+  &Item {
+    margin: 0;
+  }
 }

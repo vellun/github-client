@@ -1,9 +1,11 @@
-@use 'styles/variables' as *;
+@use "styles/variables" as *;
+@use "styles/mixins" as mixins;
 
 .button {
-  display: flex;
+  @include mixins.flex;
+
   justify-content: space-between;
-  align-items: center;
+  cursor: pointer;
   border: none;
   outline: none;
   background-color: $button-primary-bg;
@@ -11,28 +13,28 @@
   padding: $space-s $space-l;
   transition: 0.2s;
   border-radius: $border-radius;
-}
 
-.button:hover {
-  background-color: $brand-hover;
-}
+  &:hover {
+    background-color: $brand-hover;
+  }
 
-.button.ButtonLoading:hover {
-  background-color: $brand;
-}
+  &.ButtonLoading:hover {
+    background-color: $brand;
+  }
 
-.button:active {
-  background-color: $button-primary-bg-active;
-}
+  &:active {
+    background-color: $button-primary-bg-active;
+  }
 
-.button:disabled {
-  background-color: #d9d9d9;
-}
+  &:disabled {
+    background-color: #d9d9d9;
 
-.button:disabled:hover {
-  background-color: #d9d9d9;
-}
+    &:hover {
+      background-color: #d9d9d9;
+    }
+  }
 
-.button.ButtonLoadingDisabled:disabled {
-  background-color: $brand;
+  &.ButtonLoadingDisabled:disabled {
+    background-color: $brand;
+  }
 }

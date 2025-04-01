@@ -1,4 +1,4 @@
-@use 'styles/variables' as *;
+@use "styles/variables" as *;
 
 @keyframes rotate {
   0% {
@@ -12,23 +12,23 @@
 .loader {
   fill: $brand;
   animation: rotate 2s linear infinite;
+
+  &-l {
+    width: $loader-l;
+    height: $loader-l;
+  }
+
+  &-m {
+    width: $loader-m;
+    height: $loader-m;
+  }
+
+  &-s {
+    width: $loader-s;
+    height: $loader-s;
+  }
 }
 
 .buttonLoader {
   fill: #fff;
-}
-
-.loader-l {
-  width: $loader-l;
-  height: $loader-l;
-}
-
-.loader-m {
-  width: $loader-m;
-  height: $loader-m;
-}
-
-.loader-s {
-  width: $loader-s;
-  height: $loader-s;
 }

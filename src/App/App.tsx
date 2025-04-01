@@ -1,6 +1,6 @@
 import Navbar from "components/Navbar";
 import { Outlet } from "react-router";
-import "styles/styles.scss";
+import "styles/_styles.scss";
 
 const App = () => {
   return (
