@@ -1,52 +1,37 @@
-import * as React from 'react';
+import * as React from "react";
 
-import './Text.css';
-import cn from 'classnames';
+import styles from "./Text.module.scss";
+import cn from "classnames";
 
 export type TextProps = {
   /** Дополнительный класс */
   className?: string;
   /** Стиль отображения */
-  view?: 'title' | 'button' | 'p-20' | 'p-18' | 'p-16' | 'p-14' | 'p-12';
+  view?: "title" | "button" | "p-20" | "p-18" | "p-16" | "p-14" | "p-12";
   /** Html-тег */
-  tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'div' | 'p' | 'span';
+  tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div" | "p" | "span";
   /** Начертание шрифта */
-  weight?: 'normal' | 'medium' | 'bold';
+  weight?: "normal" | "medium" | "bold";
   /** Контент */
   children: React.ReactNode;
   /** Цвет */
-  color?: 'primary' | 'secondary' | 'accent';
+  color?: "primary" | "secondary" | "accent";
   /** Максимальное кол-во строк */
   maxLines?: number;
 };
 
-const Text: React.FC<TextProps> = ({
-  className,
-  view,
-  tag = 'p',
-  weight,
-  color,
-  maxLines,
-  children,
-  ...props
-}) => {
-  const elementRef =
-    React.useRef<HTMLDivElement | HTMLHeadingElement | HTMLParagraphElement>(
-      null
-    );
+const Text: React.FC<TextProps> = ({ className, view, tag = "p", weight, color, maxLines, children, ...props }) => {
+  const elementRef = React.useRef<HTMLDivElement | HTMLHeadingElement | HTMLParagraphElement>(null);
 
   React.useEffect(() => {
     if (elementRef.current && maxLines !== undefined) {
-      elementRef.current.style.setProperty(
-        '-webkit-line-clamp',
-        maxLines.toString()
-      );
+      elementRef.current.style.setProperty("-webkit-line-clamp", maxLines.toString());
     }
   }, [maxLines]);
 
-  const styles = {
-    fontWeight: weight === 'bold' ? 700 : weight === 'medium' ? 500 : 400,
-    view: view === 'button' || view === 'title' ? `${view}Text` : view,
+  const inputStyles = {
+    fontWeight: weight === "bold" ? 700 : weight === "medium" ? 500 : 400,
+    view: view === "button" ? styles.buttonText : view === "title" ? styles.titleText : styles.view,
   };
 
   const Tag = tag;
@@ -55,19 +40,19 @@ const Text: React.FC<TextProps> = ({
     <Tag
       ref={elementRef}
       className={cn(
-        'text',
+        styles.text,
         className,
-        styles.view,
-        color === 'accent'
-          ? 'TextAccent'
-          : color === 'secondary'
-          ? 'TextSecondary'
-          : color === 'primary'
-          ? 'TextPrimary'
-          : ''
+        inputStyles.view,
+        color === "accent"
+          ? styles.TextAccent
+          : color === "secondary"
+            ? styles.TextSecondary
+            : color === "primary"
+              ? styles.TextPrimary
+              : "",
       )}
       style={{
-        fontWeight: styles.fontWeight,
+        fontWeight: inputStyles.fontWeight,
       }}
       {...props}
     >

@@ -1,5 +1,5 @@
-@import "./Roboto/fonts.css";
-@import "styles/variables";
+@use "styles/Roboto/fonts";
+@use "styles/variables" as *;
 
 html,
 body {

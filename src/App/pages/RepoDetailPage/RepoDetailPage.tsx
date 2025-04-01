@@ -15,7 +15,6 @@ const RepoDetailPage = () => {
   const [fetchRepo, error] = useFetching(async () => {
     const repo = await RepsService.getByRepoName(repoName);
     setRepo(repo);
-    console.log(repo.stargazers_count)
   });
 
   useEffect(() => {
