@@ -6,7 +6,8 @@ import TitleSection from "./components/TitleSection";
 import styles from "./RepoDetailPage.module.scss";
 import Readme from "./components/Readme";
 import RepoLink from "./components/RepoLink";
-import TopicSection from "./components/TopicSection";
+import TopicSection from "./components/TopicSection/TopicSection";
+import StatsSection from "./components/StatsSection/StatsSection";
 
 const RepoDetailPage = () => {
   const { repoName } = useParams();
@@ -14,6 +15,7 @@ const RepoDetailPage = () => {
   const [fetchRepo, error] = useFetching(async () => {
     const repo = await RepsService.getByRepoName(repoName);
     setRepo(repo);
+    console.log(repo.stargazers_count)
   });
 
   useEffect(() => {
@@ -26,6 +28,13 @@ const RepoDetailPage = () => {
         <TitleSection repo={repo} />
         {repo && repo.homepage && <RepoLink repo={repo} />}
         {repo && repo.topics && <TopicSection topics={repo.topics} />}
+        {repo && (
+          <StatsSection
+            starsCount={repo.stargazers_count}
+            watchingCount={repo.watchers_count}
+            forksCount={repo.forks_count}
+          />
+        )}
         <Readme repo={repo} />
       </div>
     </div>

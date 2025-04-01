@@ -1,4 +1,4 @@
-import TopicItem from "../../components/TopicItem";
+import TopicItem from "../TopicItem";
 import styles from "./topicSection.module.scss";
 
 const TopicSection = ({ topics }) => {
