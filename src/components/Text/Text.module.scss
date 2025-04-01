@@ -1,62 +1,39 @@
 @use "styles/variables" as *;
 
-// @for $i from 12 through 20 step 2 {
-//   .p-#{$i} {
-//     font-size: $i px;
-//     line-height: #{$i + 4}px;
-//   }
-// }
+@for $i from 12 through 20 {
+  @if $i % 2 == 0 {
+    .p-#{$i} {
+      font-size: #{$i}px;
+      line-height: #{$i + 4}px;
+    }
+  }
+}
 
 .text {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   overflow: hidden;
   color: inherit;
-}
 
-.titleText {
-  font-size: 44px;
-  line-height: 48px;
-  text-align: center;
-}
+  &Accent {
+    color: $brand;
+  }
 
-.buttonText {
-  font-size: 18px;
-}
+  &Secondary {
+    color: $text-secondary;
+  }
 
-// .p-20 {
-//   font-size: 20px;
-//   line-height: 24px;
-// }
+  &Primary {
+    color: $text-primary;
+  }
 
-// .p-18 {
-//   font-size: 18px;
-//   line-height: 22px;
-// }
+  &Title {
+    font-size: 44px;
+    line-height: 48px;
+    text-align: center;
+  }
 
-// .p-16 {
-//   font-size: 16px;
-//   line-height: 20px;
-// }
-
-// .p-14 {
-//   font-size: 14px;
-//   line-height: 18px;
-// }
-
-// .p-12 {
-//   font-size: 12px;
-//   line-height: 14px;
-// }
-
-.TextAccent {
-  color: #518581;
-}
-
-.TextSecondary {
-  color: #afadb5;
-}
-
-.TextPrimary {
-  color: black;
+  &Button {
+    font-size: 18px;
+  }
 }

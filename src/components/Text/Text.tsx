@@ -31,7 +31,7 @@ const Text: React.FC<TextProps> = ({ className, view, tag = "p", weight, color, 
 
   const inputStyles = {
     fontWeight: weight === "bold" ? 700 : weight === "medium" ? 500 : 400,
-    view: view === "button" ? styles.buttonText : view === "title" ? styles.titleText : styles.view,
+    view: view === "button" ? styles.textButton : view === "title" ? styles.textTitle : styles.view,
   };
 
   const Tag = tag;
@@ -44,11 +44,11 @@ const Text: React.FC<TextProps> = ({ className, view, tag = "p", weight, color, 
         className,
         inputStyles.view,
         color === "accent"
-          ? styles.TextAccent
+          ? styles.textAccent
           : color === "secondary"
-            ? styles.TextSecondary
+            ? styles.textSecondary
             : color === "primary"
-              ? styles.TextPrimary
+              ? styles.textPrimary
               : "",
       )}
       style={{
