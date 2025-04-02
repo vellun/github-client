@@ -1,4 +1,4 @@
-import App from "App";
+import App from "App/App";
 import AllRepsPage from "App/pages/AllRepsPage";
 import RepoDetailPage from "App/pages/RepoDetailPage";
 import { Navigate, RouteObject } from "react-router";

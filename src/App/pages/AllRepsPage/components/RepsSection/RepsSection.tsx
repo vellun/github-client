@@ -9,7 +9,7 @@ import { Link } from "react-router";
 
 const RepsSection = () => {
   const [reps, setReps] = useState<any[]>([]);
-  const [fetchReps, error] = useFetching(async () => {
+  const [fetchReps, _] = useFetching(async () => {
     const reps = await RepsService.getAll();
     setReps(reps);
   });

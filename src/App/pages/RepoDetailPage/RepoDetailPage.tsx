@@ -1,18 +1,20 @@
-import RepsService from "api/RepsService";
+import { default as Repo, default as RepsService } from "api/RepsService";
 import { useFetching } from "hooks/useFetching";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import TitleSection from "./components/TitleSection";
-import styles from "./RepoDetailPage.module.scss";
 import Readme from "./components/Readme";
 import RepoLink from "./components/RepoLink";
-import TopicSection from "./components/TopicSection/TopicSection";
 import StatsSection from "./components/StatsSection/StatsSection";
+import TitleSection from "./components/TitleSection";
+import TopicSection from "./components/TopicSection/TopicSection";
+import styles from "./RepoDetailPage.module.scss";
 
-const RepoDetailPage = () => {
-  const { repoName } = useParams();
-  const [repo, setRepo] = useState(null);
-  const [fetchRepo, error] = useFetching(async () => {
+const RepoDetailPage: React.FC = () => {
+  const { repoName } = useParams<{ repoName: string }>();
+  const [repo, setRepo] = useState<Repo | null>(null);
+
+  const [fetchRepo, _] = useFetching(async () => {
+    if (!repoName) return;
     const repo = await RepsService.getByRepoName(repoName);
     setRepo(repo);
   });
@@ -24,7 +26,7 @@ const RepoDetailPage = () => {
   return (
     <div className={styles.RepoDetailPage}>
       <div className={styles.Page}>
-        <TitleSection repo={repo} />
+        {repo && <TitleSection avatarUrl={repo.owner.avatar_url} repoName={repo.name} />}
         {repo && repo.homepage && <RepoLink repo={repo} />}
         {repo && repo.topics && <TopicSection topics={repo.topics} />}
         {repo && (
@@ -34,7 +36,7 @@ const RepoDetailPage = () => {
             forksCount={repo.forks_count}
           />
         )}
-        <Readme repo={repo} />
+        {repo && <Readme repoName={repo.name} />}
       </div>
     </div>
   );
