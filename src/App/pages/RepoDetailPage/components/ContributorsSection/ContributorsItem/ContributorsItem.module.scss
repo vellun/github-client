@@ -1,0 +1,17 @@
+@use "styles/variables" as *;
+@use "styles/mixins" as mixins;
+
+.image {
+  border-radius: 50%;
+}
+
+.ContributorsItem {
+  @include mixins.flex;
+
+  gap: 8px;
+  cursor: pointer;
+}
+
+.text {
+  margin: 0;
+}

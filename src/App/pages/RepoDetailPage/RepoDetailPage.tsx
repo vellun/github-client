@@ -7,6 +7,7 @@ import RepoLink from "./components/RepoLink";
 import StatsSection from "./components/StatsSection/StatsSection";
 import TitleSection from "./components/TitleSection";
 import TopicSection from "./components/TopicSection/TopicSection";
+import ContributorsSection from "./components/ContributorsSection/ContributorsSection";
 import styles from "./RepoDetailPage.module.scss";
 
 const RepoDetailPage: React.FC = () => {
@@ -36,6 +37,7 @@ const RepoDetailPage: React.FC = () => {
             forksCount={repo.forks_count}
           />
         )}
+        {repo && <ContributorsSection repoName={repo.name} />}
         {repo && <Readme repoName={repo.name} />}
       </div>
     </div>

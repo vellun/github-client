@@ -3,9 +3,9 @@ import React from "react";
 export const useFetching = (callback: () => Promise<any>) => {
   const [error, setError] = React.useState<string | null>(null);
 
-  const fetching = async () => {
+  const fetching = async (...args) => {
     try {
-      await callback();
+      await callback(...args);
     } catch (err) {
       if (err instanceof Error) {
         setError(err.message);
