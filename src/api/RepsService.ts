@@ -12,10 +12,6 @@ export default interface Repo {
   forks_count: number;
 }
 
-export default interface Readme {
-  content: string;
-}
-
 export default class RepsService {
   static async getAll(limit = 10, page = 1): Promise<Repo[]> {
     // TODO: добавить пагинацию
@@ -26,7 +22,7 @@ export default class RepsService {
     const response = await axios.get(`https://api.github.com/repos/ktsstudio/${repoName}`);
     return response.data;
   }
-  static async getReadme(repoName: string): Promise<Readme> {
+  static async getReadme(repoName: string): Promise<string> {
     const response = await axios.get(`https://api.github.com/repos/ktsstudio/${repoName}/readme`, {
       headers: {
         Accept: "application/vnd.github.html+json",

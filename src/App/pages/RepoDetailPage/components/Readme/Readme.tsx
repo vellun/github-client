@@ -11,9 +11,9 @@ interface ReadmeProps {
 const Readme: React.FC<ReadmeProps> = ({ repoName }) => {
   const [readmeHtml, setReadmeHtml] = useState<string>("");
 
-  const [fetchReadme, _] = useFetching(async () => {
-    const reps = await RepsService.getReadme(repoName);
-    setReadmeHtml(reps);
+  const [fetchReadme, _] = useFetching(async (): Promise<void> => {
+    const readme = await RepsService.getReadme(repoName);
+    setReadmeHtml(readme);
   });
 
   useEffect(() => {
