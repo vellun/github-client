@@ -1,33 +1,21 @@
-import * as React from 'react';
-import { IconProps } from '../Icon';
+import cn from "classnames";
+import * as React from "react";
+import Icon, { IconProps } from "../Icon";
+import styles from "./../Icons.module.scss";
 
-const ArrowDownIcon: React.FC<IconProps> = ({
-  className,
-  color,
-  width = '24',
-  height = '24',
-  ...props
-}) => (
-  <svg
-    className={className}
-    width={width}
-    height={height}
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    {...props}
-  >
+const ArrowDownIcon: React.FC<IconProps> = ({ color, ...props }) => (
+  <Icon {...props}>
     <path
-      fill={
-        color === 'accent'
-          ? '#518581'
-          : color === 'secondary'
-          ? '#AFADB5'
-          : 'black'
-      }
+      className={cn(
+        color === "accent"
+          ? styles.IconFillAccent
+          : color === "secondary"
+            ? styles.IconFillSecondary
+            : styles.IconFillPrimary,
+      )}
       d="M2.33563 8.74741L3.66436 7.25259L12 14.662L20.3356 7.25259L21.6644 8.74741L12 17.338L2.33563 8.74741Z"
     />
-  </svg>
+  </Icon>
 );
 
 export default ArrowDownIcon;
