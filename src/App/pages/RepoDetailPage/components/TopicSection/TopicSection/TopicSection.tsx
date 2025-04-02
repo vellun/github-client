@@ -1,7 +1,11 @@
 import TopicItem from "../TopicItem";
 import styles from "./topicSection.module.scss";
 
-const TopicSection = ({ topics }) => {
+interface TopicSectionProps {
+  topics: string[];
+}
+
+const TopicSection: React.FC<TopicSectionProps> = ({ topics }) => {
   return (
     <div className={styles.TopicSection}>
       {topics.map((topic, index) => (

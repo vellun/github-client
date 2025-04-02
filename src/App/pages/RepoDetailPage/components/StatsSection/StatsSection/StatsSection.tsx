@@ -1,16 +1,34 @@
 import StatsItem from "../StatsItem";
 import styles from "./StatsSection.module.scss";
 
-import starsIcon from "assets/icons/star-icon.svg";
-import watchingIcon from "assets/icons/eye-icon.svg";
-import forksIcon from "assets/icons/forks-icon.svg";
+import EyeIcon from "components/icons/EyeIcon";
+import ForkIcon from "components/icons/ForkIcon";
+import StarIcon from "components/icons/StarIcon";
 
-const StatsSection = ({ starsCount, watchingCount, forksCount }) => {
+interface StatsSectionProps {
+  starsCount: number;
+  watchingCount: number;
+  forksCount: number;
+}
+
+const StatsSection: React.FC<StatsSectionProps> = ({ starsCount, watchingCount, forksCount }) => {
   return (
     <div className={styles.StatsSection}>
-      <StatsItem iconPath={starsIcon} statCount={starsCount} statName={"stars"} />
-      <StatsItem iconPath={watchingIcon} statCount={watchingCount} statName={"watching"} />
-      <StatsItem iconPath={forksIcon} statCount={forksCount} statName={"forks"} />
+      <StatsItem
+        iconComponent={<StarIcon width="16" height="16" color="secondary" />}
+        statCount={starsCount}
+        statName={"stars"}
+      />
+      <StatsItem
+        iconComponent={<EyeIcon width="16" height="16" color="secondary" />}
+        statCount={watchingCount}
+        statName={"watching"}
+      />
+      <StatsItem
+        iconComponent={<ForkIcon width="16" height="16" color="secondary" />}
+        statCount={forksCount}
+        statName={"forks"}
+      />
     </div>
   );
 };
