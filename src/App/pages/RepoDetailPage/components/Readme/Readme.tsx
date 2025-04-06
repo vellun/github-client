@@ -3,12 +3,13 @@ import styles from "./Readme.module.scss";
 import { useFetching } from "hooks/useFetching";
 import RepsService from "api/RepsService";
 import Text from "components/Text";
+import { observer } from "mobx-react-lite";
 
 interface ReadmeProps {
   repoName: string;
 }
 
-const Readme: React.FC<ReadmeProps> = ({ repoName }) => {
+const Readme: React.FC<ReadmeProps> = observer(({ repoName }) => {
   const [readmeHtml, setReadmeHtml] = useState<string>("");
 
   const [fetchReadme, _] = useFetching(async (): Promise<void> => {
@@ -27,6 +28,6 @@ const Readme: React.FC<ReadmeProps> = ({ repoName }) => {
       <div className={styles.ReadmeContent} dangerouslySetInnerHTML={{ __html: readmeHtml }} />
     </div>
   );
-};
+});
 
 export default Readme;

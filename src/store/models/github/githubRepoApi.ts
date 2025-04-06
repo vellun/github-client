@@ -9,6 +9,11 @@ export type GithubRepoApiModel = {
   html_url: string;
   pushed_at: string;
   owner: GithubOwnerApiModel;
+  homepage?: string;
+  topics: string[];
+  stargazers_count: number;
+  watchers_count: number;
+  forks_count: number;
 };
 
 export const normalizeGithubRepoModel = (raw: GithubRepoApiModel): GithubRepoModel => ({
@@ -18,6 +23,11 @@ export const normalizeGithubRepoModel = (raw: GithubRepoApiModel): GithubRepoMod
   htmlUrl: raw.html_url,
   pushedAt: new Date(raw.pushed_at),
   owner: normalizeGithubOwnerModel(raw.owner),
+  homepage: raw.homepage,
+  topics: raw.topics,
+  stargazersCount: raw.stargazers_count,
+  watchersCount: raw.watchers_count,
+  forksCount: raw.forks_count,
 });
 
 export const normalizeGithubReposToCollection = (

@@ -1,13 +1,14 @@
 import ArrowDownIcon from "components/icons/ArrowDownIcon";
 import Text from "components/Text";
 import styles from "./titleSection.module.scss";
+import { observer } from "mobx-react-lite";
 
 interface TitleSectionProps {
-  avatarUrl: string;
+  avatarUrl?: string;
   repoName: string;
 }
 
-const TitleSection: React.FC<TitleSectionProps> = ({ avatarUrl, repoName }) => {
+const TitleSection: React.FC<TitleSectionProps> = observer(({ avatarUrl, repoName }) => {
   return (
     <div className={styles.titleSection}>
       <ArrowDownIcon className={styles.titleArrowIcon} width={32} height={32}></ArrowDownIcon>
@@ -17,6 +18,6 @@ const TitleSection: React.FC<TitleSectionProps> = ({ avatarUrl, repoName }) => {
       </Text>
     </div>
   );
-};
+});
 
 export default TitleSection;

@@ -1,2 +1,4 @@
-export { default } from './GithubReposStore';
-export * from './requestGithubRepos';
+export { GithubAllReposStore } from "./AllReposStore/GithubAllReposStore";
+export { GithubRepoStore } from "./RepoStore/GithubRepoStore";
+export { requestGithubRepos } from "./AllReposStore/requestGithubRepos";
+export { requestGithubRepoByName } from "./RepoStore/requestGithubRepoByName";

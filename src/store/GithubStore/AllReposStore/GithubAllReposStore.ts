@@ -7,7 +7,7 @@ import { Meta } from "utils/meta";
 import { ILocalStore } from "hooks/useLocal";
 import { requestGithubRepos } from "store/GithubStore";
 
-export default class GithubReposStore implements ILocalStore {
+export class GithubAllReposStore implements ILocalStore {
   _repos: CollectionT<number, GithubRepoModel> = {
     order: [],
     entities: {},
@@ -29,7 +29,6 @@ export default class GithubReposStore implements ILocalStore {
     }
 
     this.meta = Meta.loading;
-    console.log(">>>>>>>>", this.meta)
     this._repos = {
       order: [],
       entities: {},

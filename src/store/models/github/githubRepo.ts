@@ -7,4 +7,9 @@ export type GithubRepoModel = {
   htmlUrl: string;
   pushedAt: Date;
   owner: GithubOwnerModel;
+  homepage?: string;
+  topics: string[];
+  stargazersCount: number;
+  watchersCount: number;
+  forksCount: number;
 };

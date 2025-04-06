@@ -1,2 +1,1 @@
-export { default } from "./AllReposPage";
-export * from "./AllReposPage";
+export { AllReposPage } from "./AllReposPage";

@@ -4,12 +4,13 @@ import { useFetching } from "hooks/useFetching";
 import { useEffect, useState } from "react";
 import styles from "./ContributorsSection.module.scss";
 import ContributorsItem from "../ContributorsItem";
+import { observer } from "mobx-react-lite";
 
 interface ContributorsProps {
   repoName: string;
 }
 
-const ContributorsSection: React.FC<ContributorsProps> = ({ repoName }) => {
+const ContributorsSection: React.FC<ContributorsProps> = observer(({ repoName }) => {
   const [contributors, setContributors] = useState<Contributor[]>([]);
   const [user, setUser] = useState<User | null>(null);
 
@@ -46,6 +47,6 @@ const ContributorsSection: React.FC<ContributorsProps> = ({ repoName }) => {
       })}
     </div>
   );
-};
+});
 
 export default ContributorsSection;
