@@ -8,9 +8,9 @@ import { Link } from "react-router";
 
 const Navbar = () => {
   return (
-    <div className={cn(styles.navbar)}>
+    <div className={cn(styles.root)}>
       <Link className="link" to={`/repositories`}>
-        <div className={cn(styles.navbarLogo)}>
+        <div className={cn(styles.root__logo, styles.logo)}>
           <img src={githubLogo} alt="GitHub User Logo" width="32px" height="32px" />
           <Text weight="bold" view="p-20">
             GitHub Client

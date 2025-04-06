@@ -1,5 +1,5 @@
 import App from "App/App";
-import AllRepsPage from "App/pages/AllRepsPage";
+import AllReposPage from "App/pages/AllReposPage";
 import RepoDetailPage from "App/pages/RepoDetailPage";
 import { Navigate, RouteObject } from "react-router";
 
@@ -14,7 +14,7 @@ export const routesConfig: RouteObject[] = [
       },
       {
         path: "/repositories",
-        element: <AllRepsPage />,
+        element: <AllReposPage />,
       },
       {
         path: "/repositories/:repoName",
