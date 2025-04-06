@@ -9,7 +9,7 @@ export type InputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, "onCh
   afterSlot?: React.ReactNode;
 };
 
-const Input = React.forwardRef<HTMLInputElement, InputProps>(
+export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, value, onChange, afterSlot, ...props }, ref) => (
     <div className={cn(`styles.${className}`, styles.InputDiv)}>
       <input
@@ -24,5 +24,3 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     </div>
   ),
 );
-
-export default Input;

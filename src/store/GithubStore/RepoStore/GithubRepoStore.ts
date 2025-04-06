@@ -1,9 +1,10 @@
-import { action, computed, makeObservable, observable, runInAction } from "mobx";
+import { action, computed, IReactionDisposer, makeObservable, observable, reaction, runInAction } from "mobx";
 import { GithubRepoModel } from "store/models";
 import { Meta } from "utils/meta";
 import { requestGithubRepoByName } from "store/GithubStore";
+import { ILocalStore } from "hooks/useLocal";
 
-export class GithubRepoStore {
+export class GithubRepoStore implements ILocalStore {
   _repo: GithubRepoModel | null = null;
   meta: Meta = Meta.initial;
 
@@ -43,4 +44,15 @@ export class GithubRepoStore {
   get repo(): GithubRepoModel | null {
     return this._repo;
   }
+
+  destroy(): void {
+    this._metaChangedReaction();
+  }
+
+  _metaChangedReaction: IReactionDisposer = reaction(
+    () => this.meta,
+    (...args) => {
+      console.log("Reaction", args);
+    },
+  );
 }

@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import React, { useEffect, useRef, useState } from "react";
 import ArrowDownIcon from "../icons/ArrowDownIcon";
-import Input from "../Input";
+import { Input } from "../Input";
 import styles from "./MultiDropdown.module.scss";
 
 export type Option = {

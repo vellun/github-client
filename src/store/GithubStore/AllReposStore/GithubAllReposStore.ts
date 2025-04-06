@@ -1,4 +1,4 @@
-import { action, computed, makeObservable, observable, reaction, runInAction, IReactionDisposer } from "mobx";
+import { action, computed, IReactionDisposer, makeObservable, observable, reaction, runInAction } from "mobx";
 
 import { GithubRepoModel } from "store/models";
 import { CollectionT } from "utils/collection";
@@ -6,6 +6,7 @@ import { Meta } from "utils/meta";
 
 import { ILocalStore } from "hooks/useLocal";
 import { requestGithubRepos } from "store/GithubStore";
+import rootStore from "store/RootStore";
 
 export class GithubAllReposStore implements ILocalStore {
   _repos: CollectionT<number, GithubRepoModel> = {
@@ -53,13 +54,13 @@ export class GithubAllReposStore implements ILocalStore {
   }
 
   destroy(): void {
-    this._metaChangedReaction();
+    this._qpReaction();
   }
 
-  _metaChangedReaction: IReactionDisposer = reaction(
-    () => this.meta,
-    (...args) => {
-      console.log("Reaction", args);
+  private readonly _qpReaction: IReactionDisposer = reaction(
+    () => rootStore.query.getParam("search"),
+    (search) => {
+      console.log("search value change", search);
     },
   );
 }
