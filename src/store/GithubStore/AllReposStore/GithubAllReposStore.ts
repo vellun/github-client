@@ -17,6 +17,9 @@ export class GithubAllReposStore implements ILocalStore {
   _repoType: string = "all";
   meta: Meta = Meta.initial;
 
+  currentPage: number = 1;
+  perPage: number = 6;
+
   constructor() {
     makeObservable(this, {
       _repos: observable,
@@ -27,9 +30,11 @@ export class GithubAllReposStore implements ILocalStore {
       setMeta: action.bound,
       setOrg: action.bound,
       setRepoType: action.bound,
+      setPage: action.bound,
       repos: computed,
       org: computed,
       repoType: computed,
+      totalPages: computed,
     });
   }
 
@@ -49,7 +54,18 @@ export class GithubAllReposStore implements ILocalStore {
       repoType = this.repoType;
     }
 
-    console.log("REPO TYPEEEE", repoType)
+    let page = rootStore.query.getParam("page");
+    if (!page || page === "") {
+      page = this.currentPage;
+    }
+
+    let perPage = rootStore.query.getParam("per_page");
+    if (!perPage || perPage === "") {
+      perPage = this.perPage;
+    }
+
+    page = Number(page);
+    perPage = Number(perPage);
 
     this.setMeta(Meta.loading);
     this._repos = {
@@ -57,7 +73,7 @@ export class GithubAllReposStore implements ILocalStore {
       entities: {},
     };
 
-    const { isError, data } = await requestGithubRepos(searchRepo, repoType);
+    const { isError, data } = await requestGithubRepos(searchRepo, repoType, page, perPage);
     if (isError) {
       this.setMeta(Meta.error);
       return;
@@ -67,6 +83,10 @@ export class GithubAllReposStore implements ILocalStore {
       this.meta = Meta.success;
       this._repos = data;
     });
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this._repos.order.length / this.perPage);
   }
 
   get repos(): GithubRepoModel[] {
@@ -93,6 +113,14 @@ export class GithubAllReposStore implements ILocalStore {
 
   setRepoType(newType: string) {
     this._repoType = newType;
+  }
+
+  setPage(page: number) {
+    this.currentPage = page;
+  }
+
+  setPerPage(perPage: number) {
+    this.perPage = perPage;
   }
 
   // destroy(): void {}

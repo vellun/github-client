@@ -13,11 +13,11 @@ export const routesConfig: RouteObject[] = [
         element: <Navigate to="/repositories" replace />,
       },
       {
-        path: "/repositories",
+        path: `/repositories`,
         element: <AllReposPage />,
       },
       {
-        path: "/repositories/:repoName",
+        path: "/repositories/:orgName/:repoName",
         element: <RepoDetailPage />,
       },
     ],

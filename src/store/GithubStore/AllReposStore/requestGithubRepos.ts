@@ -8,6 +8,8 @@ import { CollectionT } from "utils/collection";
 export const requestGithubRepos = async (
   organization: string,
   type: string,
+  page: number,
+  perPage: number,
 ): Promise<ApiResp<CollectionT<number, GithubRepoModel>>> => {
   // Ладно, оставлю это пока тут
   const token = "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";
@@ -19,6 +21,8 @@ export const requestGithubRepos = async (
       },
       params: {
         type: type,
+        page: page,
+        per_page: perPage,
       },
     });
     return {

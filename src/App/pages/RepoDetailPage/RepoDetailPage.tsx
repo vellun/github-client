@@ -1,26 +1,27 @@
-import { default as Repo, default as RepsService } from "api/RepsService";
-import { useFetching } from "hooks/useFetching";
-import { useEffect, useState } from "react";
+import { Loader } from "components/Loader";
+import { observer, useLocalObservable } from "mobx-react-lite";
+import { useEffect } from "react";
 import { useParams } from "react-router";
+import { GithubRepoStore } from "store/GithubStore";
+import { Meta } from "utils/meta";
+import ContributorsSection from "./components/ContributorsSection/ContributorsSection";
 import Readme from "./components/Readme";
 import RepoLink from "./components/RepoLink";
 import StatsSection from "./components/StatsSection/StatsSection";
 import TitleSection from "./components/TitleSection";
 import TopicSection from "./components/TopicSection/TopicSection";
-import ContributorsSection from "./components/ContributorsSection/ContributorsSection";
 import styles from "./RepoDetailPage.module.scss";
-import { observer, useLocalObservable, useLocalStore } from "mobx-react-lite";
-import { GithubRepoStore } from "store/GithubStore";
-import { GithubRepoModel } from "store/models/github";
-import { Meta } from "utils/meta";
-import { Loader } from "components/Loader";
+import rootStore from "store/RootStore";
 
 export const RepoDetailPage: React.FC = observer(() => {
   const { repoName } = useParams<{ repoName: string }>();
+  const { orgName } = useParams<{ orgName: string }>();
   const store = useLocalObservable(() => new GithubRepoStore());
 
   useEffect(() => {
-    store.fetch("ktsstudio", repoName);
+    // const repoName = rootStore.query.getParam("search")
+    console.log("AAAAAAAAAAAAAAAAAAAAAaaaa", repoName);
+    store.fetch(orgName, repoName);
   }, [store, repoName]);
 
   const repo = store.repo;

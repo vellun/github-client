@@ -26,6 +26,7 @@ export const FiltersSection = observer(({ store }: { store: GithubAllReposStore 
 
   const handleButtonClick = () => {
     inputValue ? store.setOrg(inputValue) : store.setOrg("ktsstudio");
+    rootStore.query.setSearch(inputValue);
     store.fetch();
   };
 
