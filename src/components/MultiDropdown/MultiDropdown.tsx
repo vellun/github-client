@@ -5,13 +5,10 @@ import { Input } from "../Input";
 import styles from "./MultiDropdown.module.scss";
 
 export type Option = {
-  /** Ключ варианта, используется для отправки на бек/использования в коде */
   key: string;
-  /** Значение варианта, отображается пользователю */
   value: string;
 };
 
-/** Пропсы, которые принимает компонент Dropdown */
 export type MultiDropdownProps = {
   className?: string;
   /** Массив возможных вариантов для выбора */
@@ -26,7 +23,7 @@ export type MultiDropdownProps = {
   getTitle: (value: Option[]) => string;
 };
 
-const MultiDropdown: React.FC<MultiDropdownProps> = (props: MultiDropdownProps) => {
+export const MultiDropdown: React.FC<MultiDropdownProps> = (props: MultiDropdownProps) => {
   const { options, value, onChange, disabled, getTitle, className } = props;
 
   const [search, setSearch] = useState("");
@@ -94,5 +91,3 @@ const MultiDropdown: React.FC<MultiDropdownProps> = (props: MultiDropdownProps) 
     </div>
   );
 };
-
-export default MultiDropdown;

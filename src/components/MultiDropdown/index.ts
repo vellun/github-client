@@ -1,2 +1,1 @@
-export { default } from './MultiDropdown';
-export * from './MultiDropdown';
+export { MultiDropdown, type Option } from "./MultiDropdown";

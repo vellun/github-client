@@ -7,6 +7,7 @@ import { CollectionT } from "utils/collection";
 
 export const requestGithubRepos = async (
   organization: string,
+  type: string,
 ): Promise<ApiResp<CollectionT<number, GithubRepoModel>>> => {
   // Ладно, оставлю это пока тут
   const token = "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";
@@ -15,6 +16,9 @@ export const requestGithubRepos = async (
     const response = await axios(apiUrls.github.organizationRepos(organization), {
       headers: {
         Authorization: `token ${token}`,
+      },
+      params: {
+        type: type,
       },
     });
     return {

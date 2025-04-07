@@ -14,18 +14,22 @@ export class GithubAllReposStore implements ILocalStore {
     entities: {},
   };
   _org: string = "ktsstudio";
+  _repoType: string = "all";
   meta: Meta = Meta.initial;
 
   constructor() {
     makeObservable(this, {
       _repos: observable,
       _org: observable,
+      _repoType: observable,
       meta: observable,
       fetch: action.bound,
       setMeta: action.bound,
       setOrg: action.bound,
+      setRepoType: action.bound,
       repos: computed,
       org: computed,
+      repoType: computed,
     });
   }
 
@@ -40,13 +44,20 @@ export class GithubAllReposStore implements ILocalStore {
       searchRepo = this.org;
     }
 
+    let repoType = rootStore.query.getParam("filter");
+    if (!repoType || repoType === "") {
+      repoType = this.repoType;
+    }
+
+    console.log("REPO TYPEEEE", repoType)
+
     this.setMeta(Meta.loading);
     this._repos = {
       order: [],
       entities: {},
     };
 
-    const { isError, data } = await requestGithubRepos(searchRepo);
+    const { isError, data } = await requestGithubRepos(searchRepo, repoType);
     if (isError) {
       this.setMeta(Meta.error);
       return;
@@ -68,6 +79,10 @@ export class GithubAllReposStore implements ILocalStore {
     return this._org;
   }
 
+  get repoType(): string {
+    return this._repoType;
+  }
+
   setMeta(newMeta: Meta) {
     this.meta = newMeta;
   }
@@ -75,6 +90,12 @@ export class GithubAllReposStore implements ILocalStore {
   setOrg(newOrg: string) {
     this._org = newOrg;
   }
+
+  setRepoType(newType: string) {
+    this._repoType = newType;
+  }
+
+  // destroy(): void {}
 
   destroy(): void {
     this._qpReaction();

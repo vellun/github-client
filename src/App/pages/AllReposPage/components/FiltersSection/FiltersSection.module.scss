@@ -1,0 +1,24 @@
+@use "styles/variables" as *;
+@use "styles/mixins" as mixins;
+
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 60px;
+
+  &__dropdown {
+    z-index: 2;
+  }
+
+  &__search {
+    @include mixins.flex;
+
+    justify-content: space-between;
+    gap: $space-l;
+
+    &__input {
+      z-index: 1;
+    }
+  }
+}
