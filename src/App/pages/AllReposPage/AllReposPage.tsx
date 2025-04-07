@@ -1,5 +1,5 @@
 import { Loader } from "components/Loader";
-import Text from "components/Text";
+import { Text } from "components/Text";
 import { observer, useLocalObservable } from "mobx-react-lite";
 import { GithubAllReposStore } from "store/GithubStore";
 import { Meta } from "utils/meta";

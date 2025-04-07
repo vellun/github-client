@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "./Readme.module.scss";
 import { useFetching } from "hooks/useFetching";
 import RepsService from "api/RepsService";
-import Text from "components/Text";
+import { Text } from "components/Text";
 import { observer } from "mobx-react-lite";
 
 interface ReadmeProps {

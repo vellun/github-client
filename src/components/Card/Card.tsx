@@ -1,7 +1,7 @@
-import React from 'react';
-import cn from 'classnames';
+import React from "react";
+import cn from "classnames";
 
-import Text from 'components/Text';
+import { Text } from "components/Text";
 import styles from "./Card.module.scss";
 
 export type CardProps = {
@@ -23,7 +23,7 @@ export type CardProps = {
   actionSlot?: React.ReactNode;
 };
 
-const Card: React.FC<CardProps> = ({
+export const Card: React.FC<CardProps> = ({
   className,
   image,
   captionSlot,
@@ -38,12 +38,7 @@ const Card: React.FC<CardProps> = ({
       <img className={styles.cardImage} src={image} alt="Repo's card image"></img>
       <div className={styles.cardBody}>
         {captionSlot && (
-          <Text
-          className={cn(styles.cardText, styles.captionSlot)}
-            weight="medium"
-            view="p-14"
-            color="secondary"
-          >
+          <Text className={cn(styles.cardText, styles.captionSlot)} weight="medium" view="p-14" color="secondary">
             {captionSlot}
           </Text>
         )}
@@ -67,12 +62,7 @@ const Card: React.FC<CardProps> = ({
         </Text>
         <div className={styles.cardFooter}>
           {contentSlot && (
-            <Text
-              className={cn(styles.cardTitle, styles.contentSlot)}
-              weight="bold"
-              view="p-18"
-              color="primary"
-            >
+            <Text className={cn(styles.cardTitle, styles.contentSlot)} weight="bold" view="p-18" color="primary">
               {contentSlot}
             </Text>
           )}
@@ -82,5 +72,3 @@ const Card: React.FC<CardProps> = ({
     </div>
   );
 };
-
-export default Card;

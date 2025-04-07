@@ -1,5 +1,5 @@
 import UsersService, { Contributor, User } from "api/UsersService";
-import Text from "components/Text";
+import { Text } from "components/Text";
 import { useFetching } from "hooks/useFetching";
 import { useEffect, useState } from "react";
 import styles from "./ContributorsSection.module.scss";

@@ -1,12 +1,12 @@
 import githubLogo from "assets/icons/github-logo.svg";
 import userLogo from "assets/icons/user-logo.svg";
-import Text from "components/Text";
+import { Text } from "components/Text";
 import cn from "classnames";
 
 import styles from "./Navbar.module.scss";
 import { Link } from "react-router";
 
-const Navbar = () => {
+export const Navbar = () => {
   return (
     <div className={cn(styles.root)}>
       <Link className="link" to={`/repositories`}>
@@ -21,5 +21,3 @@ const Navbar = () => {
     </div>
   );
 };
-
-export default Navbar;

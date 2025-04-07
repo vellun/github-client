@@ -1,4 +1,4 @@
-import Text from "components/Text";
+import { Text } from "components/Text";
 import styles from "./StatsItem.module.scss";
 
 interface StatsItemProps {

@@ -1,5 +1,5 @@
 import ArrowDownIcon from "components/icons/ArrowDownIcon";
-import Text from "components/Text";
+import { Text } from "components/Text";
 import styles from "./titleSection.module.scss";
 import { observer } from "mobx-react-lite";
 

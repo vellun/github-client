@@ -13,7 +13,16 @@ export type TextProps = {
   maxLines?: number;
 };
 
-const Text: React.FC<TextProps> = ({ className, view, tag = "p", weight, color, maxLines, children, ...props }) => {
+export const Text: React.FC<TextProps> = ({
+  className,
+  view,
+  tag = "p",
+  weight,
+  color,
+  maxLines,
+  children,
+  ...props
+}) => {
   const elementRef = React.useRef<HTMLDivElement | HTMLHeadingElement | HTMLParagraphElement>(null);
 
   React.useEffect(() => {
@@ -34,5 +43,3 @@ const Text: React.FC<TextProps> = ({ className, view, tag = "p", weight, color, 
     </Tag>
   );
 };
-
-export default Text;

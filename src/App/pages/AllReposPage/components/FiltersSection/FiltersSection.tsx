@@ -1,5 +1,5 @@
 import searchLogo from "assets/icons/search.svg";
-import Button from "components/Button";
+import { Button } from "components/Button";
 import { Input } from "components/Input";
 import { MultiDropdown, Option } from "components/MultiDropdown";
 import { observer } from "mobx-react-lite";

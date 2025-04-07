@@ -1,4 +1,4 @@
-import Text from "components/Text";
+import { Text } from "components/Text";
 import styles from "./ContributorsItem.module.scss";
 
 interface ContributorsItemProps {
