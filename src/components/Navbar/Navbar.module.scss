@@ -1,0 +1,18 @@
+@use "styles/variables" as *;
+@use "styles/mixins" as mixins;
+
+.navbar {
+  @include mixins.flex;
+
+  justify-content: space-between;
+  padding-left: $content-margin;
+  padding-right: $content-margin;
+  border-bottom: 2px solid $brand-secondary;
+
+  &Logo {
+    @include mixins.flex;
+
+    justify-content: space-between;
+    gap: $space-xl;
+  }
+}

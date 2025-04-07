@@ -1,0 +1,19 @@
+@use "styles/variables" as *;
+@use "styles/mixins" as mixins;
+
+.title {
+  &Section {
+    @include mixins.flex;
+
+    justify-content: left;
+    gap: 16px;
+  }
+  &Image {
+    width: 40px;
+    height: 40px;
+    border-radius: $border-radius;
+  }
+  &ArrowIcon {
+    transform: rotate(90deg);
+  }
+}

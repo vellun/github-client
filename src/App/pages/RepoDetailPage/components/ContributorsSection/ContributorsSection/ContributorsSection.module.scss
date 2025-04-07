@@ -1,0 +1,35 @@
+@use "styles/variables" as *;
+@use "styles/mixins" as mixins;
+
+.Contributors {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 38px;
+
+  &Count {
+    display: inline-block;
+    vertical-align: sub;
+    text-align: center;
+    background-color: $brand-secondary;
+    border-radius: 50%;
+    padding: 4px 5px;
+    height: 16px;
+  }
+}
+
+.title {
+  display: flex;
+  gap: 2px;
+}
+
+.text {
+  margin: 0;
+  line-height: 22px;
+}
+
+.countText {
+  font-size: 10px;
+  line-height: 10px;
+  color: rgba(0, 0, 0, 0.62);
+}

@@ -1,0 +1,39 @@
+@use "styles/variables" as *;
+
+@for $i from 12 through 20 {
+  @if $i % 2 == 0 {
+    .p-#{$i} {
+      font-size: #{$i}px;
+      line-height: #{$i + 4}px;
+    }
+  }
+}
+
+.text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: inherit;
+
+  &Accent {
+    color: $brand;
+  }
+
+  &Secondary {
+    color: $text-secondary;
+  }
+
+  &Primary {
+    color: $text-primary;
+  }
+
+  &Title {
+    font-size: 44px;
+    line-height: 48px;
+    text-align: center;
+  }
+
+  &Button {
+    font-size: 18px;
+  }
+}

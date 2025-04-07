@@ -25,7 +25,11 @@
       "components": ["components/*"],
       "config": ["config/*"],
       "styles": ["styles/*"],
-      "utils": ["utils/*"]
+      "utils": ["utils/*"],
+      "App": ["App/*"],
+      "assets": ["assets/*"],
+      "hooks": ["hooks/*"],
+      "api": ["api/*"]
     }
   },
   "include": ["src"]

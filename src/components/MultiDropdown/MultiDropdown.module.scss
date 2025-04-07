@@ -1,0 +1,53 @@
+@use "styles/variables" as *;
+@use "styles/mixins" as mixins;
+
+.root {
+  position: relative;
+}
+
+.multi-dropdown {
+  position: relative;
+}
+
+.category {
+  background: #ffffff;
+  box-sizing: border-box;
+  color: $text-secondary;
+
+  &:focus {
+    color: #151411;
+  }
+  &:checked {
+    color: $text-secondary;
+  }
+
+  &:disabled {
+    color: #151411;
+    opacity: 0.8;
+  }
+}
+
+.menuCategory {
+  @include mixins.shadow;
+
+  position: absolute;
+  background: #ffffff;
+  width: 100%;
+  top: calc(100% + 8px);
+}
+
+.item {
+  @include mixins.flex;
+
+  padding: 14px 12px;
+  color: $text-primary;
+  cursor: pointer;
+}
+
+.item__selected {
+  color: $brand;
+
+  &:hover {
+    color: $text-secondary;
+  }
+}

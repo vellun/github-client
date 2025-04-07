@@ -1,0 +1,19 @@
+@use "styles/Roboto/fonts";
+@use "styles/variables" as *;
+
+html,
+body {
+  font-family: "Roboto";
+  margin: 0;
+  padding: 0;
+  background-color: $body-background;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+}

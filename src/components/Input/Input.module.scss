@@ -1,0 +1,32 @@
+@use "styles/variables" as *;
+
+.InputDiv {
+  height: 52px;
+  position: relative;
+  width: 100%;
+}
+
+.input {
+  border: none;
+  height: 100%;
+  width: 100%;
+  display: block;
+  padding: 14px 12px;
+  border-radius: $border-radius;
+
+  &:focus {
+    outline: none;
+    border: 1px solid var(--brand);
+  }
+
+  &:disabled {
+    background-color: white;
+  }
+
+  &Icon {
+    position: absolute;
+    right: 12px;
+    bottom: 50%;
+    transform: translateY(50%);
+  }
+}

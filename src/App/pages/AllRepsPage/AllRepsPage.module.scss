@@ -1,0 +1,21 @@
+@use "styles/variables" as *;
+@use "styles/mixins" as mixins;
+
+.allRepsPage {
+  margin-left: $content-margin;
+  margin-right: $content-margin;
+}
+
+.filtersSection {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 60px;
+}
+
+.searchSection {
+  @include mixins.flex;
+
+  justify-content: space-between;
+  gap: $space-l;
+}

@@ -1,0 +1,26 @@
+@use "styles/variables" as *;
+
+.Icon {
+  &Stroke {
+    &Accent {
+      stroke: $brand;
+    }
+    &Secondary {
+      stroke: $text-secondary;
+    }
+    &Primary {
+      stroke: $text-primary;
+    }
+  }
+  &Fill {
+    &Accent {
+      fill: $brand;
+    }
+    &Secondary {
+      fill: $text-secondary;
+    }
+    &Primary {
+      fill: $text-primary;
+    }
+  }
+}

@@ -1,0 +1,15 @@
+@use "styles/mixins" as mixins;
+
+.StatsItem {
+  @include mixins.flex;
+
+  gap: 8px;
+
+  &ItemText {
+    @include mixins.flex;
+  }
+
+  &Item {
+    margin: 0;
+  }
+}
