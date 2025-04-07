@@ -2,16 +2,14 @@ import Card from "components/Card";
 
 import ktsCat from "assets/images/kts-cat.png";
 import { Loader } from "components/Loader";
-import { observer, useLocalObservable } from "mobx-react-lite";
+import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import { Link } from "react-router";
 import { GithubAllReposStore } from "store/GithubStore";
 import { Meta } from "utils/meta";
 import styles from "./ReposSection.module.scss";
 
-export const ReposSection = observer(() => {
-  const store = useLocalObservable(() => new GithubAllReposStore());
-
+export const ReposSection = observer(({ store }: { store: GithubAllReposStore }) => {
   useEffect(() => {
     store.fetch();
   }, [store]);

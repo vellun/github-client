@@ -1,5 +1,5 @@
 import { QueryParamsStore } from "store/RootStore/QueryParamsStore";
 
-export default class RootStore {
+export class RootStore {
   readonly query = new QueryParamsStore();
 }

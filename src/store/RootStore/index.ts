@@ -1,5 +1,2 @@
-import RootStore from "./RootStore";
-
-const rootStore = new RootStore();
-
-export default rootStore;
+export { RootStore } from "./RootStore";
+export { default } from "./instance";

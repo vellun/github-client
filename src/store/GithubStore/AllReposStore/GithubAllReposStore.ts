@@ -13,31 +13,42 @@ export class GithubAllReposStore implements ILocalStore {
     order: [],
     entities: {},
   };
+  _org: string = "ktsstudio";
   meta: Meta = Meta.initial;
 
   constructor() {
     makeObservable(this, {
       _repos: observable,
+      _org: observable,
       meta: observable,
       fetch: action.bound,
+      setMeta: action.bound,
+      setOrg: action.bound,
       repos: computed,
+      org: computed,
     });
   }
 
   async fetch(): Promise<void> {
-    if (this.meta === Meta.loading || this.meta === Meta.success) {
-      return;
+    console.log("делаем вброс-запрос", this.org, rootStore.query.getParam("search"));
+    // if (this.meta === Meta.loading || this.meta === Meta.success) {
+    //   return;
+    // }
+
+    let searchRepo = rootStore.query.getParam("search");
+    if (!searchRepo || searchRepo === "") {
+      searchRepo = this.org;
     }
 
-    this.meta = Meta.loading;
+    this.setMeta(Meta.loading);
     this._repos = {
       order: [],
       entities: {},
     };
 
-    const { isError, data } = await requestGithubRepos("ktsstudio");
+    const { isError, data } = await requestGithubRepos(searchRepo);
     if (isError) {
-      this.meta = Meta.error;
+      this.setMeta(Meta.error);
       return;
     }
 
@@ -53,14 +64,27 @@ export class GithubAllReposStore implements ILocalStore {
     return this._repos.order.map((id) => this._repos.entities[id]);
   }
 
+  get org(): string {
+    return this._org;
+  }
+
+  setMeta(newMeta: Meta) {
+    this.meta = newMeta;
+  }
+
+  setOrg(newOrg: string) {
+    this._org = newOrg;
+  }
+
   destroy(): void {
     this._qpReaction();
   }
 
   private readonly _qpReaction: IReactionDisposer = reaction(
-    () => rootStore.query.getParam("search"),
+    () => (rootStore.query.getParam("search"), this._org),
     (search) => {
       console.log("search value change", search);
+      this.fetch();
     },
   );
 }
