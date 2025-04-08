@@ -36,7 +36,13 @@ export const Text: React.FC<TextProps> = ({
   return (
     <Tag
       ref={elementRef}
-      className={cn("text", styles[`text_color-${color}`], styles[`text_view-${view}`], styles[`text_font-${weight}`])}
+      className={cn(
+        "text",
+        className,
+        styles[`text_color-${color}`],
+        styles[`text_view-${view}`],
+        styles[`text_font-${weight}`],
+      )}
       {...props}
     >
       {children}

@@ -1,6 +1,6 @@
 @use "styles/mixins" as mixins;
 
-.TopicSection {
+.root {
   @include mixins.flex;
 
   gap: 8px;

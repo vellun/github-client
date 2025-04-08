@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import React, { useEffect, useRef, useState } from "react";
-import ArrowDownIcon from "../icons/ArrowDownIcon";
+import { ArrowDownIcon } from "../icons/ArrowDownIcon";
 import { Input } from "../Input";
 import styles from "./MultiDropdown.module.scss";
 
@@ -60,7 +60,10 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = (props: MultiDropdown
 
       return (
         <div
-          className={classNames(styles.item, isSelected && styles.item__selected)}
+          className={classNames(
+            styles["dropdown__category-menu__item"],
+            isSelected && styles["dropdown__category-menu__item_selected"],
+          )}
           onClick={() => {
             if (isSelected) {
               onChange(value.filter((v) => v.key !== option.key));
@@ -76,18 +79,18 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = (props: MultiDropdown
     });
 
   return (
-    <div className={classNames(styles.root, className)} ref={dropdownRef}>
+    <div className={classNames(styles.dropdown, className)} ref={dropdownRef}>
       <Input
         disabled={disabled}
         onChange={(value) => {
           setSearch(value);
         }}
         value={search}
-        className={styles.category}
+        className={styles.dropdown__category}
         placeholder={getTitle(value)}
         afterSlot={<ArrowDownIcon color="secondary" />}
       />
-      {isOpen && !disabled && <div className={styles.menuCategory}>{items}</div>}
+      {isOpen && !disabled && <div className={styles["dropdown__category-menu"]}>{items}</div>}
     </div>
   );
 };

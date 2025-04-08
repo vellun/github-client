@@ -1,11 +1,11 @@
 @use "styles/variables" as *;
 
-.RepoDetailPage {
+.root {
   background-color: white;
   padding-bottom: 80px;
-}
 
-.Page {
-  margin-left: $content-margin;
-  margin-right: $content-margin;
+  &__page {
+    margin-left: $content-margin;
+    margin-right: $content-margin;
+  }
 }

@@ -1,7 +1,7 @@
 @use "styles/variables" as *;
 @use "styles/mixins" as mixins;
 
-.allRepsPage {
+.root {
   margin-left: $content-margin;
   margin-right: $content-margin;
 }

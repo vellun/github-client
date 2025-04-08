@@ -1,26 +1,27 @@
 @use "styles/variables" as *;
 
-.Icon {
-  &Stroke {
-    &Accent {
-      stroke: $brand;
-    }
-    &Secondary {
-      stroke: $text-secondary;
-    }
-    &Primary {
-      stroke: $text-primary;
-    }
-  }
-  &Fill {
-    &Accent {
+.icon {
+  &__fill {
+    &-accent {
       fill: $brand;
     }
-    &Secondary {
+    &-secondary {
       fill: $text-secondary;
     }
-    &Primary {
+    &-primary {
       fill: $text-primary;
+    }
+  }
+
+  &__stroke {
+    &-accent {
+      stroke: $brand;
+    }
+    &-secondary {
+      stroke: $text-secondary;
+    }
+    &-primary {
+      stroke: $text-primary;
     }
   }
 }

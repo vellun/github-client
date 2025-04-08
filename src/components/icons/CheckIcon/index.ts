@@ -1,1 +1,1 @@
-export { default } from './CheckIcon';
+export { CheckIcon } from "./CheckIcon";

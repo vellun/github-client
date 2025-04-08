@@ -11,14 +11,8 @@ export const requestGithubRepos = async (
   page: number,
   perPage: number,
 ): Promise<ApiResp<CollectionT<number, GithubRepoModel>>> => {
-  // Ладно, оставлю это пока тут
-  const token = "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";
-
   try {
     const response = await axios(apiUrls.github.organizationRepos(organization), {
-      headers: {
-        Authorization: `token ${token}`,
-      },
       params: {
         type: type,
         page: page,

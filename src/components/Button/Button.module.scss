@@ -18,7 +18,7 @@
     background-color: $brand-hover;
   }
 
-  &.ButtonLoading:hover {
+  &.button-loading:hover {
     background-color: $brand;
   }
 
@@ -34,7 +34,7 @@
     }
   }
 
-  &.ButtonLoadingDisabled:disabled {
+  &.button-loading-disabled:disabled {
     background-color: $brand;
   }
 }

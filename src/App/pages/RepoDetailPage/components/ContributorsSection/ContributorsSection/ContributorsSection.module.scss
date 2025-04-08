@@ -1,13 +1,23 @@
 @use "styles/variables" as *;
 @use "styles/mixins" as mixins;
 
-.Contributors {
+.root {
   display: flex;
   flex-direction: column;
   gap: 8px;
   margin-bottom: 38px;
 
-  &Count {
+  &__section {
+    display: flex;
+    gap: 2px;
+  }
+
+  &__title {
+    margin: 0;
+    line-height: 22px;
+  }
+
+  &__count {
     display: inline-block;
     vertical-align: sub;
     text-align: center;
@@ -15,21 +25,11 @@
     border-radius: 50%;
     padding: 4px 5px;
     height: 16px;
+
+    &-text {
+      font-size: 10px;
+      line-height: 10px;
+      color: rgba(0, 0, 0, 0.62);
+    }
   }
-}
-
-.title {
-  display: flex;
-  gap: 2px;
-}
-
-.text {
-  margin: 0;
-  line-height: 22px;
-}
-
-.countText {
-  font-size: 10px;
-  line-height: 10px;
-  color: rgba(0, 0, 0, 0.62);
 }

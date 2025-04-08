@@ -15,14 +15,14 @@ export const Button: React.FC<ButtonProps> = ({ loading, children, disabled, cla
   <button
     className={cn(
       styles.button,
-      loading && styles.ButtonLoading,
-      disabled === undefined && loading ? styles.ButtonLoadingDisabled : "",
+      loading && styles["button-loading"],
+      disabled === undefined && loading ? styles["button-loading-disabled"] : "",
       className,
     )}
     disabled={disabled !== undefined ? disabled : loading}
     {...props}
   >
-    {loading && <Loader className={styles.buttonLoader} size="s"></Loader>}
+    {loading && <Loader size="s"></Loader>}
     {children}
   </button>
 );

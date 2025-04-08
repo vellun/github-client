@@ -12,7 +12,7 @@
     @include mixins.shadow;
   }
 
-  &Image {
+  &__image {
     display: block;
     width: 100%;
     height: 348px;
@@ -21,23 +21,23 @@
     border-top-right-radius: $border-radius;
   }
 
-  &Body {
+  &__body {
     padding: $space-xl $space-xs;
   }
 
-  &Footer {
+  &__footer {
     @include mixins.flex;
 
     margin-top: $space-l;
     justify-content: space-between;
   }
 
-  &Text {
+  &__text {
     margin: 8px 0;
   }
 
-  &Title,
-  .captionSlot {
+  &__title,
+  &__caption-slot {
     margin-top: 0;
   }
 }

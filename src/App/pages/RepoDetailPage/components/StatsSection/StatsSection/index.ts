@@ -1,2 +1,1 @@
-export { default } from "./StatsSection";
-export * from "./StatsSection";
+export { StatsSection } from "./StatsSection";

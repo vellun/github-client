@@ -25,7 +25,7 @@ export const AllReposPage: React.FC = observer(() => {
   };
 
   return (
-    <div className={styles.allRepsPage}>
+    <div className={styles.root}>
       <Text tag="h1" weight="bold" color="primary" view="title">
         List of organization repositories
       </Text>

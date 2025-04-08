@@ -9,7 +9,7 @@ interface ReadmeProps {
   repoName: string;
 }
 
-const Readme: React.FC<ReadmeProps> = observer(({ repoName }) => {
+export const Readme: React.FC<ReadmeProps> = observer(({ repoName }) => {
   const [readmeHtml, setReadmeHtml] = useState<string>("");
 
   const [fetchReadme, _] = useFetching(async (): Promise<void> => {
@@ -19,15 +19,13 @@ const Readme: React.FC<ReadmeProps> = observer(({ repoName }) => {
 
   useEffect(() => {
     fetchReadme();
-  }, []);
+  }, [fetchReadme]);
   return (
-    <div className={styles.Readme}>
-      <Text className={styles.readmeText} view="p-12" weight="bold" color="primary">
+    <div className={styles.root}>
+      <Text className={styles.root__title} view="p-12" weight="bold" color="primary">
         README.md
       </Text>
-      <div className={styles.ReadmeContent} dangerouslySetInnerHTML={{ __html: readmeHtml }} />
+      <div className={styles.root__content} dangerouslySetInnerHTML={{ __html: readmeHtml }} />
     </div>
   );
 });
-
-export default Readme;

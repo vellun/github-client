@@ -4,14 +4,13 @@ import { useEffect } from "react";
 import { useParams } from "react-router";
 import { GithubRepoStore } from "store/GithubStore";
 import { Meta } from "utils/meta";
-import ContributorsSection from "./components/ContributorsSection/ContributorsSection";
-import Readme from "./components/Readme";
-import RepoLink from "./components/RepoLink";
-import StatsSection from "./components/StatsSection/StatsSection";
-import TitleSection from "./components/TitleSection";
-import TopicSection from "./components/TopicSection/TopicSection";
+import { ContributorsSection } from "./components/ContributorsSection/ContributorsSection";
+import { Readme } from "./components/Readme";
+import { RepoLink } from "./components/RepoLink";
+import { StatsSection } from "./components/StatsSection/StatsSection";
+import { TitleSection } from "./components/TitleSection";
+import { TopicSection } from "./components/TopicSection/TopicSection";
 import styles from "./RepoDetailPage.module.scss";
-import rootStore from "store/RootStore";
 
 export const RepoDetailPage: React.FC = observer(() => {
   const { repoName } = useParams<{ repoName: string }>();
@@ -19,19 +18,17 @@ export const RepoDetailPage: React.FC = observer(() => {
   const store = useLocalObservable(() => new GithubRepoStore());
 
   useEffect(() => {
-    // const repoName = rootStore.query.getParam("search")
-    console.log("AAAAAAAAAAAAAAAAAAAAAaaaa", repoName);
     store.fetch(orgName, repoName);
-  }, [store, repoName]);
+  }, [store, repoName, orgName]);
 
   const repo = store.repo;
 
   const ObservedRepolink = observer(RepoLink);
 
   return (
-    <div className={styles.RepoDetailPage}>
+    <div className={styles.root}>
       {store.meta === Meta.loading && <Loader />}
-      <div className={styles.Page}>
+      <div className={styles.root__page}>
         {repo && <TitleSection avatarUrl={repo.owner.avatarUrl} repoName={repo.name} />}
         {repo && repo.homepage && <ObservedRepolink repo={repo} />}
         {repo && repo.topics && <TopicSection topics={repo.topics} />}

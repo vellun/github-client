@@ -1,43 +1,35 @@
-import UsersService, { Contributor, User } from "api/UsersService";
+import UsersService, { Contributor } from "api/UsersService";
 import { Text } from "components/Text";
 import { useFetching } from "hooks/useFetching";
-import { useEffect, useState } from "react";
-import styles from "./ContributorsSection.module.scss";
-import ContributorsItem from "../ContributorsItem";
 import { observer } from "mobx-react-lite";
+import { useEffect, useState } from "react";
+import { ContributorsItem } from "../ContributorsItem";
+import styles from "./ContributorsSection.module.scss";
 
 interface ContributorsProps {
   repoName: string;
 }
 
-const ContributorsSection: React.FC<ContributorsProps> = observer(({ repoName }) => {
+export const ContributorsSection: React.FC<ContributorsProps> = observer(({ repoName }) => {
   const [contributors, setContributors] = useState<Contributor[]>([]);
-  const [user, setUser] = useState<User | null>(null);
-
-  const [login, setLogin] = useState<string>("");
 
   const [fetchContributors, _] = useFetching(async (): Promise<void> => {
     const contributors = await UsersService.getContributors(repoName);
     setContributors(contributors);
   });
 
-  // const [fetchUser, _] = useFetching(async (): Promise<void> => {
-  //   const user = await UsersService.getByLogin(login);
-  //   setUser(user);
-  // });
-
   useEffect(() => {
     fetchContributors();
-  }, []);
+  }, [fetchContributors]);
 
   return (
-    <div className={styles.Contributors}>
-      <div className={styles.title}>
-        <Text className={styles.text} view="p-18" weight="bold" color="primary">
+    <div className={styles.root}>
+      <div className={styles.root__section}>
+        <Text className={styles.root__title} view="p-18" weight="bold" color="primary">
           Contributors
         </Text>
-        <div className={styles.ContributorsCount}>
-          <Text className={styles.countText} tag="span" weight="bold">
+        <div className={styles.root__count}>
+          <Text className={styles["root__count-text"]} tag="span" weight="bold">
             {contributors.length}
           </Text>
         </div>
@@ -48,5 +40,3 @@ const ContributorsSection: React.FC<ContributorsProps> = observer(({ repoName })
     </div>
   );
 });
-
-export default ContributorsSection;

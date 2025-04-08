@@ -15,11 +15,11 @@ export const ReposSection = observer(({ store }: { store: GithubAllReposStore })
   }, [store]);
 
   return (
-    <div className={styles.RepsSection}>
+    <div className={styles.root}>
       {store.meta === Meta.loading && <Loader />}
       {store.repos.map((repo) => (
-        <Link key={repo.id} className={styles.cardLink} to={`/repositories/${repo.owner.login}/${repo.name}`}>
-          <Card className={styles.RepoCard} image={ktsCat} title={repo.name} subtitle={repo.description}></Card>
+        <Link key={repo.id} className={styles.root__link} to={`/repositories/${repo.owner.login}/${repo.name}`}>
+          <Card className={styles.root__card} image={ktsCat} title={repo.name} subtitle={repo.description}></Card>
         </Link>
       ))}
     </div>

@@ -1,17 +1,21 @@
 @use "styles/variables" as *;
 @use "styles/mixins" as mixins;
 
-.image {
-  border-radius: 50%;
-}
-
-.ContributorsItem {
+.root {
   @include mixins.flex;
 
   gap: 8px;
   cursor: pointer;
+
+  &__image {
+    border-radius: 50%;
+  }
+
+  &__name {
+    .text {
+      margin: 0;
+    }
+  }
 }
 
-.text {
-  margin: 0;
-}
+

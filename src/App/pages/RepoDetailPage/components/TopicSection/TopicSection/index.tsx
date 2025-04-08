@@ -1,2 +1,1 @@
-export { default } from "./TopicSection";
-export * from "./TopicSection";
+export { TopicSection } from "./TopicSection";
