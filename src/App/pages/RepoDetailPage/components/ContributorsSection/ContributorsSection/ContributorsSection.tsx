@@ -1,7 +1,6 @@
 import UsersService, { Contributor } from "api/UsersService";
 import { Text } from "components/Text";
 import { useFetching } from "hooks/useFetching";
-import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
 import { ContributorsItem } from "../ContributorsItem";
 import styles from "./ContributorsSection.module.scss";
@@ -10,7 +9,7 @@ interface ContributorsProps {
   repoName: string;
 }
 
-export const ContributorsSection: React.FC<ContributorsProps> = observer(({ repoName }) => {
+export const ContributorsSection: React.FC<ContributorsProps> = ({ repoName }) => {
   const [contributors, setContributors] = useState<Contributor[]>([]);
 
   const [fetchContributors, _] = useFetching(async (): Promise<void> => {
@@ -39,4 +38,4 @@ export const ContributorsSection: React.FC<ContributorsProps> = observer(({ repo
       })}
     </div>
   );
-});
+};

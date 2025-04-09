@@ -1,15 +1,14 @@
 import { ArrowDownIcon } from "components/icons/ArrowDownIcon";
 import { Text } from "components/Text";
-import styles from "./titleSection.module.scss";
-import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router";
+import styles from "./titleSection.module.scss";
 
 interface TitleSectionProps {
   avatarUrl?: string;
   repoName: string;
 }
 
-export const TitleSection: React.FC<TitleSectionProps> = observer(({ avatarUrl, repoName }) => {
+export const TitleSection: React.FC<TitleSectionProps> = ({ avatarUrl, repoName }) => {
   const navigate = useNavigate();
 
   const handleGoBack = () => {
@@ -27,4 +26,4 @@ export const TitleSection: React.FC<TitleSectionProps> = observer(({ avatarUrl, 
       </Text>
     </div>
   );
-});
+};

@@ -23,14 +23,12 @@ export const RepoDetailPage: React.FC = observer(() => {
 
   const repo = store.repo;
 
-  const ObservedRepolink = observer(RepoLink);
-
   return (
     <div className={styles.root}>
       {store.meta === Meta.loading && <Loader />}
       <div className={styles.root__page}>
         {repo && <TitleSection avatarUrl={repo.owner.avatarUrl} repoName={repo.name} />}
-        {repo && repo.homepage && <ObservedRepolink repo={repo} />}
+        {repo && repo.homepage && <RepoLink repo={repo} />}
         {repo && repo.topics && <TopicSection topics={repo.topics} />}
         {repo && (
           <StatsSection

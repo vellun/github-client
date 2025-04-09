@@ -1,15 +1,14 @@
-import { useEffect, useState } from "react";
-import styles from "./Readme.module.scss";
-import { useFetching } from "hooks/useFetching";
 import RepsService from "api/RepsService";
 import { Text } from "components/Text";
-import { observer } from "mobx-react-lite";
+import { useFetching } from "hooks/useFetching";
+import { useEffect, useState } from "react";
+import styles from "./Readme.module.scss";
 
 interface ReadmeProps {
   repoName: string;
 }
 
-export const Readme: React.FC<ReadmeProps> = observer(({ repoName }) => {
+export const Readme: React.FC<ReadmeProps> = ({ repoName }) => {
   const [readmeHtml, setReadmeHtml] = useState<string>("");
 
   const [fetchReadme, _] = useFetching(async (): Promise<void> => {
@@ -28,4 +27,4 @@ export const Readme: React.FC<ReadmeProps> = observer(({ repoName }) => {
       <div className={styles.root__content} dangerouslySetInnerHTML={{ __html: readmeHtml }} />
     </div>
   );
-});
+};
