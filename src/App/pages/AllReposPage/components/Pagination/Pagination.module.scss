@@ -1,0 +1,44 @@
+@use "styles/variables" as *;
+@use "styles/mixins" as mixins;
+
+.pagination {
+  @include mixins.flex;
+
+  justify-content: space-between;
+  row-gap: 15px;
+  width: 296px;
+  margin-bottom: 22px;
+
+  &__item {
+    cursor: pointer;
+  }
+
+  &__arrow {
+    &:disabled {
+      cursor: auto;
+      stroke: $brand-secondary;
+    }
+  }
+
+  &__arrow-right {
+    transform: rotate(180deg);
+  }
+
+  &__numbers {
+    height: 38px;
+
+    &__text {
+      margin: 0;
+    }
+  }
+
+  &__numbers-item {
+    width: 42px;
+    height: 100%;
+
+    &_active {
+      background-color: $button-primary-bg;
+      color: $button-primary-text-active;
+    }
+  }
+}
