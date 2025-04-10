@@ -1,7 +1,7 @@
 .root {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
   align-items: stretch;
   margin-top: 36px;
   row-gap: 80px;
@@ -10,5 +10,11 @@
 
   &__link {
     text-decoration: none;
+  }
+}
+
+@media (max-width: 1440px) {
+  .root {
+    column-gap: 40px;
   }
 }
