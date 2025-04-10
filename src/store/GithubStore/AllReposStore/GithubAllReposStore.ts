@@ -86,7 +86,6 @@ export class GithubAllReposStore implements ILocalStore {
   }
 
   get totalPages(): number {
-    console.log("AAAAAAAAAAAAAAAA", this._repos.order.length)
     return Math.ceil(this._repos.order.length / this.perPage);
   }
 
