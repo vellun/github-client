@@ -1,28 +1,25 @@
-import UsersService, { Contributor } from "api/UsersService";
+import { Loader } from "components/Loader";
 import { Text } from "components/Text";
-import { useFetching } from "hooks/useFetching";
-import { useEffect, useState } from "react";
+import { observer } from "mobx-react-lite";
+import { useEffect } from "react";
+import { RepoStore } from "store/ReposStore";
+import { Meta } from "utils/meta";
 import { ContributorsItem } from "../ContributorsItem";
 import styles from "./ContributorsSection.module.scss";
 
-interface ContributorsProps {
-  repoName: string;
-}
-
-export const ContributorsSection: React.FC<ContributorsProps> = ({ repoName }) => {
-  const [contributors, setContributors] = useState<Contributor[]>([]);
-
-  const [fetchContributors, _] = useFetching(async (): Promise<void> => {
-    const contributors = await UsersService.getContributors(repoName);
-    setContributors(contributors);
-  });
+export const ContributorsSection: React.FC<{ store: RepoStore }> = observer(({ store }) => {
+  const repoName = store.repo.name;
+  const orgName = store.repo.owner.login;
 
   useEffect(() => {
-    fetchContributors();
-  }, [fetchContributors]);
+    store.fetchContributors(orgName, repoName);
+  }, [store, repoName, orgName]);
+
+  const contributors = store.contributors;
 
   return (
     <div className={styles.root}>
+      {store.contributorsMeta === Meta.loading && <Loader />}
       <div className={styles.root__section}>
         <Text className={styles.root__title} view="p-18" weight="bold" color="primary">
           Contributors
@@ -34,8 +31,8 @@ export const ContributorsSection: React.FC<ContributorsProps> = ({ repoName }) =
         </div>
       </div>
       {contributors.map((contributor, index) => {
-        return <ContributorsItem key={index} login={contributor.login} avatarUrl={contributor.avatar_url} />;
+        return <ContributorsItem key={index} login={contributor.login} avatarUrl={contributor.avatarUrl} />;
       })}
     </div>
   );
-};
+});

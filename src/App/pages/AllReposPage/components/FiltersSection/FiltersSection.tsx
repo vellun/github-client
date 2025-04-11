@@ -5,7 +5,7 @@ import { MultiDropdown, Option } from "components/MultiDropdown";
 import { observer } from "mobx-react-lite";
 import { useCallback, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
-import { GithubAllReposStore } from "store/GithubStore";
+import { GithubAllReposStore } from "store";
 import rootStore from "store/RootStore";
 import styles from "./FiltersSection.module.scss";
 

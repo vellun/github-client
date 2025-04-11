@@ -1,4 +1,4 @@
-export type GithubOwnerModel = {
+export type RepoOwnerModel = {
   id: number;
   login: string;
   avatarUrl: string;

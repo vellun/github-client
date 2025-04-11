@@ -5,7 +5,7 @@ import { Loader } from "components/Loader";
 import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import { Link } from "react-router";
-import { GithubAllReposStore } from "store/GithubStore";
+import { GithubAllReposStore } from "store";
 import { Meta } from "utils/meta";
 import styles from "./ReposSection.module.scss";
 import { routesConfig } from "config/routes";

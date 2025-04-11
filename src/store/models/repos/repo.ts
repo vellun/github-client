@@ -1,12 +1,12 @@
-import { GithubOwnerModel } from "./githubOwner";
+import { RepoOwnerModel } from "./repoOwner";
 
-export type GithubRepoModel = {
+export type RepoModel = {
   id: number;
   name: string;
   description: string;
   htmlUrl: string;
   pushedAt: Date;
-  owner: GithubOwnerModel;
+  owner: RepoOwnerModel;
   homepage?: string;
   topics: string[];
   stargazersCount: number;

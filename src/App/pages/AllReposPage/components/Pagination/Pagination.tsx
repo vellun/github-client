@@ -1,6 +1,6 @@
 import { Text } from "components/Text";
 import { observer } from "mobx-react-lite";
-import { GithubAllReposStore } from "store/GithubStore";
+import { GithubAllReposStore } from "store";
 import styles from "./Pagination.module.scss";
 
 import cn from "classnames";

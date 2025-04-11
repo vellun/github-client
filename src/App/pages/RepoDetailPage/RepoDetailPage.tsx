@@ -2,7 +2,7 @@ import { Loader } from "components/Loader";
 import { observer, useLocalObservable } from "mobx-react-lite";
 import { useEffect } from "react";
 import { useParams } from "react-router";
-import { GithubRepoStore } from "store/GithubStore";
+import { RepoStore } from "store/ReposStore";
 import { Meta } from "utils/meta";
 import { ContributorsSection } from "./components/ContributorsSection/ContributorsSection";
 import { Readme } from "./components/Readme";
@@ -15,17 +15,17 @@ import styles from "./RepoDetailPage.module.scss";
 export const RepoDetailPage: React.FC = observer(() => {
   const { repoName } = useParams<{ repoName: string }>();
   const { orgName } = useParams<{ orgName: string }>();
-  const store = useLocalObservable(() => new GithubRepoStore());
+  const store = useLocalObservable(() => new RepoStore());
 
   useEffect(() => {
-    store.fetch(orgName, repoName);
+    store.fetchRepo(orgName, repoName);
   }, [store, repoName, orgName]);
 
   const repo = store.repo;
 
   return (
     <div className={styles.root}>
-      {store.meta === Meta.loading && <Loader />}
+      {store.repoMeta === Meta.loading && <Loader />}
       <div className={styles.root__page}>
         {repo && <TitleSection avatarUrl={repo.owner.avatarUrl} repoName={repo.name} />}
         {repo && repo.homepage && <RepoLink repo={repo} />}
@@ -37,8 +37,8 @@ export const RepoDetailPage: React.FC = observer(() => {
             forksCount={repo.forksCount}
           />
         )}
-        {repo && <ContributorsSection repoName={repo.name} />}
-        {repo && <Readme repoName={repo.name} />}
+        {repo && <ContributorsSection store={store} />}
+        {repo && <Readme store={store} />}
       </div>
     </div>
   );

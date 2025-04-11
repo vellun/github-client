@@ -1,18 +1,15 @@
-import { action, computed, IReactionDisposer, makeObservable, observable, reaction, runInAction } from "mobx";
+import { action, computed, IReactionDisposer, makeObservable, observable, reaction, runInAction, toJS } from "mobx";
 
-import { GithubRepoModel } from "store/models";
-import { CollectionT } from "utils/collection";
+import { RepoModel } from "store/models";
+import { Collection } from "utils/collection";
 import { Meta } from "utils/meta";
 
+import ReposService from "api/ReposService";
 import { ILocalStore } from "hooks/useLocal";
-import { requestGithubRepos } from "store/GithubStore";
 import rootStore from "store/RootStore";
 
-export class GithubAllReposStore implements ILocalStore {
-  _repos: CollectionT<number, GithubRepoModel> = {
-    order: [],
-    entities: {},
-  };
+export class AllReposStore implements ILocalStore {
+  _repos: Collection<number, RepoModel> = new Collection();
   _org: string = "ktsstudio";
   _repoType: string = "all";
   meta: Meta = Meta.initial;
@@ -39,7 +36,6 @@ export class GithubAllReposStore implements ILocalStore {
   }
 
   async fetch(): Promise<void> {
-    console.log("делаем вброс-запрос", this.org, rootStore.query.getParam("search"));
     // if (this.meta === Meta.loading || this.meta === Meta.success) {
     //   return;
     // }
@@ -68,12 +64,12 @@ export class GithubAllReposStore implements ILocalStore {
     perPage = Number(perPage);
 
     this.setMeta(Meta.loading);
-    this._repos = {
-      order: [],
-      entities: {},
-    };
+    // this._repos.order = [];
+    // this._repos.entities = {};
 
-    const { isError, data } = await requestGithubRepos(searchRepo, repoType, page, perPage);
+    // this._repos.clear();
+
+    const { isError, data } = await ReposService.getAll(searchRepo, repoType, page, perPage);
     if (isError) {
       this.setMeta(Meta.error);
       return;
@@ -81,7 +77,8 @@ export class GithubAllReposStore implements ILocalStore {
 
     runInAction(() => {
       this.meta = Meta.success;
-      this._repos = data;
+
+      this._repos.setAll(data.order, data.entities);
     });
   }
 
@@ -89,10 +86,10 @@ export class GithubAllReposStore implements ILocalStore {
     return Math.ceil(this._repos.order.length / this.perPage);
   }
 
-  get repos(): GithubRepoModel[] {
+  get repos(): RepoModel[] {
     console.log("get repos", this._repos);
 
-    return this._repos.order.map((id) => this._repos.entities[id]);
+    return this._repos.getAll;
   }
 
   get org(): string {

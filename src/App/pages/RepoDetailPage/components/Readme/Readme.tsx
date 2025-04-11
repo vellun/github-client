@@ -1,30 +1,26 @@
-import RepsService from "api/RepsService";
+import { Loader } from "components/Loader";
 import { Text } from "components/Text";
-import { useFetching } from "hooks/useFetching";
-import { useEffect, useState } from "react";
+import { observer } from "mobx-react-lite";
+import { useEffect } from "react";
+import { Meta } from "utils/meta";
 import styles from "./Readme.module.scss";
+import { RepoStore } from "store/ReposStore";
 
-interface ReadmeProps {
-  repoName: string;
-}
-
-export const Readme: React.FC<ReadmeProps> = ({ repoName }) => {
-  const [readmeHtml, setReadmeHtml] = useState<string>("");
-
-  const [fetchReadme, _] = useFetching(async (): Promise<void> => {
-    const readme = await RepsService.getReadme(repoName);
-    setReadmeHtml(readme);
-  });
+export const Readme: React.FC<{ store: RepoStore }> = observer(({ store }) => {
+  const repoName = store.repo.name;
+  const orgName = store.repo.owner.login;
 
   useEffect(() => {
-    fetchReadme();
-  }, [fetchReadme]);
+    store.fetchReadme(orgName, repoName);
+  }, [store, repoName, orgName]);
+
   return (
     <div className={styles.root}>
+      {store.readmeMeta === Meta.loading && <Loader />}
       <Text className={styles.root__title} view="p-12" weight="bold" color="primary">
         README.md
       </Text>
-      <div className={styles.root__content} dangerouslySetInnerHTML={{ __html: readmeHtml }} />
+      <div className={styles.root__content} dangerouslySetInnerHTML={{ __html: store.readme }} />
     </div>
   );
-};
+});
