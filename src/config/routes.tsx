@@ -1,5 +1,8 @@
 export const routesConfig = {
-  root: "/",
+  root: {
+    mask: "/",
+    create: () => "/",
+  },
   repositories: {
     mask: "/repositories",
     create: () => "/repositories",
