@@ -1,31 +1,22 @@
 import { Text } from "components/Text";
-import { observer } from "mobx-react-lite";
-import { GithubAllReposStore } from "store";
+import { observer, useLocalObservable } from "mobx-react-lite";
 import styles from "./Pagination.module.scss";
 
 import cn from "classnames";
 import { ArrowRightIcon } from "components/icons/ArrowRightIcon";
-import { useLocation, useNavigate } from "react-router";
 import { useState } from "react";
+import { PaginationStore } from "store/RootStore/PaginationStore";
 
-export const Pagination = observer(({ store }: { store: GithubAllReposStore }) => {
-  const location = useLocation();
-  const navigate = useNavigate();
+export const Pagination = observer(() => {
+  const paginationStore = useLocalObservable(() => new PaginationStore());
 
   const [buttonActive, setbuttonActive] = useState<number | string>(1);
 
   const totalPages = 9; // TODO: calculate total pages
 
   const handlePageChange = (newPage: number) => {
-    store.setPage(newPage);
-
     setbuttonActive(newPage);
-
-    const params = new URLSearchParams(location.search);
-    params.set("page", newPage.toString());
-
-    navigate(`${location.pathname}?${params.toString()}`);
-    store.fetch();
+    paginationStore.setPage(newPage);
   };
 
   const handleClick = (value: number | string) => {
@@ -40,8 +31,8 @@ export const Pagination = observer(({ store }: { store: GithubAllReposStore }) =
     <div className={styles.pagination}>
       <button
         className={cn(styles.pagination__arrow, styles.pagination__item)}
-        onClick={() => handlePageChange(store.currentPage - 1)}
-        disabled={store.currentPage === 1}
+        onClick={() => handlePageChange(paginationStore.page - 1)}
+        disabled={paginationStore.page === 1}
       >
         <ArrowRightIcon width="32" height="32" />
       </button>
@@ -54,11 +45,13 @@ export const Pagination = observer(({ store }: { store: GithubAllReposStore }) =
             })}
             onClick={() => handleClick(value)}
           >
-            <Text className={styles.pagination__numbers__text} view="p-18">{value}</Text>
+            <Text className={styles.pagination__numbers__text} view="p-18">
+              {value}
+            </Text>
           </button>
         ))}
       </div>
-      <button onClick={() => handlePageChange(store.currentPage + 1)}>
+      <button onClick={() => handlePageChange(paginationStore.page + 1)}>
         <ArrowRightIcon
           className={cn(styles["pagination__arrow"], styles["pagination__arrow-right"], styles.pagination__item)}
           width="32"

@@ -22,7 +22,7 @@ const AllReposPageContent: React.FC = observer(() => {
       <ReposSection store={store} />
       {store.meta === Meta.loading && <Loader />}
 
-      <Pagination store={store} />
+      <Pagination />
     </div>
   );
 });

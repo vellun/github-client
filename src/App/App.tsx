@@ -9,9 +9,7 @@ import "styles/_styles.scss";
 const App = () => {
   useQueryParamsStoreInit();
   return (
-    <>
-      <Layout />
-    </>
+    <Layout />
   );
 };
 

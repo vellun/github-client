@@ -20,9 +20,7 @@ export class AllReposStore {
       meta: observable,
       fetch: action.bound,
       setMeta: action.bound,
-      setPage: action.bound,
       repos: computed,
-      totalPages: computed,
     });
   }
 
@@ -48,10 +46,6 @@ export class AllReposStore {
     });
   }
 
-  get totalPages(): number {
-    return Math.ceil(this._repos.order.length / this.perPage);
-  }
-
   get repos(): RepoModel[] {
     console.log("get repos", this._repos);
 
@@ -60,14 +54,6 @@ export class AllReposStore {
 
   setMeta(newMeta: Meta) {
     this.meta = newMeta;
-  }
-
-  setPage(page: number) {
-    this.currentPage = page;
-  }
-
-  setPerPage(perPage: number) {
-    this.perPage = perPage;
   }
 
   private readonly _qpReaction: IReactionDisposer = reaction(
@@ -79,7 +65,17 @@ export class AllReposStore {
     },
   );
 
+  private readonly _pageChangeReaction: IReactionDisposer = reaction(
+    () => rootStore.query.getParam("page"),
+    (page) => {
+      if (page !== null) {
+        this.fetch();
+      }
+    },
+  );
+
   destroy(): void {
     this._qpReaction();
+    this._pageChangeReaction();
   }
 }
