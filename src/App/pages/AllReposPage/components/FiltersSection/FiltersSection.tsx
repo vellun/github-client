@@ -9,8 +9,8 @@ export const FiltersSection = observer(() => {
 
   return (
     <div className={styles.root}>
-      <Search store={store} />
       <Filters />
+      <Search store={store} />
     </div>
   );
 });

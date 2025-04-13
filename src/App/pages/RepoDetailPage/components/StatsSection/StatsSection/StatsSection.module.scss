@@ -1,6 +1,8 @@
+@use "styles/variables" as *;
+
 .root {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-bottom: 20px;
+  gap: $space-xxs;
+  margin-bottom: $space-l;
 }

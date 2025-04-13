@@ -35,14 +35,14 @@
     }
 
     &:focus {
-      color: #151411;
+      color: $dropdown-focus;
     }
     &:checked {
       color: $text-secondary;
     }
 
     &:disabled {
-      color: #151411;
+      color: $dropdown-focus;
       opacity: 0.8;
     }
   }

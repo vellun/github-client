@@ -3,6 +3,7 @@ import { filterOptions } from "config/filterOptions";
 import { observer, useLocalObservable } from "mobx-react-lite";
 import { useCallback } from "react";
 import { FiltersStore } from "store/RootStore/FiltersStore";
+import styles from "./Filters.module.scss";
 
 export const Filters = observer(() => {
   const filtersStore = useLocalObservable(() => new FiltersStore());
@@ -21,6 +22,7 @@ export const Filters = observer(() => {
 
   return (
     <MultiDropdown
+      className={styles.root}
       options={filterOptions}
       value={filtersStore.filter ? [{ key: filtersStore.filter, value: filtersStore.filter }] : []}
       onChange={handleSelect}

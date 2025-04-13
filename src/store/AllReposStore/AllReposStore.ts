@@ -56,7 +56,7 @@ export class AllReposStore {
     this.meta = newMeta;
   }
 
-  private readonly _qpReaction: IReactionDisposer = reaction(
+  private readonly _filterChangeReaction: IReactionDisposer = reaction(
     () => rootStore.query.getParam("filter"),
     (filter) => {
       if (filter !== null) {
@@ -75,7 +75,7 @@ export class AllReposStore {
   );
 
   destroy(): void {
-    this._qpReaction();
+    this._filterChangeReaction();
     this._pageChangeReaction();
   }
 }
