@@ -22,8 +22,8 @@ export const ContributorsSection: React.FC<{ store: RepoStore }> = observer(({ s
           </Text>
         </div>
       </div>
-      {contributors.map((contributor, index) => {
-        return <ContributorsItem key={index} login={contributor.login} avatarUrl={contributor.avatarUrl} />;
+      {contributors.map((contributor) => {
+        return <ContributorsItem key={contributor.id} login={contributor.login} avatarUrl={contributor.avatarUrl} />;
       })}
     </div>
   );

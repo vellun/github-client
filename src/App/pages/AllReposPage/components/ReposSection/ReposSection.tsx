@@ -19,7 +19,7 @@ export const ReposSection = observer(({ store }: { store: AllReposStore }) => {
           className={styles.root__link}
           to={routesConfig.repoDetail.create(repo.owner.login, repo.name)}
         >
-          <Card className={styles.root__card} image={ktsCat} title={repo.name} subtitle={repo.description}></Card>
+          <Card className={styles.root__card} image={repo.owner.avatarUrl} title={repo.name} subtitle={repo.description}></Card>
         </Link>
       ))}
     </div>

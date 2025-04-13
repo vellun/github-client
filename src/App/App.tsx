@@ -1,16 +1,27 @@
 import { AllReposPage } from "App/pages/AllReposPage";
 import { RepoDetailPage } from "App/pages/RepoDetailPage";
+import { Navbar } from "components/Navbar";
 import { Layout } from "components/Layout";
 import { routesConfig } from "config/routes";
-import { createBrowserRouter, Navigate, RouteObject } from "react-router";
+import { createBrowserRouter, Navigate, Outlet, RouteObject } from "react-router";
 import { useQueryParamsStoreInit } from "store/RootStore/hooks";
 import "styles/_styles.scss";
 
 const App = () => {
-  useQueryParamsStoreInit();
   return (
-    <Layout />
+    <div>
+      <QueryParamsStoreInit />
+      <Layout>
+        <Navbar />
+        <Outlet />
+      </Layout>
+    </div>
   );
+};
+
+const QueryParamsStoreInit = () => {
+  useQueryParamsStoreInit();
+  return null;
 };
 
 const routes: RouteObject[] = [
