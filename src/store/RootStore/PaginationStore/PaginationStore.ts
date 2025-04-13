@@ -1,7 +1,8 @@
 import { action, IReactionDisposer, makeObservable, observable, reaction } from "mobx";
 import { rootStore } from "store/RootStore";
+import { IStoreWithReaction } from "store/interfaces";
 
-export class PaginationStore {
+export class PaginationStore implements IStoreWithReaction {
   page: number = Number(rootStore.query.getParam("page"));
 
   constructor() {

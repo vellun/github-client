@@ -1,8 +1,9 @@
 import { action, IReactionDisposer, makeObservable, observable, reaction } from "mobx";
 import { ParsedQs } from "qs";
 import { rootStore } from "store/RootStore";
+import { IStoreWithReaction } from "store/interfaces";
 
-export class SearchStore {
+export class SearchStore implements IStoreWithReaction {
   search: string | ParsedQs | (string | ParsedQs)[] | undefined = rootStore.query.getParam("search");
 
   constructor() {

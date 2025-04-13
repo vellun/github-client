@@ -6,8 +6,9 @@ import { Meta } from "utils/meta";
 
 import ReposService from "api/ReposService";
 import { rootStore } from "store/RootStore";
+import { IStoreWithReaction } from "store/interfaces";
 
-export class AllReposStore {
+export class AllReposStore implements IStoreWithReaction {
   _repos: Collection<number, RepoModel> = new Collection();
   meta: Meta = Meta.initial;
 
