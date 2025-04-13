@@ -19,11 +19,11 @@ type ApiRequestParams = {
 
 export default class ReposService {
   static async getAll(params: ApiRequestParams): Promise<ApiResp<Collection<number, RepoModel>>> {
-    let org = "ktsstudio";
-    if (params.org !== undefined) {
-      org = params.org;
+    if (params.org === undefined || params.org === null) {
+      params.org = "ktsstudio";
     }
-    const response = await fetch(apiUrls.repos.organizationRepos(org), {
+
+    const response = await fetch(apiUrls.repos.organizationRepos(params.org), {
       type: params.type,
       page: params.page,
       per_page: params.perPage,
