@@ -28,6 +28,12 @@ export class RepoStore {
     });
   }
 
+  init(orgName: string, repoName: string) {
+    this.fetchRepo(orgName, repoName);
+    this.fetchContributors(orgName, repoName);
+    this.fetchReadme(orgName, repoName);
+  }
+
   async fetchRepo(orgName: string, repoName: string): Promise<void> {
     if (this.repoMeta === Meta.loading || this.repoMeta === Meta.success) {
       return;

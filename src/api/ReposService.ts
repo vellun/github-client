@@ -10,17 +10,23 @@ import { ApiResp } from "utils/apiTypes";
 import { Collection } from "utils/collection";
 import { fetch } from "utils/fetch";
 
+type ApiRequestParams = {
+  org: string | null;
+  type: string | null;
+  page: number | null;
+  perPage: number | null;
+};
+
 export default class ReposService {
-  static async getAll(
-    orgName: string,
-    repoType: string,
-    page = 1,
-    perPage: number,
-  ): Promise<ApiResp<Collection<number, RepoModel>>> {
-    const response = await fetch(apiUrls.repos.organizationRepos(orgName), {
-      type: repoType,
-      page: page,
-      per_page: perPage,
+  static async getAll(params: ApiRequestParams): Promise<ApiResp<Collection<number, RepoModel>>> {
+    let org = "ktsstudio";
+    if (params.org !== undefined) {
+      org = params.org;
+    }
+    const response = await fetch(apiUrls.repos.organizationRepos(org), {
+      type: params.type,
+      page: params.page,
+      per_page: params.perPage,
     });
 
     return { isError: response.isError, data: normalizeReposToCollection(response.data) };

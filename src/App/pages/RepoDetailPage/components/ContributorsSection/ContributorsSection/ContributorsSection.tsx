@@ -1,20 +1,12 @@
 import { Loader } from "components/Loader";
 import { Text } from "components/Text";
 import { observer } from "mobx-react-lite";
-import { useEffect } from "react";
-import { RepoStore } from "store/ReposStore";
+import { RepoStore } from "store";
 import { Meta } from "utils/meta";
 import { ContributorsItem } from "../ContributorsItem";
 import styles from "./ContributorsSection.module.scss";
 
 export const ContributorsSection: React.FC<{ store: RepoStore }> = observer(({ store }) => {
-  const repoName = store.repo.name;
-  const orgName = store.repo.owner.login;
-
-  useEffect(() => {
-    store.fetchContributors(orgName, repoName);
-  }, [store, repoName, orgName]);
-
   const contributors = store.contributors;
 
   return (

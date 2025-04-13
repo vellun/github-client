@@ -2,19 +2,14 @@ import { Card } from "components/Card";
 
 import ktsCat from "assets/images/kts-cat.png";
 import { Loader } from "components/Loader";
+import { routesConfig } from "config/routes";
 import { observer } from "mobx-react-lite";
-import { useEffect } from "react";
 import { Link } from "react-router";
-import { GithubAllReposStore } from "store";
+import { AllReposStore } from "store/AllReposStore";
 import { Meta } from "utils/meta";
 import styles from "./ReposSection.module.scss";
-import { routesConfig } from "config/routes";
 
-export const ReposSection = observer(({ store }: { store: GithubAllReposStore }) => {
-  useEffect(() => {
-    store.fetch();
-  }, [store]);
-
+export const ReposSection = observer(({ store }: { store: AllReposStore }) => {
   return (
     <div className={styles.root}>
       {store.meta === Meta.loading && <Loader />}

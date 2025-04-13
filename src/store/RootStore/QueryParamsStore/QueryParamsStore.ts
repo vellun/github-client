@@ -6,6 +6,7 @@ type PrivateFields = "_params";
 export class QueryParamsStore {
   private _params: qs.ParsedQs = {};
   private _search: string = "";
+  updateQueryParam: ((params: Record<string, string | number | null | number[]>) => void) | null = null;
 
   constructor() {
     makeObservable<QueryParamsStore, PrivateFields>(this, {
@@ -25,5 +26,14 @@ export class QueryParamsStore {
       this._search = search;
       this._params = qs.parse(search);
     }
+  }
+
+  getApiParams() {
+    return {
+      org: this.getParam("search"),
+      type: this.getParam("filter"),
+      page: this.getParam("page"),
+      perPage: this.getParam("per_page"),
+    };
   }
 }

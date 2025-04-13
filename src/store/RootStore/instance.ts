@@ -1,4 +1,3 @@
 import { RootStore } from "./RootStore";
 
-const rootStore = new RootStore();
-export default rootStore;
+export const rootStore = new RootStore();

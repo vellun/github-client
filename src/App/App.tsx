@@ -3,21 +3,16 @@ import { RepoDetailPage } from "App/pages/RepoDetailPage";
 import { Layout } from "components/Layout";
 import { routesConfig } from "config/routes";
 import { createBrowserRouter, Navigate, RouteObject } from "react-router";
-import { useQueryParamsStoreInit } from "store/RootStore/hooks/useQueryParamsStoreInit";
+import { useQueryParamsStoreInit } from "store/RootStore/hooks";
 import "styles/_styles.scss";
 
 const App = () => {
+  useQueryParamsStoreInit();
   return (
     <>
-      <QueryParamsStoreInit />
       <Layout />
     </>
   );
-};
-
-const QueryParamsStoreInit = () => {
-  useQueryParamsStoreInit();
-  return null;
 };
 
 const routes: RouteObject[] = [
