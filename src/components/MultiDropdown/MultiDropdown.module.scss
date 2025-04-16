@@ -1,53 +1,49 @@
 @use "styles/variables" as *;
 @use "styles/mixins" as mixins;
 
-.root {
+.dropdown {
   position: relative;
-}
 
-.multi-dropdown {
-  position: relative;
-}
-
-.category {
-  background: #ffffff;
-  box-sizing: border-box;
-  color: $text-secondary;
-
-  &:focus {
-    color: #151411;
-  }
-  &:checked {
+  &__category {
+    background: #ffffff;
+    box-sizing: border-box;
     color: $text-secondary;
-  }
 
-  &:disabled {
-    color: #151411;
-    opacity: 0.8;
-  }
-}
+    &-menu {
+      @include mixins.shadow;
 
-.menuCategory {
-  @include mixins.shadow;
+      position: absolute;
+      background: #ffffff;
+      width: 100%;
+      top: calc(100% + 8px);
 
-  position: absolute;
-  background: #ffffff;
-  width: 100%;
-  top: calc(100% + 8px);
-}
+      &__item {
+        @include mixins.flex;
 
-.item {
-  @include mixins.flex;
+        padding: 14px 12px;
+        color: $text-primary;
+        cursor: pointer;
 
-  padding: 14px 12px;
-  color: $text-primary;
-  cursor: pointer;
-}
+        &_selected {
+          color: $brand;
 
-.item__selected {
-  color: $brand;
+          &:hover {
+            color: $text-secondary;
+          }
+        }
+      }
+    }
 
-  &:hover {
-    color: $text-secondary;
+    &:focus {
+      color: $dropdown-focus;
+    }
+    &:checked {
+      color: $text-secondary;
+    }
+
+    &:disabled {
+      color: $dropdown-focus;
+      opacity: 0.8;
+    }
   }
 }

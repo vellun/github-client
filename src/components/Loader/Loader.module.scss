@@ -13,22 +13,20 @@
   fill: $brand;
   animation: rotate 2s linear infinite;
 
-  &-l {
-    width: $loader-l;
-    height: $loader-l;
-  }
+  &__size {
+    &-l {
+      width: $loader-l;
+      height: $loader-l;
+    }
 
-  &-m {
-    width: $loader-m;
-    height: $loader-m;
-  }
+    &-m {
+      width: $loader-m;
+      height: $loader-m;
+    }
 
-  &-s {
-    width: $loader-s;
-    height: $loader-s;
+    &-s {
+      width: $loader-s;
+      height: $loader-s;
+    }
   }
-}
-
-.buttonLoader {
-  fill: #fff;
 }

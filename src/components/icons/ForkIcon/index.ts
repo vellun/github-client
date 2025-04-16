@@ -1,1 +1,1 @@
-export { default } from './ForkIcon';
+export { ForkIcon } from './ForkIcon';

@@ -29,7 +29,9 @@
       "App": ["App/*"],
       "assets": ["assets/*"],
       "hooks": ["hooks/*"],
-      "api": ["api/*"]
+      "api": ["api/*"],
+      "store": ["store/*"],
+      "meta": ["store/*"]
     }
   },
   "include": ["src"]

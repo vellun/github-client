@@ -1,25 +1,14 @@
-import App from "App/App";
-import AllRepsPage from "App/pages/AllRepsPage";
-import RepoDetailPage from "App/pages/RepoDetailPage";
-import { Navigate, RouteObject } from "react-router";
-
-export const routesConfig: RouteObject[] = [
-  {
-    path: "/",
-    element: <App />,
-    children: [
-      {
-        index: true,
-        element: <Navigate to="/repositories" replace />,
-      },
-      {
-        path: "/repositories",
-        element: <AllRepsPage />,
-      },
-      {
-        path: "/repositories/:repoName",
-        element: <RepoDetailPage />,
-      },
-    ],
+export const routesConfig = {
+  root: {
+    mask: "/",
+    create: () => "/",
   },
-];
+  repositories: {
+    mask: "/repositories",
+    create: () => "/repositories",
+  },
+  repoDetail: {
+    mask: "/repositories/:orgName/:repoName",
+    create: (orgName: string, repoName: string) => `/repositories/${orgName}/${repoName}`,
+  },
+};

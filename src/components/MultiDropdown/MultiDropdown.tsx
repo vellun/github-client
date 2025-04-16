@@ -1,17 +1,14 @@
 import classNames from "classnames";
 import React, { useEffect, useRef, useState } from "react";
-import ArrowDownIcon from "../icons/ArrowDownIcon";
-import Input from "../Input";
+import { ArrowDownIcon } from "../icons/ArrowDownIcon";
+import { Input } from "../Input";
 import styles from "./MultiDropdown.module.scss";
 
 export type Option = {
-  /** Ключ варианта, используется для отправки на бек/использования в коде */
   key: string;
-  /** Значение варианта, отображается пользователю */
   value: string;
 };
 
-/** Пропсы, которые принимает компонент Dropdown */
 export type MultiDropdownProps = {
   className?: string;
   /** Массив возможных вариантов для выбора */
@@ -26,7 +23,7 @@ export type MultiDropdownProps = {
   getTitle: (value: Option[]) => string;
 };
 
-const MultiDropdown: React.FC<MultiDropdownProps> = (props: MultiDropdownProps) => {
+export const MultiDropdown: React.FC<MultiDropdownProps> = (props: MultiDropdownProps) => {
   const { options, value, onChange, disabled, getTitle, className } = props;
 
   const [search, setSearch] = useState("");
@@ -63,7 +60,10 @@ const MultiDropdown: React.FC<MultiDropdownProps> = (props: MultiDropdownProps) 
 
       return (
         <div
-          className={classNames(styles.item, isSelected && styles.item__selected)}
+          className={classNames(
+            styles["dropdown__category-menu__item"],
+            isSelected && styles["dropdown__category-menu__item_selected"],
+          )}
           onClick={() => {
             if (isSelected) {
               onChange(value.filter((v) => v.key !== option.key));
@@ -79,20 +79,18 @@ const MultiDropdown: React.FC<MultiDropdownProps> = (props: MultiDropdownProps) 
     });
 
   return (
-    <div className={classNames(styles.root, className)} ref={dropdownRef}>
+    <div className={classNames(styles.dropdown, className)} ref={dropdownRef}>
       <Input
         disabled={disabled}
         onChange={(value) => {
           setSearch(value);
         }}
         value={search}
-        className={styles.category}
+        className={styles.dropdown__category}
         placeholder={getTitle(value)}
         afterSlot={<ArrowDownIcon color="secondary" />}
       />
-      {isOpen && !disabled && <div className={styles.menuCategory}>{items}</div>}
+      {isOpen && !disabled && <div className={styles["dropdown__category-menu"]}>{items}</div>}
     </div>
   );
 };
-
-export default MultiDropdown;

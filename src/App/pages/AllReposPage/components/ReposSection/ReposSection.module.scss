@@ -1,0 +1,20 @@
+.root {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  margin-top: 36px;
+  row-gap: 80px;
+  column-gap: 80px;
+  margin-bottom: 40px;
+
+  &__link {
+    text-decoration: none;
+  }
+}
+
+@media (max-width: 1440px) {
+  .root {
+    column-gap: 40px;
+  }
+}

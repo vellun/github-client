@@ -1,2 +1,1 @@
-export { default } from "./ContributorsSection";
-export * from "./ContributorsSection";
+export { ContributorsSection } from "./ContributorsSection";
