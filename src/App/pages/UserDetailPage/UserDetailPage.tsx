@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import { useUserPageStore } from "./context";
 import { UserProvider } from "./provider";
 import styles from "./UserDetailPage.module.scss";
@@ -7,6 +7,8 @@ import { Meta } from "utils/meta";
 import { Loader } from "components/Loader";
 import { UserLogo } from "components/UserLogo";
 import { Text } from "components/Text";
+import { routesConfig } from "config/routes";
+import { Button } from "components/Button";
 
 const UserDetailPageContent: React.FC = observer(() => {
   const store = useUserPageStore();
@@ -24,6 +26,7 @@ const UserDetailPageContent: React.FC = observer(() => {
       <Text color="secondary">{user.login}</Text>
       <Text>{user.bio}</Text>
       {user.type}
+      <Link className="link" to={routesConfig.userRepos.create(user.login)}><Button>Repositories</Button></Link>
     </div>
   );
 });

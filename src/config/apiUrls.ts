@@ -1,4 +1,5 @@
 const githubApi = (endpoint: string): string => `https://api.github.com/${endpoint}`;
+const authApi = (endpoint: string): string => `https://fakestoreapi.com/${endpoint}`;
 
 export const apiUrls = {
   repos: {
@@ -16,5 +17,9 @@ export const apiUrls = {
   search: {
     users: (): string => githubApi(`search/users`),
     repos: (): string => githubApi(`search/repositories`)
+  },
+  auth: {
+    register: (): string => authApi(`users`),
+    login: (): string => authApi(`auth/login`)
   }
 };

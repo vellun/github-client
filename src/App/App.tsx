@@ -9,6 +9,8 @@ import { useQueryParamsStoreInit } from "store/RootStore/hooks";
 import { rootStore } from "store/RootStore/instance";
 import "styles/_styles.scss";
 import { UserReposPage } from "App/pages/UserReposPage";
+import { LoginPage } from "App/pages/LoginPage";
+import { RegisterPage } from "App/pages/RegisterPage";
 
 const App = () => {
   useQueryParamsStoreInit()
@@ -60,6 +62,14 @@ const routes: RouteObject[] = [
       {
         path: routesConfig.userDetail.mask,
         element: <UserDetailPage />
+      },
+      {
+        path: routesConfig.login.mask,
+        element: <LoginPage />
+      },
+      {
+        path: routesConfig.register.mask,
+        element: <RegisterPage />
       },
     ],
   },

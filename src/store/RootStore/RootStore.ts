@@ -1,7 +1,7 @@
-import { PaginationStore } from "store/RootStore/PaginationStore";
+import { AuthStore } from "store/RootStore/AuthStore";
 import { QueryParamsStore } from "store/RootStore/QueryParamsStore";
 
 export class RootStore {
   readonly query = new QueryParamsStore();
-  // readonly pagination = new PaginationStore();
+  readonly auth = new AuthStore();
 }
