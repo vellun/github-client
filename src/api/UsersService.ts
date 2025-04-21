@@ -21,8 +21,6 @@ export default class UsersService {
     let url = apiUrls.users.users()
     let q = []
 
-    console.log("PPPPPPPPPAAAA", params.login)
-
     if (isParam(params.login)) {
       url = apiUrls.search.users()
       q.push(`${params.login} in:login`)
@@ -42,12 +40,8 @@ export default class UsersService {
       reqParams.q = q.join(" ")
     }
 
-    console.log("SSSSS", reqParams)
-
     const response = await fetch(url, reqParams);
     let responseData = response.data
-
-    console.log("DDDDDDDDDDDD", response.response)
 
     if (isParam(params.login) || isParam(params.type)) {
       responseData = response.data.items;

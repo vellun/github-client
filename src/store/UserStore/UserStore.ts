@@ -16,7 +16,6 @@ export class UserStore {
   }
 
   init(login: string) {
-    console.log("SSSS")
     this.fetchUser(login);
   }
 
@@ -35,7 +34,6 @@ export class UserStore {
     runInAction(() => {
       this.userMeta = Meta.success;
       this._user = data;
-      console.log("AAAAAAAAA", this._user)
     });
   }
 

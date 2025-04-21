@@ -39,7 +39,7 @@ export class QueryParamsStore {
 
   getApiUserReposParams() {
     return {
-      login: this.getParam("search"),
+      repoName: this.getParam("search"),
       type: this.getParam("filter"),
       page: this.getParam("page"),
       perPage: this.getParam("per_page"),

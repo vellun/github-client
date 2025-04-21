@@ -11,3 +11,10 @@ export type UsersApiRequestParams = {
     since: number | null;
     perPage: number | null;
 };
+
+export type UsersReposApiRequestParams = {
+    repoName: string | null;
+    type: string | null;
+    page: number | null;
+    perPage: number | null;
+};
