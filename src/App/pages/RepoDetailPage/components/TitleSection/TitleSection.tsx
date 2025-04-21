@@ -6,14 +6,11 @@ import styles from "./titleSection.module.scss";
 // import { useBack } from "App/pages/hooks";
 
 interface TitleSectionProps {
-  orgName: string;
   avatarUrl?: string;
   repoName: string;
 }
 
 export const TitleSection: React.FC<TitleSectionProps> = ({ avatarUrl, repoName }) => {
-  // const back = useBack(); // НЕ РАБОТАЕТ; TODO: разобраться
-
   const navigate = useNavigate();
   const location = useLocation();
 

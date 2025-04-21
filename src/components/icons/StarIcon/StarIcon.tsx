@@ -2,7 +2,7 @@ import * as React from "react";
 import { Icon, IconProps } from "../Icon";
 import styles from "./../Icons.module.scss";
 
-export const StarIcon: React.FC<IconProps> = ({ color = "primary", ...props }) => (
+export const StarIcon: React.FC<IconProps> = ({ color = "accent", ...props }) => (
   <Icon viewBox="0 0 16 16" {...props}>
     <path
       className={styles[`icon__fill-${color}`]}

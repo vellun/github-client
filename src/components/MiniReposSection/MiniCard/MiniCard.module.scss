@@ -9,10 +9,16 @@
 
     height: 100%;
 
+    transition: 0.2s;
+
 
     &__title {
         @include mixins.flex;
         gap: 12px
+    }
+
+    &:hover {
+        @include mixins.shadow
     }
 }
 

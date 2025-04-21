@@ -24,7 +24,11 @@ button {
   color: black;
 }
 
-.container {
+.noMarginText {
+  margin: 0
+}
+
+.flex-container {
   margin-left: $content-margin;
   margin-right: $content-margin;
   display: flex;
@@ -32,4 +36,11 @@ button {
   align-items: center;
   justify-content: center;
   max-width: 1440px;
+}
+
+.container {
+  margin-left: $content-margin;
+  margin-right: $content-margin;
+  max-width: 1440px;
+
 }

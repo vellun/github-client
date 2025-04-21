@@ -1,3 +1,6 @@
+@use "styles/mixins" as mixins;
+@use "styles/variables" as *;
+
 .root {
   display: flex;
   flex-wrap: wrap;
@@ -6,6 +9,18 @@
   row-gap: 80px;
   column-gap: 80px;
   margin-bottom: 40px;
+
+  &__card {
+    &__caption {
+      @include mixins.flex;
+      gap: 15px;
+    }
+
+    &__stars {
+      @include mixins.flex;
+      gap: 4px
+    }
+  }
 
   &__link {
     text-decoration: none;

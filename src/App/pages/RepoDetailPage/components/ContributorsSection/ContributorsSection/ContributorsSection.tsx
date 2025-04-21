@@ -1,7 +1,7 @@
 import { Loader } from "components/Loader";
 import { Text } from "components/Text";
 import { observer } from "mobx-react-lite";
-import { RepoStore } from "store";
+import { RepoStore } from "store/RepoStore";
 import { Meta } from "utils/meta";
 import { ContributorsItem } from "../ContributorsItem";
 import styles from "./ContributorsSection.module.scss";

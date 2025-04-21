@@ -4,9 +4,13 @@
 .user {
     @include mixins.flex;
     justify-content: space-between;
-
+    border: 1px solid $brand-secondary;
+    border-radius: $border-radius;
     background-color: white;
+
     padding: $space-s;
+
+    transition: 0.2s;
 
     &__title {
         @include mixins.flex;

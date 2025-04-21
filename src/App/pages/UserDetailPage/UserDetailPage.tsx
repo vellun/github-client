@@ -9,6 +9,7 @@ import { UserLogo } from "components/UserLogo";
 import { Text } from "components/Text";
 import { routesConfig } from "config/routes";
 import { Button } from "components/Button";
+import cn from "classnames"
 
 const UserDetailPageContent: React.FC = observer(() => {
   const store = useUserPageStore();
@@ -19,13 +20,14 @@ const UserDetailPageContent: React.FC = observer(() => {
   }
 
   return (
-    <div className={styles.root}>
+    <div className={cn("container", styles.user)}>
       {store.userMeta === Meta.loading && <Loader />}
       <UserLogo src={user.avatarUrl} width="250px" height="250px" alt="User Avatar" />
-      <Text view="p-20" weight="medium">{user.name}</Text>
-      <Text color="secondary">{user.login}</Text>
+      <div className={styles.user__name}>
+      <Text className="noMarginText" view="p-20" weight="medium">{user.name}</Text>
+      <Text className="noMarginText" color="secondary">{user.login}</Text>
+      </div>
       <Text>{user.bio}</Text>
-      {user.type}
       <Link className="link" to={routesConfig.userRepos.create(user.login)}><Button>Repositories</Button></Link>
     </div>
   );

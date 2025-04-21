@@ -1,9 +1,9 @@
 import { Button } from "components/Button";
 import { Text } from "components/Text";
 import { UserLogo } from "components/UserLogo";
-import styles from "./UserItem.module.scss";
-import { Link } from "react-router";
 import { routesConfig } from "config/routes";
+import { Link } from "react-router";
+import styles from "./UserItem.module.scss";
 
 type UserItem = {
     login: string,

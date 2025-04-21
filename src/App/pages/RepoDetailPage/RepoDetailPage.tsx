@@ -2,6 +2,7 @@ import { Loader } from "components/Loader";
 import { observer } from "mobx-react-lite";
 import { useParams } from "react-router";
 import { Meta } from "utils/meta";
+import { addViewedRepo } from "utils/viewedRepos";
 import { ContributorsSection } from "./components/ContributorsSection/ContributorsSection";
 import { Readme } from "./components/Readme";
 import { RepoLink } from "./components/RepoLink";
@@ -11,9 +12,6 @@ import { TopicSection } from "./components/TopicSection/TopicSection";
 import { useRepoPageStore } from "./context";
 import { RepoProvider } from "./provider";
 import styles from "./RepoDetailPage.module.scss";
-import { useEffect } from "react";
-import { addViewedRepo, getViewedRepos } from "utils/viewedRepos";
-import { rootStore } from "store/RootStore";
 
 const RepoDetailPageContent: React.FC = observer(() => {
   const store = useRepoPageStore();
@@ -23,15 +21,7 @@ const RepoDetailPageContent: React.FC = observer(() => {
     return <div>Репозиторий не найден</div>;
   }
 
-  // rootStore.viewedRepos.addViewedRepo(repo)
-
   addViewedRepo(repo);
-  // console.log("VIEWED", getViewedRepos())
-
-  // useEffect(() => {
-  //   addViewedRepo(repo);
-  //   console.log("VIEWED", getViewedRepos())
-  // }, [repo]);
 
   return (
     <div className={styles.root}>

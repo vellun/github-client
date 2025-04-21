@@ -10,6 +10,10 @@ export const getViewedRepos = () => {
 export const addViewedRepo = (repo: RepoModel) => {
     let viewedRepos = getViewedRepos();
 
+    if (viewedRepos.some(r => r.name === repo.name)) {
+        return
+    }
+
     if (viewedRepos.length >= 4 || viewedRepos[0] !== undefined && viewedRepos[0].name === repo.name) {
         viewedRepos = viewedRepos.slice(1)
     }
