@@ -11,6 +11,9 @@ import { TopicSection } from "./components/TopicSection/TopicSection";
 import { useRepoPageStore } from "./context";
 import { RepoProvider } from "./provider";
 import styles from "./RepoDetailPage.module.scss";
+import { useEffect } from "react";
+import { addViewedRepo, getViewedRepos } from "utils/viewedRepos";
+import { rootStore } from "store/RootStore";
 
 const RepoDetailPageContent: React.FC = observer(() => {
   const store = useRepoPageStore();
@@ -19,6 +22,16 @@ const RepoDetailPageContent: React.FC = observer(() => {
   if (!repo) {
     return <div>Репозиторий не найден</div>;
   }
+
+  // rootStore.viewedRepos.addViewedRepo(repo)
+
+  addViewedRepo(repo);
+  // console.log("VIEWED", getViewedRepos())
+
+  // useEffect(() => {
+  //   addViewedRepo(repo);
+  //   console.log("VIEWED", getViewedRepos())
+  // }, [repo]);
 
   return (
     <div className={styles.root}>
