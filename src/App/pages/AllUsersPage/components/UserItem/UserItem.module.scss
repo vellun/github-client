@@ -1,0 +1,19 @@
+@use "styles/mixins" as mixins;
+@use "styles/variables" as *;
+
+.user {
+    @include mixins.flex;
+    justify-content: space-between;
+
+    background-color: white;
+    padding: $space-s;
+
+    &__title {
+        @include mixins.flex;
+        gap: $space-s;
+    }
+
+    &:hover {
+        @include mixins.shadow
+    }
+}

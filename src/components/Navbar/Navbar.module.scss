@@ -1,7 +1,7 @@
 @use "styles/variables" as *;
 @use "styles/mixins" as mixins;
 
-.root {
+.navbar {
   @include mixins.flex;
 
   justify-content: space-between;
@@ -15,4 +15,13 @@
     justify-content: space-between;
     gap: $space-xl;
   }
+
+  &__menu {
+    @include mixins.flex;
+    gap: 40px;
+  }
+}
+
+.panel__check {
+  display: none;
 }

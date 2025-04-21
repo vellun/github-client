@@ -19,6 +19,7 @@ export const useQueryParamsStoreInit = (): void => {
     });
 
     navigate(`?${searchParams.toString()}`, { replace: true });
+    return searchParams.toString()
   };
 
   rootStore.query.setSearch(search);

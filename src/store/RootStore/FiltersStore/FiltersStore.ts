@@ -1,34 +1,34 @@
-import { action, IReactionDisposer, makeObservable, observable, reaction } from "mobx";
+import { makeAutoObservable } from "mobx";
 import { ParsedQs } from "qs";
-import { rootStore } from "store/RootStore";
-import { IStoreWithReaction } from "store/interfaces";
+import { FiltersType, rootStore } from "store/RootStore";
 
-export class FiltersStore implements IStoreWithReaction {
+
+export class FiltersStore {
   filter: string | ParsedQs | (string | ParsedQs)[] | undefined = rootStore.query.getParam("filter");
+  filterType: FiltersType
 
   constructor() {
-    makeObservable(this, {
-      filter: observable,
-      setFilter: action,
-    });
+    makeAutoObservable(this, {}, { autoBind: true })
   }
 
   setFilter(newFilter: string) {
     if (this.filter !== newFilter) {
-      this.filter = newFilter;
+      this.filter = newFilter
+
+      if (rootStore.query.updateQueryParam !== null) {
+        rootStore.query.updateQueryParam({ filter: newFilter })
+      }
     }
   }
 
-  destroy(): void {
-    this._qpReaction();
+  setReposFilter(newFilter: string) {
+    this.setFilter(newFilter)
+    this.filterType = FiltersType.repos
   }
 
-  private readonly _qpReaction: IReactionDisposer = reaction(
-    () => this.filter,
-    (filter) => {
-      if (rootStore.query.updateQueryParam !== null) {
-        rootStore.query.updateQueryParam({ filter: filter });
-      }
-    },
-  );
+  setUsersFilter(newFilter: string) {
+    this.setFilter(newFilter)
+    this.filterType = FiltersType.users
+
+  }
 }

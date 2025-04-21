@@ -1,19 +1,15 @@
 import { Card } from "components/Card";
 
-import ktsCat from "assets/images/kts-cat.png";
-import { Loader } from "components/Loader";
 import { routesConfig } from "config/routes";
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router";
-import { AllReposStore } from "store/AllReposStore";
-import { Meta } from "utils/meta";
-import styles from "./ReposSection.module.scss";
+import { RepoModel } from "store/models";
+import styles from "./ReposCardsSection.module.scss";
 
-export const ReposSection = observer(({ store }: { store: AllReposStore }) => {
+export const ReposCardsSection = observer(({ repos }: { repos: RepoModel[] }) => {
   return (
     <div className={styles.root}>
-      {store.meta === Meta.loading && <Loader />}
-      {store.repos.map((repo) => (
+      {repos.map((repo) => (
         <Link
           key={repo.id}
           className={styles.root__link}

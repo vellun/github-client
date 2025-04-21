@@ -9,7 +9,11 @@ export const apiUrls = {
     repoReadme: (orgName: string, repoName: string): string => githubApi(`repos/${orgName}/${repoName}/readme`),
   },
   users: {
+    users: (): string => githubApi(`users`),
     userByLogin: (login: string): string => githubApi(`users/${login}`),
     userRepos: (login: string): string => githubApi(`users/${login}/repos`),
   },
+  search: {
+    users: (): string => githubApi(`search/users`)
+  }
 };

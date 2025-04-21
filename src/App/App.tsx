@@ -1,28 +1,36 @@
+import { UserDetailPage } from "App/pages/UserDetailPage";
 import { AllReposPage } from "App/pages/AllReposPage";
+import { AllUsersPage } from "App/pages/AllUsersPage";
 import { RepoDetailPage } from "App/pages/RepoDetailPage";
-import { Navbar } from "components/Navbar";
 import { Layout } from "components/Layout";
 import { routesConfig } from "config/routes";
-import { createBrowserRouter, Navigate, Outlet, RouteObject } from "react-router";
+import { createBrowserRouter, Navigate, RouteObject } from "react-router";
 import { useQueryParamsStoreInit } from "store/RootStore/hooks";
+import { rootStore } from "store/RootStore/instance";
 import "styles/_styles.scss";
+import { UserReposPage } from "App/pages/UserReposPage";
 
 const App = () => {
+  useQueryParamsStoreInit()
+
   return (
-    <div>
-      <QueryParamsStoreInit />
-      <Layout>
-        <Navbar />
-        <Outlet />
-      </Layout>
-    </div>
+    <Layout />
   );
 };
 
-const QueryParamsStoreInit = () => {
-  useQueryParamsStoreInit();
-  return null;
-};
+const InitializeReposQueryParams = () => {
+  if (rootStore.query.getParam("page") === undefined) {
+    const searchParams = rootStore.query.updateQueryParam({ page: 1 });
+    rootStore.query.setSearch(searchParams)
+  }
+
+  if (rootStore.query.getParam("per_page") === undefined) {
+    const searchParams = rootStore.query.updateQueryParam({ per_page: 6 });
+    rootStore.query.setSearch(searchParams)
+  }
+
+  return null
+}
 
 const routes: RouteObject[] = [
   {
@@ -35,11 +43,23 @@ const routes: RouteObject[] = [
       },
       {
         path: routesConfig.repositories.mask,
-        element: <AllReposPage />,
+        element: <><InitializeReposQueryParams /><AllReposPage /></>,
       },
       {
         path: routesConfig.repoDetail.mask,
         element: <RepoDetailPage />,
+      },
+      {
+        path: routesConfig.users.mask,
+        element: <><InitializeReposQueryParams /><AllUsersPage /></>
+      },
+      {
+        path: routesConfig.userRepos.mask,
+        element: <><InitializeReposQueryParams /><UserReposPage /></>
+      },
+      {
+        path: routesConfig.userDetail.mask,
+        element: <UserDetailPage />
       },
     ],
   },

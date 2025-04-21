@@ -5,8 +5,7 @@
   @include mixins.flex;
 
   justify-content: space-between;
-  row-gap: 15px;
-  width: 296px;
+  row-gap: 40px;
   margin-bottom: 22px;
 
   &__item {
@@ -16,7 +15,6 @@
   &__arrow {
     &:disabled {
       cursor: auto;
-      stroke: $brand-secondary;
     }
   }
 

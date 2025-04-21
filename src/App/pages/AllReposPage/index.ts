@@ -1,2 +1,2 @@
 export { AllReposPage } from "./AllReposPage";
-export { ReposProvider } from "./provider";
+export { ReposProvider, ReposFiltersProvider } from "./provider";

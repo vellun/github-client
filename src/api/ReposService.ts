@@ -1,3 +1,4 @@
+import { ReposApiRequestParams } from "api/types";
 import { apiUrls } from "config/apiUrls";
 import {
   RepoModel,
@@ -10,26 +11,43 @@ import { ApiResp } from "utils/apiTypes";
 import { Collection } from "utils/collection";
 import { fetch } from "utils/fetch";
 
-type ApiRequestParams = {
-  org: string | null;
-  type: string | null;
-  page: number | null;
-  perPage: number | null;
-};
+
 
 export default class ReposService {
-  static async getAll(params: ApiRequestParams): Promise<ApiResp<Collection<number, RepoModel>>> {
+  static async getAll(params: ReposApiRequestParams, type: "org" | "user", ownerLogin?: string): Promise<ApiResp<Collection<number, RepoModel>>> {
     if (params.org === undefined || params.org === null) {
       params.org = "ktsstudio";
     }
 
-    const response = await fetch(apiUrls.repos.organizationRepos(params.org), {
+    let url = apiUrls.repos.organizationRepos(params.org)
+    if (type == "user" && ownerLogin) {
+      url = apiUrls.users.userRepos(ownerLogin)
+    }
+
+    const response = await fetch(url, {
       type: params.type,
-      page: params.page,
       per_page: params.perPage,
+      page: params.page,
+
     });
 
-    return { isError: response.isError, data: normalizeReposToCollection(response.data) };
+    let pagesCount = 1
+
+    if (response.headers?.link !== undefined) {
+      const linkMatchLast = response.headers?.link.match(/page=(\d+)>; rel="last"/)
+      const linkMatchPrev = response.headers?.link.match(/page=(\d+)>; rel="prev"/)
+
+      if (linkMatchLast !== null) {
+        pagesCount = Number(linkMatchLast[1])
+      } else {
+        pagesCount = Number(linkMatchPrev[1]) + 1
+      }
+
+      console.log("RRRRRRRRRRR", pagesCount)
+    }
+
+
+    return { isError: response.isError, data: normalizeReposToCollection(response.data), pagesCount: pagesCount };
   }
 
   static async getByRepoName(orgName: string, repoName: string): Promise<ApiResp<RepoModel>> {

@@ -1,0 +1,18 @@
+@use "styles/mixins" as mixins;
+
+.panel {
+    background-color: aqua;
+
+    &__title {
+        @include mixins.flex;
+        gap: 14         px
+    }
+
+    &__link {
+        text-decoration: none;
+    }
+
+    &__menu {
+        list-style: none;
+    }
+}

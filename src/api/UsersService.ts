@@ -1,20 +1,68 @@
-import axios from "axios";
+import { UsersApiRequestParams } from "api/types";
+import { apiUrls } from "config/apiUrls";
+import { normalizeUserModel } from "store/models";
+import {
+  RepoModel,
+  RepoOwnerModel,
+  normalizeRepoOwnersToCollection,
+  normalizeReposToCollection
+} from "store/models";
+import { UserModel } from "store/models/users";
+import { ApiResp } from "utils/apiTypes";
+import { Collection } from "utils/collection";
+import { fetch } from "utils/fetch";
 
-export type User = {
-  login: string;
-  avatar_url: string;
-  name?: string;
-};
+const isParam = (param: any) => {
+  return param !== undefined && param !== null
+}
 
-export type Contributor = Omit<User, "name">;
+export default class UsersService {
+  static async getAll(params: UsersApiRequestParams): Promise<ApiResp<Collection<number, RepoOwnerModel>>> {
+    let url = apiUrls.users.users()
+    let q = []
 
-export default class RepsService {
-  static async getByLogin(login: string): Promise<User> {
-    const response = await axios.get(`https://api.github.com/users/${login}`);
-    return response.data;
+    console.log("PPPPPPPPPAAAA", params.login)
+
+    if (isParam(params.login)) {
+      url = apiUrls.search.users()
+      q.push(`${params.login} in:login`)
+    }
+
+    if (isParam(params.type)) {
+      url = apiUrls.search.users()
+      q.push(`type:${params.type}`)
+    }
+
+    const reqParams = {
+      since: params.since,
+      per_page: params.perPage,
+    }
+
+    if (q.length) {
+      reqParams.q = q.join(" ")
+    }
+
+    console.log("SSSSS", reqParams)
+
+    const response = await fetch(url, reqParams);
+    let responseData = response.data
+
+    console.log("DDDDDDDDDDDD", response.response)
+
+    if (isParam(params.login) || isParam(params.type)) {
+      responseData = response.data.items;
+    }
+
+    return { isError: response.isError, data: normalizeRepoOwnersToCollection(responseData) };
   }
-  static async getContributors(repoName: string): Promise<Contributor[]> {
-    const response = await axios.get(`https://api.github.com/repos/ktsstudio/${repoName}/contributors`);
-    return response.data;
+
+  static async getByLogin(login: string): Promise<ApiResp<UserModel>> {
+    const response = await fetch(apiUrls.users.userByLogin(login));
+    return { isError: response.isError, data: normalizeUserModel(response.data) };
+  }
+
+  static async getRepos(login: string): Promise<ApiResp<Collection<number, RepoModel>>> {
+    const response = await fetch(apiUrls.users.userRepos(login));
+    return { isError: response.isError, data: normalizeReposToCollection(response.data) };
   }
 }
