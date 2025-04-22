@@ -6,10 +6,10 @@ export const fetch = async (url: string, params: any = {}, headers: any = {}, me
   // const token = 'AUTH_TOKEN_PLACEHOLDER';
   const token = process.env.AUTH_TOKEN
   console.log("TOKEN", token)
-  // headers = {
-  //   ...headers,
-  //   Authorization: `token ${token}`,
-  // }
+  headers = {
+    ...headers,
+    Authorization: `token ${token}`,
+  }
   try {
     let response = ""
     if (method === "post") {
