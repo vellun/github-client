@@ -1,17 +1,6 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { HashRouter } from 'react-router-dom';
-import App from 'App/App';
-import 'config/configureMobX';
-import 'styles/_styles.scss';
+import { router } from "App/App";
+import "config/configureMobX";
+import { createRoot } from "react-dom/client";
+import { RouterProvider } from "react-router";
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
-
-root.render(
-    <React.StrictMode>
-        <HashRouter>
-            <App />
-        </HashRouter>
-    </React.StrictMode>
-);
-
+createRoot(document.getElementById("root")!).render(<RouterProvider router={router} />);
