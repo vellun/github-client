@@ -1,10 +1,10 @@
-name: Deploy to Pages
+name: Deploy to pages
 
 on:
   push:
     branches:
       - master
-
+      
 jobs:
   deploy:
     runs-on: ubuntu-latest
