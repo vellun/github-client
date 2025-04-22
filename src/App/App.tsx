@@ -17,9 +17,9 @@ const App = () => {
   useQueryParamsStoreInit();
 
   return (
-    <Layout>
-      <Routes>
-        <Route path={routesConfig.root.mask} element={<Navigate to="/repositories" replace />} />
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Navigate to="/repositories" replace />} />
         <Route path={routesConfig.repositories.mask} element={<><InitializeReposQueryParams /><AllReposPage /></>} />
         <Route path={routesConfig.repoDetail.mask} element={<RepoDetailPage />} />
         <Route path={routesConfig.users.mask} element={<><InitializeReposQueryParams /><AllUsersPage /></>} />
@@ -27,10 +27,10 @@ const App = () => {
         <Route path={routesConfig.userDetail.mask} element={<UserDetailPage />} />
         <Route path={routesConfig.login.mask} element={<LoginPage />} />
         <Route path={routesConfig.register.mask} element={<RegisterPage />} />
-      </Routes>
-    </Layout>
-  );
-};
+      </Route>
+    </Routes>
+    )
+}
 
 const InitializeReposQueryParams = () => {
   if (rootStore.query.getParam("page") === undefined) {

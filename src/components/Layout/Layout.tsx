@@ -11,7 +11,6 @@ export const Layout: React.FC<LayoutProps> = () => {
   return (
     <div className={styles.layout}>
       <Navbar />
-      {/* <SidePanel /> */}
       <Outlet />
     </div>
   );
