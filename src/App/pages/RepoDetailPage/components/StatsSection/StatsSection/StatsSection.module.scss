@@ -1,8 +1,0 @@
-@use "styles/variables" as *;
-
-.root {
-  display: flex;
-  flex-direction: column;
-  gap: $space-xxs;
-  margin-bottom: $space-l;
-}

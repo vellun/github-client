@@ -1,1 +1,0 @@
-export { StatsItem } from "./StatsItem";

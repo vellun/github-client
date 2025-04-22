@@ -1,1 +1,0 @@
-export { MiniCard } from "./MiniCard"

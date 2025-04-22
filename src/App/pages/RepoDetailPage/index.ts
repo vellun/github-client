@@ -1,1 +1,0 @@
-export { RepoDetailPage } from "./RepoDetailPage";

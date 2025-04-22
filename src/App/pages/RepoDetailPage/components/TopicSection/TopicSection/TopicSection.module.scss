@@ -1,9 +1,0 @@
-@use "styles/mixins" as mixins;
-@use "styles/variables" as *;
-
-.root {
-  @include mixins.flex;
-
-  gap: $space-xxs;
-  margin-bottom: $space-l;
-}

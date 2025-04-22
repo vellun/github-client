@@ -1,1 +1,0 @@
-export { StatsSection } from "./StatsSection";

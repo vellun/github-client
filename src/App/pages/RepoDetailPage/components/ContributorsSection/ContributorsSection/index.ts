@@ -1,1 +1,0 @@
-export { ContributorsSection } from "./ContributorsSection";

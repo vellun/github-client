@@ -1,1 +1,0 @@
-export { FiltersSection } from "./FiltersSection";

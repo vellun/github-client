@@ -1,1 +1,0 @@
-export { UserLogo } from "./UserLogo";

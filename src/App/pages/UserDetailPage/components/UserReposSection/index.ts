@@ -1,1 +1,0 @@
-export { UserReposSection } from "./UserReposSection"
