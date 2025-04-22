@@ -50,19 +50,3 @@ const InitializeReposQueryParams = () => {
 };
 
 export default App;
-
-
-// const InitializeReposQueryParams = () => {
-//   if (rootStore.query.getParam("page") === undefined) {
-//     const searchParams = rootStore.query.updateQueryParam({ page: 1 });
-//     rootStore.query.setSearch(searchParams);
-//   }
-
-//   if (rootStore.query.getParam("per_page") === undefined) {
-//     const searchParams = rootStore.query.updateQueryParam({ per_page: 6 });
-//     rootStore.query.setSearch(searchParams);
-//   }
-
-//   return null;
-// };
-
