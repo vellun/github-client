@@ -1,8 +1,6 @@
 @use "styles/variables" as *;
 
-.InputDiv {
-  height: 52px;
-  position: relative;
+.root {
   width: 100%;
 }
 
@@ -23,7 +21,13 @@
     background-color: white;
   }
 
-  &Icon {
+  &__content {
+    height: 52px;
+    position: relative;
+    width: 100%;
+  }
+
+  &__icon {
     position: absolute;
     right: 12px;
     bottom: 50%;

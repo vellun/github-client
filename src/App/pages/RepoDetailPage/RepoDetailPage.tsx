@@ -1,47 +1,60 @@
-import { default as Repo, default as RepsService } from "api/RepsService";
-import { useFetching } from "hooks/useFetching";
-import { useEffect, useState } from "react";
+import { Loader } from "components/Loader";
+import { observer } from "mobx-react-lite";
 import { useParams } from "react-router";
-import Readme from "./components/Readme";
-import RepoLink from "./components/RepoLink";
-import StatsSection from "./components/StatsSection/StatsSection";
-import TitleSection from "./components/TitleSection";
-import TopicSection from "./components/TopicSection/TopicSection";
-import ContributorsSection from "./components/ContributorsSection/ContributorsSection";
+import { Meta } from "utils/meta";
+import { addViewedRepo } from "utils/viewedRepos";
+import { ContributorsSection } from "./components/ContributorsSection/ContributorsSection";
+import { LanguagesSection } from "./components/LanguagesSection";
+import { Readme } from "./components/Readme";
+import { RepoLink } from "./components/RepoLink";
+import { StatsSection } from "./components/StatsSection/StatsSection";
+import { TitleSection } from "./components/TitleSection";
+import { TopicSection } from "./components/TopicSection/TopicSection";
+import { useRepoPageStore } from "./context";
+import { RepoProvider } from "./provider";
 import styles from "./RepoDetailPage.module.scss";
 
-const RepoDetailPage: React.FC = () => {
-  const { repoName } = useParams<{ repoName: string }>();
-  const [repo, setRepo] = useState<Repo | null>(null);
+const RepoDetailPageContent: React.FC = observer(() => {
+  const store = useRepoPageStore();
+  const repo = store.repo;
 
-  const [fetchRepo, _] = useFetching(async () => {
-    if (!repoName) return;
-    const repo = await RepsService.getByRepoName(repoName);
-    setRepo(repo);
-  });
+  if (!repo) {
+    return <div>Репозиторий не найден</div>;
+  }
 
-  useEffect(() => {
-    fetchRepo();
-  }, [repoName]);
+  addViewedRepo(repo);
 
   return (
-    <div className={styles.RepoDetailPage}>
-      <div className={styles.Page}>
-        {repo && <TitleSection avatarUrl={repo.owner.avatar_url} repoName={repo.name} />}
-        {repo && repo.homepage && <RepoLink repo={repo} />}
-        {repo && repo.topics && <TopicSection topics={repo.topics} />}
-        {repo && (
-          <StatsSection
-            starsCount={repo.stargazers_count}
-            watchingCount={repo.watchers_count}
-            forksCount={repo.forks_count}
-          />
-        )}
-        {repo && <ContributorsSection repoName={repo.name} />}
-        {repo && <Readme repoName={repo.name} />}
+    <div className={styles.root}>
+      {store.repoMeta === Meta.loading && <Loader />}
+      {store.repoMeta === Meta.error && <div>Репозиторий не найден</div>}
+      <div className={styles.root__page}>
+        <TitleSection login={repo.owner.login} avatarUrl={repo.owner.avatarUrl} repoName={repo.name} />
+        {repo.homepage && <RepoLink repo={repo} />}
+        {repo.topics && <TopicSection topics={repo.topics} />}
+
+        <StatsSection
+          starsCount={repo.stargazersCount}
+          watchingCount={repo.watchersCount}
+          forksCount={repo.forksCount}
+        />
+
+        <div className={styles.root__info}>
+          {store?.contributors?.length !== 0 && <ContributorsSection store={store} />}
+          <LanguagesSection store={store} />
+        </div>
+
+        <Readme store={store} />
       </div>
     </div>
   );
-};
+});
 
-export default RepoDetailPage;
+export const RepoDetailPage = () => {
+  const { orgName, repoName } = useParams<{ orgName: string; repoName: string }>();
+  return (
+    <RepoProvider orgName={orgName} repoName={repoName}>
+      <RepoDetailPageContent />
+    </RepoProvider>
+  );
+};

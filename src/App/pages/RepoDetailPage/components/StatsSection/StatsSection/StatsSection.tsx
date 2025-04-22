@@ -1,9 +1,9 @@
-import StatsItem from "../StatsItem";
+import { StatsItem } from "../StatsItem";
 import styles from "./StatsSection.module.scss";
 
-import EyeIcon from "components/icons/EyeIcon";
-import ForkIcon from "components/icons/ForkIcon";
-import StarIcon from "components/icons/StarIcon";
+import { EyeIcon } from "components/icons/EyeIcon";
+import { ForkIcon } from "components/icons/ForkIcon";
+import { StarIcon } from "components/icons/StarIcon";
 
 interface StatsSectionProps {
   starsCount: number;
@@ -11,9 +11,9 @@ interface StatsSectionProps {
   forksCount: number;
 }
 
-const StatsSection: React.FC<StatsSectionProps> = ({ starsCount, watchingCount, forksCount }) => {
+export const StatsSection: React.FC<StatsSectionProps> = ({ starsCount, watchingCount, forksCount }) => {
   return (
-    <div className={styles.StatsSection}>
+    <div className={styles.root}>
       <StatsItem
         iconComponent={<StarIcon width="16" height="16" color="secondary" />}
         statCount={starsCount}
@@ -32,5 +32,3 @@ const StatsSection: React.FC<StatsSectionProps> = ({ starsCount, watchingCount, 
     </div>
   );
 };
-
-export default StatsSection;

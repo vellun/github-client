@@ -1,7 +1,7 @@
-import React from 'react';
-import cn from 'classnames';
+import React from "react";
+import cn from "classnames";
 
-import Text from 'components/Text';
+import { Text } from "components/Text";
 import styles from "./Card.module.scss";
 
 export type CardProps = {
@@ -23,7 +23,7 @@ export type CardProps = {
   actionSlot?: React.ReactNode;
 };
 
-const Card: React.FC<CardProps> = ({
+export const Card: React.FC<CardProps> = ({
   className,
   image,
   captionSlot,
@@ -35,11 +35,11 @@ const Card: React.FC<CardProps> = ({
 }) => {
   return (
     <div className={cn(styles.card, className)} onClick={onClick}>
-      <img className={styles.cardImage} src={image} alt="Repo's card image"></img>
-      <div className={styles.cardBody}>
+      <img className={styles.card__image} src={image} alt="Repo's card image"></img>
+      <div className={styles.card__body}>
         {captionSlot && (
           <Text
-          className={cn(styles.cardText, styles.captionSlot)}
+            className={cn(styles.card__text, styles["card__caption-slot"])}
             weight="medium"
             view="p-14"
             color="secondary"
@@ -48,7 +48,7 @@ const Card: React.FC<CardProps> = ({
           </Text>
         )}
         <Text
-          className={cn(styles.cardText, styles.cardTitle)}
+          className={cn(styles.card__text, styles.card__title)}
           weight="medium"
           view="p-20"
           color="primary"
@@ -56,23 +56,12 @@ const Card: React.FC<CardProps> = ({
         >
           {title}
         </Text>
-        <Text
-          className={cn(styles.cardTitle, styles.cardSubtitle)}
-          weight="normal"
-          view="p-16"
-          color="secondary"
-          maxLines={3}
-        >
+        <Text className={cn(styles.card__title)} weight="normal" view="p-16" color="secondary" maxLines={3}>
           {subtitle}
         </Text>
-        <div className={styles.cardFooter}>
+        <div className={styles.card__footer}>
           {contentSlot && (
-            <Text
-              className={cn(styles.cardTitle, styles.contentSlot)}
-              weight="bold"
-              view="p-18"
-              color="primary"
-            >
+            <Text className={cn(styles.card__title)} weight="bold" view="p-18" color="primary">
               {contentSlot}
             </Text>
           )}
@@ -82,5 +71,3 @@ const Card: React.FC<CardProps> = ({
     </div>
   );
 };
-
-export default Card;

@@ -1,10 +1,10 @@
-.TopicItem {
+.topic {
   background-color: #daedff;
   border-radius: 20px;
   color: #0066cc;
   padding: 4px 16px;
-}
 
-.TopicName {
-  margin: 0;
+  &__name {
+    margin: 0;
+  }
 }

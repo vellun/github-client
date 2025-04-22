@@ -8,11 +8,21 @@
   padding-left: $content-margin;
   padding-right: $content-margin;
   border-bottom: 2px solid $brand-secondary;
+  // margin-bottom: $space-xl;
 
-  &Logo {
+  &__logo {
     @include mixins.flex;
 
     justify-content: space-between;
     gap: $space-xl;
   }
+
+  &__menu {
+    @include mixins.flex;
+    gap: 40px;
+  }
+}
+
+.panel__check {
+  display: none;
 }

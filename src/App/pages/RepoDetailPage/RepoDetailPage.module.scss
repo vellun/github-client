@@ -1,11 +1,18 @@
 @use "styles/variables" as *;
+@use "styles/mixins" as mixins;
 
-.RepoDetailPage {
+.root {
   background-color: white;
   padding-bottom: 80px;
-}
+  min-height: 100vh;
 
-.Page {
-  margin-left: $content-margin;
-  margin-right: $content-margin;
+  &__page {
+    margin-left: $content-margin;
+    margin-right: $content-margin;
+  }
+
+  &__info {
+    display: flex;
+    gap: 80px;
+  }
 }

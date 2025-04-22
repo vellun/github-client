@@ -1,8 +1,9 @@
 @use "styles/mixins" as mixins;
+@use "styles/variables" as *;
 
-.TopicSection {
+.root {
   @include mixins.flex;
 
-  gap: 8px;
-  margin-bottom: 20px;
+  gap: $space-xxs;
+  margin-bottom: $space-l;
 }

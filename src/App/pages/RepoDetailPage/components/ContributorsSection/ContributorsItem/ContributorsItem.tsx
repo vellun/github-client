@@ -1,5 +1,8 @@
-import Text from "components/Text";
+import { UserLogo } from "components/UserLogo";
+import { Text } from "components/Text";
 import styles from "./ContributorsItem.module.scss";
+import { Link } from "react-router";
+import { routesConfig } from "config/routes";
 
 interface ContributorsItemProps {
   login: string;
@@ -7,18 +10,19 @@ interface ContributorsItemProps {
   name?: string;
 }
 
-const ContributorsItem: React.FC<ContributorsItemProps> = ({ login, avatarUrl, name }) => {
+export const ContributorsItem: React.FC<ContributorsItemProps> = ({ login, avatarUrl, name }) => {
   return (
-    <div className={styles.ContributorsItem}>
-      <img className={styles.image} src={avatarUrl} alt="Contributor Avatar" width="32px" height="32px" />
-      <Text className={styles.text} weight="bold" view="p-16">
-        {login}
-      </Text>
-      <Text className={styles.text} weight="bold" view="p-16" color="secondary">
-        {name}
-      </Text>
-    </div>
+    <Link className="link" to={routesConfig.userDetail.create(login)}>
+      <div className={styles.root}>
+        <UserLogo src={avatarUrl} alt="Contributor Avatar" />
+        <Text className={styles.root__name} weight="bold" view="p-16">
+          {login}
+        </Text>
+        <Text className={styles.root__name} weight="bold" view="p-16" color="secondary">
+          {name}
+        </Text>
+      </div>
+    </Link>
   );
 };
 
-export default ContributorsItem;

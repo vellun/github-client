@@ -1,5 +1,5 @@
-import Button from "../Button";
-import Card, { CardProps } from "./Card";
+import { Button } from "../Button";
+import { Card, CardProps } from "./Card";
 
 export default {
   title: "Card",

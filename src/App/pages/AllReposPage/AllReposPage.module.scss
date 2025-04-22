@@ -1,0 +1,12 @@
+@use "styles/variables" as *;
+
+.root {
+
+  &__title {
+    margin-bottom: 60px;
+  }
+}
+
+.title {
+  margin-right: auto
+}
