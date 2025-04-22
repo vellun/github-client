@@ -3,6 +3,11 @@ import { RepoModel } from "store/models";
 import { ApiResp } from "utils/apiTypes";
 
 export const fetch = async (url: string, params: any = {}, headers: any = {}, method: "get" | "post" = "get"): Promise<ApiResp<RepoModel>> => {
+  const token = 'AUTH_TOKEN_PLACEHOLDER';
+  headers = {
+    ...headers,
+    Authorization: `token ${token}`,
+  }
   try {
     let response = ""
     if (method === "post") {

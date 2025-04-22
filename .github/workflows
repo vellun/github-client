@@ -1,0 +1,25 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Replace placeholder with secret
+        run: |
+          sed -i 's/AUTH_TOKEN_PLACEHOLDER/${{ secrets.AUTH_TOKEN }}/g' ./src/utils/fetch.ts
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.AUTH_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./dist
