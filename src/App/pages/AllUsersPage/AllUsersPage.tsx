@@ -1,14 +1,12 @@
 import cn from "classnames";
-import { Loader } from "components/Loader";
+import { FiltersSection } from "components/FiltersSection";
 import { Pagination } from "components/Pagination";
 import { Text } from "components/Text";
 import { observer } from "mobx-react-lite";
-import { Meta } from "utils/meta";
 import styles from "./AllUsersPage.module.scss";
 import { UsersSection } from "./components/UsersSection";
 import { useUsersPageStore } from "./context";
 import { UsersFiltersProvider, UsersProvider } from "./provider";
-import { FiltersSection } from "components/FiltersSection";
 
 const AllUsersPageContent: React.FC = observer(() => {
   const store = useUsersPageStore();
@@ -22,7 +20,6 @@ const AllUsersPageContent: React.FC = observer(() => {
       <UsersFiltersProvider><FiltersSection /></UsersFiltersProvider>
 
       <UsersSection store={store} />
-      {store.meta === Meta.loading && <Loader />}
 
       <Pagination store={store} />
     </div>

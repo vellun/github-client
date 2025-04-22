@@ -53,14 +53,11 @@ export class AllReposStore implements IStoreWithReaction {
       return;
     }
 
-    console.log("DATAAAA", data)
-
     runInAction(() => {
       this.meta = Meta.success;
 
       this._repos.setAll(data.order, data.entities);
 
-      console.log("REPOOOS", this.repos)
       this.pagination.setTotalPages(pagesCount)
     });
   }
@@ -74,7 +71,6 @@ export class AllReposStore implements IStoreWithReaction {
   }
 
   setType(newType: "org" | "user") {
-    console.log("SET TYPE", newType)
     this.type = newType;
   }
 

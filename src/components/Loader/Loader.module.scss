@@ -12,6 +12,7 @@
 .loader {
   fill: $brand;
   animation: rotate 2s linear infinite;
+  margin: auto;
 
   &__size {
     &-l {

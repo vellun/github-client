@@ -2,12 +2,10 @@ import { ReposFiltersProvider, ReposProvider } from "App/pages/AllReposPage";
 import { useReposPageStore } from "App/pages/AllReposPage/context";
 import cn from "classnames";
 import { FiltersSection } from "components/FiltersSection";
-import { Loader } from "components/Loader";
 import { Pagination } from "components/Pagination";
 import { ReposSection } from "components/ReposSection";
 import { Text } from "components/Text";
 import { useParams } from "react-router";
-import { Meta } from "utils/meta";
 import styles from "./UserReposPage.module.scss";
 
 const UserReposPageContent = () => {
@@ -22,7 +20,6 @@ const UserReposPageContent = () => {
             <ReposFiltersProvider type="user"><FiltersSection /></ReposFiltersProvider>
 
             <ReposSection store={store} />
-            {store.meta === Meta.loading && <Loader />}
 
             <Pagination store={store} />
         </div>
