@@ -22,7 +22,7 @@ const parseTsConfigPaths = (
 
 export default defineConfig({
   plugins: [react()],
-  base: "/github-client/",
+  base: "",
   resolve: {
     alias: parseTsConfigPaths(tsconfig.compilerOptions.paths),
   },

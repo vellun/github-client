@@ -7,6 +7,7 @@ import { UserDetailPage } from "App/pages/UserDetailPage";
 import { UserReposPage } from "App/pages/UserReposPage";
 import { Layout } from "components/Layout";
 import { routesConfig } from "config/routes";
+import { useEffect } from "react";
 import { createHashRouter, Navigate, RouteObject } from "react-router";
 import { useQueryParamsStoreInit } from "store/RootStore/hooks";
 import { rootStore } from "store/RootStore/instance";
@@ -20,19 +21,35 @@ const App = () => {
   );
 };
 
+// const InitializeReposQueryParams = () => {
+//   if (rootStore.query.getParam("page") === undefined) {
+//     const searchParams = rootStore.query.updateQueryParam({ page: 1 });
+//     rootStore.query.setSearch(searchParams)
+//   }
+
+//   if (rootStore.query.getParam("per_page") === undefined) {
+//     const searchParams = rootStore.query.updateQueryParam({ per_page: 6 });
+//     rootStore.query.setSearch(searchParams)
+//   }
+
+//   return null
+// }
+
 const InitializeReposQueryParams = () => {
-  if (rootStore.query.getParam("page") === undefined) {
-    const searchParams = rootStore.query.updateQueryParam({ page: 1 });
-    rootStore.query.setSearch(searchParams)
-  }
+  useEffect(() => {
+    if (rootStore.query.getParam("page") === undefined) {
+      const searchParams = rootStore.query.updateQueryParam({ page: 1 });
+      rootStore.query.setSearch(searchParams)
+    }
+  
+    if (rootStore.query.getParam("per_page") === undefined) {
+      const searchParams = rootStore.query.updateQueryParam({ per_page: 6 });
+      rootStore.query.setSearch(searchParams)
+    }
+  }, []);
 
-  if (rootStore.query.getParam("per_page") === undefined) {
-    const searchParams = rootStore.query.updateQueryParam({ per_page: 6 });
-    rootStore.query.setSearch(searchParams)
-  }
-
-  return null
-}
+  return null;
+};
 
 const routes: RouteObject[] = [
   {
