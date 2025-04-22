@@ -14,5 +14,5 @@ export const UsersProvider = ({ children }: { children: React.ReactNode }) => {
 
 export const UsersFiltersProvider = ({ children }: { children: React.ReactNode }) => {
   const usersStore = useUsersPageStore()
-  return <FiltersContext.Provider value={{ pageStore: usersStore, filtersStore: filtersStore, searchStore: searchStore, options: usersFilterOptions, filterType: FiltersType.users }}>{children}</FiltersContext.Provider>;
+  return <FiltersContext.Provider value={{ inputPlaceholder: "Enter user login", pageStore: usersStore, filtersStore: filtersStore, searchStore: searchStore, options: usersFilterOptions, filterType: FiltersType.users }}>{children}</FiltersContext.Provider>;
 };

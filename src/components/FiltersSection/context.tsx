@@ -11,6 +11,7 @@ export type FiltersContextType = {
   filtersStore: FiltersStore;
   searchStore: SearchStore;
   pageStore: AllReposStore | AllUsersStore;
+  inputPlaceholder: string;
 };
 
 export const FiltersContext = createContext<FiltersContextType | null>(null);

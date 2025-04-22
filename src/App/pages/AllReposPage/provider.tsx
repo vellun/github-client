@@ -18,9 +18,11 @@ export const ReposFiltersProvider = ({ type, children }: { type: "org" | "user",
   const reposStore = useReposPageStore()
 
   let options = orgReposFilterOptions
+  let placeholder = "Enter organization name"
   if (type == "user") {
     options = userReposFilterOptions
+    placeholder = "Enter repository name"
   }
 
-  return <FiltersContext.Provider value={{ pageStore: reposStore, filtersStore: filtersStore, searchStore: searchStore, options: options, filterType: FiltersType.repos }}>{children}</FiltersContext.Provider>;
+  return <FiltersContext.Provider value={{ inputPlaceholder: placeholder, pageStore: reposStore, filtersStore: filtersStore, searchStore: searchStore, options: options, filterType: FiltersType.repos }}>{children}</FiltersContext.Provider>;
 };

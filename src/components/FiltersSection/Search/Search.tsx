@@ -37,7 +37,7 @@ export const Search = observer(() => {
         className={styles.search__input}
         value={store.search}
         onChange={handleInputChange}
-        placeholder="Enter organization name"
+        placeholder={context?.inputPlaceholder}
       ></Input>
       <Button onClick={handleButtonClick}>
         <img src={searchLogo} alt="Search Icon" width="24px" height="24px" />
