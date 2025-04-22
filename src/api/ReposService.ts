@@ -114,4 +114,10 @@ export default class ReposService {
 
     return { isError: response.isError, data: normalizeRepoOwnersToCollection(response.data) };
   }
+
+  static async getRepoLanguages(orgName: string, repoName: string): Promise<ApiResp<object>> {
+    const response = await fetch(apiUrls.repos.repoLanguages(orgName, repoName));
+
+    return { isError: response.isError, data: response.data };
+  }
 }

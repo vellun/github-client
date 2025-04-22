@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 import { Meta } from "utils/meta";
 import { addViewedRepo } from "utils/viewedRepos";
 import { ContributorsSection } from "./components/ContributorsSection/ContributorsSection";
+import { LanguagesSection } from "./components/LanguagesSection";
 import { Readme } from "./components/Readme";
 import { RepoLink } from "./components/RepoLink";
 import { StatsSection } from "./components/StatsSection/StatsSection";
@@ -28,7 +29,7 @@ const RepoDetailPageContent: React.FC = observer(() => {
       {store.repoMeta === Meta.loading && <Loader />}
       {store.repoMeta === Meta.error && <div>Репозиторий не найден</div>}
       <div className={styles.root__page}>
-        <TitleSection avatarUrl={repo.owner.avatarUrl} repoName={repo.name} />
+        <TitleSection login={repo.owner.login} avatarUrl={repo.owner.avatarUrl} repoName={repo.name} />
         {repo.homepage && <RepoLink repo={repo} />}
         {repo.topics && <TopicSection topics={repo.topics} />}
 
@@ -38,7 +39,11 @@ const RepoDetailPageContent: React.FC = observer(() => {
           forksCount={repo.forksCount}
         />
 
-        <ContributorsSection store={store} />
+        <div className={styles.root__info}>
+          {store?.contributors?.length !== 0 && <ContributorsSection store={store} />}
+          <LanguagesSection store={store} />
+        </div>
+
         <Readme store={store} />
       </div>
     </div>

@@ -8,23 +8,28 @@ export class RepoStore {
   _repo: RepoModel | null = null;
   _readme: string | null = null;
   _contributors: Collection<number, RepoOwnerModel> = new Collection();
+  _languages: object | null = null;
   repoMeta: Meta = Meta.initial;
   readmeMeta: Meta = Meta.initial;
   contributorsMeta: Meta = Meta.initial;
+  languagesMeta: Meta = Meta.initial;
 
   constructor() {
     makeObservable(this, {
       _repo: observable,
       _readme: observable,
       _contributors: observable,
+      _languages: observable,
       repoMeta: observable,
       readmeMeta: observable,
       contributorsMeta: observable,
       fetchRepo: action.bound,
       fetchReadme: action.bound,
+      fetchLanguages: action.bound,
       repo: computed,
       readme: computed,
       contributors: computed,
+      languages: computed,
     });
   }
 
@@ -32,6 +37,7 @@ export class RepoStore {
     this.fetchRepo(orgName, repoName);
     this.fetchContributors(orgName, repoName);
     this.fetchReadme(orgName, repoName);
+    this.fetchLanguages(orgName, repoName);
   }
 
   async fetchRepo(orgName: string, repoName: string): Promise<void> {
@@ -78,6 +84,28 @@ export class RepoStore {
     });
   }
 
+  async fetchLanguages(orgName: string, repoName: string): Promise<void> {
+    if (this.languagesMeta === Meta.loading || this.languagesMeta === Meta.success) {
+      return;
+    }
+
+    runInAction(() => {
+      this.languagesMeta = Meta.loading;
+      this._languages = null;
+    });
+
+    const { isError, data } = await ReposService.getRepoLanguages(orgName, repoName);
+    if (isError) {
+      this.setLanguagesMeta(Meta.error);
+      return;
+    }
+
+    runInAction(() => {
+      this.languagesMeta = Meta.success;
+      this._languages = data;
+    });
+  }
+
   async fetchContributors(orgName: string, repoName: string): Promise<void> {
     if (this.contributorsMeta === Meta.loading || this.contributorsMeta === Meta.success) {
       return;
@@ -112,6 +140,10 @@ export class RepoStore {
     return this._contributors.getAll;
   }
 
+  get languages(): object | null {
+    return this._languages;
+  }
+
   setRepoMeta(newMeta: Meta) {
     this.repoMeta = newMeta;
   }
@@ -122,5 +154,9 @@ export class RepoStore {
 
   setContributorsMeta(newMeta: Meta) {
     this.contributorsMeta = newMeta;
+  }
+
+  setLanguagesMeta(newMeta: Meta) {
+    this.languagesMeta = newMeta;
   }
 }

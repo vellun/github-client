@@ -12,4 +12,5 @@ export type RepoModel = {
   stargazersCount: number;
   watchersCount: number;
   forksCount: number;
+  languages: object;
 };

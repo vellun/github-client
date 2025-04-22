@@ -8,7 +8,7 @@
   padding-left: $content-margin;
   padding-right: $content-margin;
   border-bottom: 2px solid $brand-secondary;
-  margin-bottom: $space-xl;
+  // margin-bottom: $space-xl;
 
   &__logo {
     @include mixins.flex;

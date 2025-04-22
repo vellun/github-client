@@ -8,6 +8,7 @@ export const apiUrls = {
     repoContributors: (orgName: string, repoName: string): string =>
       githubApi(`repos/${orgName}/${repoName}/contributors`),
     repoReadme: (orgName: string, repoName: string): string => githubApi(`repos/${orgName}/${repoName}/readme`),
+    repoLanguages: (orgName: string, repoName: string): string => githubApi(`repos/${orgName}/${repoName}/languages`),
   },
   users: {
     users: (): string => githubApi(`users`),
