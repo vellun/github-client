@@ -5,22 +5,28 @@ import { Collection } from "utils/collection";
 import { Meta } from "utils/meta";
 
 import ReposService from "api/ReposService";
-import { rootStore } from "store/RootStore";
 import { IStoreWithReaction } from "store/interfaces";
+import { filtersStore, FiltersType, rootStore } from "store/RootStore";
+import { PaginationStore } from "store/RootStore";
 
 export class AllReposStore implements IStoreWithReaction {
   _repos: Collection<number, RepoModel> = new Collection();
+  pagination: PaginationStore;
   meta: Meta = Meta.initial;
 
-  currentPage: number = 1;
-  perPage: number = 6;
+  type: "org" | "user" = "org";
+  ownerLogin: string | undefined = undefined;
 
   constructor() {
+    this.pagination = new PaginationStore();
     makeObservable(this, {
       _repos: observable,
       meta: observable,
+      type: observable,
       fetch: action.bound,
       setMeta: action.bound,
+      setType: action,
+      setOwnerLogin: action,
       repos: computed,
     });
   }
@@ -32,9 +38,16 @@ export class AllReposStore implements IStoreWithReaction {
   async fetch(): Promise<void> {
     this.setMeta(Meta.loading);
     this._repos.clear();
-    const params = rootStore.query.getApiParams();
+    const reposParams = rootStore.query.getApiReposParams();
+    const userReposParams = rootStore.query.getApiUserReposParams();
 
-    const { isError, data } = await ReposService.getAll(params);
+    let isError = false, data = {}, pagesCount = 0;
+    if (this.type === "org") {
+      ({ isError, data, pagesCount } = await ReposService.getAllOrgRepos(reposParams, this.type, this.ownerLogin));
+    } else {
+      ({ isError, data, pagesCount } = await ReposService.getAllUserRepos(userReposParams, this.ownerLogin));
+    }
+
     if (isError) {
       this.setMeta(Meta.error);
       return;
@@ -44,12 +57,12 @@ export class AllReposStore implements IStoreWithReaction {
       this.meta = Meta.success;
 
       this._repos.setAll(data.order, data.entities);
+
+      this.pagination.setTotalPages(pagesCount)
     });
   }
 
   get repos(): RepoModel[] {
-    console.log("get repos", this._repos);
-
     return this._repos.getAll;
   }
 
@@ -57,10 +70,19 @@ export class AllReposStore implements IStoreWithReaction {
     this.meta = newMeta;
   }
 
+  setType(newType: "org" | "user") {
+    this.type = newType;
+  }
+
+  setOwnerLogin(newLogin: string) {
+    this.ownerLogin = newLogin
+  }
+
   private readonly _filterChangeReaction: IReactionDisposer = reaction(
     () => rootStore.query.getParam("filter"),
     (filter) => {
-      if (filter !== null) {
+
+      if (filter !== null && filtersStore.filterType === FiltersType.repos) {
         this.fetch();
       }
     },

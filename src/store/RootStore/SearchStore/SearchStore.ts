@@ -1,39 +1,42 @@
-import { action, IReactionDisposer, makeObservable, observable, reaction } from "mobx";
+import { action, makeObservable, observable } from "mobx";
 import { ParsedQs } from "qs";
-import { rootStore } from "store/RootStore";
-import { IStoreWithReaction } from "store/interfaces";
+import { FiltersType, rootStore } from "store/RootStore";
 
-export class SearchStore implements IStoreWithReaction {
+export class SearchStore {
   search: string | ParsedQs | (string | ParsedQs)[] | undefined = rootStore.query.getParam("search");
+  filterType: FiltersType
 
   constructor() {
     makeObservable(this, {
       search: observable,
       setSearch: action,
+      setReposSearch: action.bound,
+      setUsersSearch: action.bound,
     });
   }
 
   setSearch(newSearch: string) {
     if (this.search !== newSearch) {
       this.search = newSearch;
+
+      if (rootStore.query.updateQueryParam !== null) {
+        rootStore.query.updateQueryParam({ search: newSearch })
+      }
     }
+  }
+
+  setReposSearch(newSearch: string) {
+    this.setSearch(newSearch)
+    this.filterType = FiltersType.repos
+  }
+
+  setUsersSearch(newSearch: string) {
+    this.setSearch(newSearch)
+    this.filterType = FiltersType.users
+
   }
 
   getSearch() {
     return this.search;
   }
-
-  destroy(): void {
-    this._qpReaction();
-  }
-
-  private readonly _qpReaction: IReactionDisposer = reaction(
-    () => this.search,
-    (search) => {
-      // Здесь обновляются квери при введении значения в инпут
-      if (rootStore.query.updateQueryParam !== null) {
-        rootStore.query.updateQueryParam({ search: search });
-      }
-    },
-  );
 }

@@ -1,4 +1,5 @@
 @use "styles/variables" as *;
+@use "styles/mixins" as mixins;
 
 .root {
   background-color: white;
@@ -8,5 +9,10 @@
   &__page {
     margin-left: $content-margin;
     margin-right: $content-margin;
+  }
+
+  &__info {
+    display: flex;
+    gap: 80px;
   }
 }

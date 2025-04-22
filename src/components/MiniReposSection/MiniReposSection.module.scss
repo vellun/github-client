@@ -1,0 +1,19 @@
+@use "styles/mixins" as mixins;
+@use "styles/variables" as *;
+
+.root {
+    &__repos {
+        @include mixins.flex;
+        gap: $space-s;
+        align-items: stretch;
+        flex-wrap: wrap;
+
+        &__item {
+            flex: 1;
+
+        }
+    }
+
+    margin-bottom: $space-xl;
+    width: 100%
+}

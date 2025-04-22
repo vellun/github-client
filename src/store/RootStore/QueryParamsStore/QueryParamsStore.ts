@@ -28,11 +28,29 @@ export class QueryParamsStore {
     }
   }
 
-  getApiParams() {
+  getApiReposParams() {
     return {
       org: this.getParam("search"),
       type: this.getParam("filter"),
       page: this.getParam("page"),
+      perPage: this.getParam("per_page"),
+    };
+  }
+
+  getApiUserReposParams() {
+    return {
+      repoName: this.getParam("search"),
+      type: this.getParam("filter"),
+      page: this.getParam("page"),
+      perPage: this.getParam("per_page"),
+    };
+  }
+
+  getApiUsersParams() {
+    return {
+      type: this.getParam("filter"),
+      login: this.getParam("search"),
+      since: (Number(this.getParam("page")) - 1) * Number(this.getParam("per_page")),
       perPage: this.getParam("per_page"),
     };
   }

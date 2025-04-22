@@ -11,4 +11,24 @@ export const routesConfig = {
     mask: "/repositories/:orgName/:repoName",
     create: (orgName: string, repoName: string) => `/repositories/${orgName}/${repoName}`,
   },
+  users: {
+    mask: "/users",
+    create: () => "/users",
+  },
+  userDetail: {
+    mask: "/users/:login",
+    create: (login: string) => `/users/${login}`,
+  },
+  userRepos: {
+    mask: "/users/:login/repos",
+    create: (login: string) => `/users/${login}/repos`,
+  },
+  register: {
+    mask: "/register",
+    create: () => `/register`,
+  },
+  login: {
+    mask: "/login",
+    create: () => `/login`,
+  },
 };

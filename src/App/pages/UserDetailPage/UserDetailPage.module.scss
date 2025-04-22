@@ -1,0 +1,9 @@
+.user {
+    padding-bottom: 80px;
+    margin-top: 40px;
+
+    &__name {
+        display: flex;
+        flex-direction: column;
+    }
+}
