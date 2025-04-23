@@ -8,7 +8,7 @@ export const useQueryParamsStoreInit = (): void => {
   const navigate = useNavigate();
 
   const updateQueryParam = (params: Record<string, string | number | null | number[]>) => {
-    const searchParams = new URLSearchParams(window.location.hash);
+    const searchParams = new URLSearchParams(window.location.hash.split('?')[1] || '');
 
     Object.keys(params).forEach((key) => {
       const value = params[key];

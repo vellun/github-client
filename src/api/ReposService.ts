@@ -1,4 +1,4 @@
-import { ReposApiRequestParams, UsersApiRequestParams, UsersReposApiRequestParams } from "api/types";
+import { ReposApiRequestParams, UsersReposApiRequestParams } from "api/types";
 import { apiUrls } from "config/apiUrls";
 import {
   RepoModel,
