@@ -1,34 +1,29 @@
 import searchLogo from "assets/icons/search.svg";
 import { Button } from "components/Button";
-import { useFiltersContext, useSearchStore } from "components/FiltersSection/context";
+import { useFiltersContext, useFilterStore } from "components/FiltersSection/context";
 import { Input } from "components/Input";
 import { observer } from "mobx-react-lite";
-import { FiltersType } from "store/RootStore";
-import styles from "./Search.module.scss";
 import { useEffect } from "react";
+import styles from "./Search.module.scss";
 
 export const Search = observer(() => {
-  const context = useFiltersContext()
-  const store = useSearchStore()
-  const pageStore = context?.pageStore
+  const context = useFiltersContext();
+  const store = useFilterStore();
+  const pageStore = context?.pageStore;
 
   useEffect(() => {
-    return () => { store?.setSearch(""); }
-  }, []);
+    return () => {
+      store?.setSearch("", null);
+    };
+  }, [store]);
 
   const handleInputChange = (value: string) => {
-    if (context?.filterType === FiltersType.repos) {
-      store?.setReposSearch(value);
-    }
-
-    if (context?.filterType === FiltersType.users) {
-      store?.setUsersSearch(value);
-    }
+    store?.setSearch(value, context?.filterType);
   };
 
   const handleButtonClick = () => {
     pageStore?.fetch();
-    pageStore?.pagination.setPage(1)
+    pageStore?.pagination.setPage(1);
   };
 
   return (

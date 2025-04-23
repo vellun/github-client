@@ -60,7 +60,7 @@ export class AllUsersStore implements IStoreWithReaction {
     private readonly _filterChangeReaction: IReactionDisposer = reaction(
         () => rootStore.query.getParam("filter"),
         (filter) => {
-            if (filter !== null && filtersStore.filterType === FiltersType.users) {
+            if (filter !== null && filtersStore.filtersType === FiltersType.users) {
                 this.fetch();
             }
         },

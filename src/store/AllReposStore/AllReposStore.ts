@@ -82,7 +82,7 @@ export class AllReposStore implements IStoreWithReaction {
     () => rootStore.query.getParam("filter"),
     (filter) => {
 
-      if (filter !== null && filtersStore.filterType === FiltersType.repos) {
+      if (filter !== null && filtersStore.filtersType === FiltersType.repos) {
         this.fetch();
       }
     },

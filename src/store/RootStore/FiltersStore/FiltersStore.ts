@@ -2,33 +2,44 @@ import { makeAutoObservable } from "mobx";
 import { ParsedQs } from "qs";
 import { FiltersType, rootStore } from "store/RootStore";
 
-
 export class FiltersStore {
   filter: string | ParsedQs | (string | ParsedQs)[] | undefined = rootStore.query.getParam("filter");
-  filterType: FiltersType
+  search: string | ParsedQs | (string | ParsedQs)[] | undefined = rootStore.query.getParam("search");
+  filtersType: FiltersType | null = null;
 
   constructor() {
-    makeAutoObservable(this, {}, { autoBind: true })
+    makeAutoObservable(this);
   }
 
-  setFilter(newFilter: string) {
+  setFilter(newFilter: string, filterType: FiltersType | undefined | null) {
     if (this.filter !== newFilter) {
-      this.filter = newFilter
+      this.filter = newFilter;
 
       if (rootStore.query.updateQueryParam !== null) {
-        rootStore.query.updateQueryParam({ filter: newFilter })
+        rootStore.query.updateQueryParam({ filter: newFilter });
       }
+    }
+
+    if (filterType) {
+      this.filtersType = filterType;
     }
   }
 
-  setReposFilter(newFilter: string) {
-    this.setFilter(newFilter)
-    this.filterType = FiltersType.repos
+  setSearch(newSearch: string, searchType: FiltersType | undefined | null) {
+    if (this.search !== newSearch) {
+      this.search = newSearch;
+
+      if (rootStore.query.updateQueryParam !== null) {
+        rootStore.query.updateQueryParam({ search: newSearch });
+      }
+    }
+
+    if (searchType) {
+      this.filtersType = searchType;
+    }
   }
 
-  setUsersFilter(newFilter: string) {
-    this.setFilter(newFilter)
-    this.filterType = FiltersType.users
-
+  getSearch() {
+    return this.search;
   }
 }

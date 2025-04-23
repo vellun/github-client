@@ -8,43 +8,27 @@ import { UserReposPage } from "App/pages/UserReposPage";
 import { Layout } from "components/Layout";
 import { routesConfig } from "config/routes";
 import { useEffect } from "react";
-import { createHashRouter, Navigate, RouteObject } from "react-router";
+import { createBrowserRouter, createHashRouter, Navigate, RouteObject } from "react-router";
 import { useQueryParamsStoreInit } from "store/RootStore/hooks";
 import { rootStore } from "store/RootStore/instance";
 import "styles/_styles.scss";
 
 const App = () => {
-  useQueryParamsStoreInit()
+  useQueryParamsStoreInit();
 
-  return (
-    <Layout />
-  );
+  return <Layout />;
 };
-
-// const InitializeReposQueryParams = () => {
-//   if (rootStore.query.getParam("page") === undefined) {
-//     const searchParams = rootStore.query.updateQueryParam({ page: 1 });
-//     rootStore.query.setSearch(searchParams)
-//   }
-
-//   if (rootStore.query.getParam("per_page") === undefined) {
-//     const searchParams = rootStore.query.updateQueryParam({ per_page: 6 });
-//     rootStore.query.setSearch(searchParams)
-//   }
-
-//   return null
-// }
 
 const InitializeReposQueryParams = () => {
   useEffect(() => {
     if (rootStore.query.getParam("page") === undefined) {
       const searchParams = rootStore.query.updateQueryParam({ page: 1 });
-      rootStore.query.setSearch(searchParams)
+      rootStore.query.setSearch(searchParams);
     }
-  
+
     if (rootStore.query.getParam("per_page") === undefined) {
       const searchParams = rootStore.query.updateQueryParam({ per_page: 6 });
-      rootStore.query.setSearch(searchParams)
+      rootStore.query.setSearch(searchParams);
     }
   }, []);
 
@@ -62,7 +46,12 @@ const routes: RouteObject[] = [
       },
       {
         path: routesConfig.repositories.mask,
-        element: <><InitializeReposQueryParams /><AllReposPage /></>,
+        element: (
+          <>
+            <InitializeReposQueryParams />
+            <AllReposPage />
+          </>
+        ),
       },
       {
         path: routesConfig.repoDetail.mask,
@@ -70,23 +59,33 @@ const routes: RouteObject[] = [
       },
       {
         path: routesConfig.users.mask,
-        element: <><InitializeReposQueryParams /><AllUsersPage /></>
+        element: (
+          <>
+            <InitializeReposQueryParams />
+            <AllUsersPage />
+          </>
+        ),
       },
       {
         path: routesConfig.userRepos.mask,
-        element: <><InitializeReposQueryParams /><UserReposPage /></>
+        element: (
+          <>
+            <InitializeReposQueryParams />
+            <UserReposPage />
+          </>
+        ),
       },
       {
         path: routesConfig.userDetail.mask,
-        element: <UserDetailPage />
+        element: <UserDetailPage />,
       },
       {
         path: routesConfig.login.mask,
-        element: <LoginPage />
+        element: <LoginPage />,
       },
       {
         path: routesConfig.register.mask,
-        element: <RegisterPage />
+        element: <RegisterPage />,
       },
     ],
   },

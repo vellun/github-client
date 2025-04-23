@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from "react-router";
 
 import { rootStore } from "../instance";
+import { useEffect } from "react";
 
 export const useQueryParamsStoreInit = (): void => {
   const { search } = useLocation();
@@ -25,3 +26,10 @@ export const useQueryParamsStoreInit = (): void => {
   rootStore.query.setSearch(search);
   rootStore.query.updateQueryParam = updateQueryParam;
 };
+
+// export const useQueryParamsStoreInit = (): void => {
+//   const { search } = useLocation();
+//   useEffect(() => {
+//     rootStore.query.setSearch(search);
+//   }, [search]);
+// };
