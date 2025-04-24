@@ -8,7 +8,7 @@ import { UserReposPage } from "App/pages/UserReposPage";
 import { Layout } from "components/Layout";
 import { routesConfig } from "config/routes";
 import { useEffect } from "react";
-import { createBrowserRouter, createHashRouter, Navigate, RouteObject } from "react-router";
+import { createHashRouter, Navigate, RouteObject } from "react-router";
 import { useQueryParamsStoreInit } from "store/RootStore/hooks";
 import { rootStore } from "store/RootStore/instance";
 import "styles/_styles.scss";
@@ -81,10 +81,6 @@ const routes: RouteObject[] = [
       {
         path: routesConfig.login.mask,
         element: <LoginPage />,
-      },
-      {
-        path: routesConfig.register.mask,
-        element: <RegisterPage />,
       },
     ],
   },

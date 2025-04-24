@@ -8,8 +8,7 @@ export const useQueryParamsStoreInit = (): void => {
   const navigate = useNavigate();
 
   const updateQueryParam = (params: Record<string, string | number | null | number[]>) => {
-    const searchParams = new URLSearchParams(window.location.hash.split('?')[1] || '');
-
+    const searchParams = new URLSearchParams(window.location.hash.split("?")[1] || "");
     Object.keys(params).forEach((key) => {
       const value = params[key];
       if (value !== null) {
@@ -18,18 +17,11 @@ export const useQueryParamsStoreInit = (): void => {
         searchParams.delete(key);
       }
     });
-
     navigate(`?${searchParams.toString()}`, { replace: true });
-    return searchParams.toString()
+    return searchParams.toString();
   };
-
-  rootStore.query.setSearch(search);
-  rootStore.query.updateQueryParam = updateQueryParam;
+  useEffect(() => {
+    rootStore.query.setSearch(search);
+    rootStore.query.updateQueryParam = updateQueryParam;
+  }, [search]);
 };
-
-// export const useQueryParamsStoreInit = (): void => {
-//   const { search } = useLocation();
-//   useEffect(() => {
-//     rootStore.query.setSearch(search);
-//   }, [search]);
-// };
