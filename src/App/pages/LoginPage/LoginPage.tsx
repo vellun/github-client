@@ -1,32 +1,45 @@
-import React, { useState } from 'react';
-import { observer } from 'mobx-react-lite';
-import { Input } from 'components/Input';
-import styles from "./LoginPage.module.scss";
-import { rootStore } from 'store/RootStore';
-import { Button } from 'components/Button';
+import { Button } from "components/Button";
+import { Text } from "components/Text";
+import { auth } from "config/firebase";
+import { GithubAuthProvider, signInWithPopup, signOut } from "firebase/auth";
+import { observer } from "mobx-react-lite";
+import { rootStore } from "store/RootStore";
 
 export const LoginPage = observer(() => {
-  // const [formData, setFormData] = useState({
-  //   username: '',
-  //   email: '',
-  //   password: '',
-  // });
-  const [login, setLogin] = useState('');
-  const [password, setPassword] = useState('');
+  const handleLogin = () => {
+    const provider = new GithubAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        const credential = GithubAuthProvider.credentialFromResult(result);
+        const token = credential?.accessToken;
+        rootStore.auth.login(token, {
+          uid: user.uid,
+          name: user.displayName,
+          email: user.email,
+          avatarURL: user.photoURL
+        });
+      })
+      .catch((error) => {
+        console.error("Popup error:", error);
+      });
+  };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    rootStore.auth.login(login, password);
-    // if (authStore.user) {
-    //   history.push('/'); // Перенаправление на главную страницу после успешной регистрации
-    // }
+  const handleLogout = () => {
+    signOut(auth)
+      .then(() => {
+        rootStore.auth.logout()
+      })
+      .catch((error) => {
+        console.error('Logout error:', error);
+      });
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-        <Input onChange={(value) => setLogin(value)} placeholder="Login" />
-        <Input onChange={(value) => setPassword(value)} placeholder="Password" type="password" />
-        <Button type="submit">Sign in</Button>
-    </form>
+    <div>
+      <Text>GitHub Authorization</Text>
+      <Button onClick={handleLogin}>Log in</Button>
+      <Button onClick={handleLogout}>Log out</Button>
+    </div>
   );
 });

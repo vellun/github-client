@@ -1,67 +1,58 @@
-import { makeAutoObservable, runInAction } from "mobx";
-import bcrypt from 'bcryptjs';
+import { makeAutoObservable } from "mobx";
+import { ProfileModel } from "store/models";
+import { getCookie, removeCookie, setCookie } from "typescript-cookie";
 import { Meta } from "utils/meta";
-import AuthService from "api/AuthService";
 
 export class AuthStore {
-  user: string | null = null;
-  token: string | null = null;
+  private _user: ProfileModel | null = null;
+  private _token: string | null = null;
+  private _isAuth: boolean = false;
   meta: Meta = Meta.initial;
 
   constructor() {
     makeAutoObservable(this);
-    const storedUser = localStorage.getItem('user');
-    const storedToken = localStorage.getItem('token');
-    if (storedUser && storedToken) {
-      this.user = storedUser;
-      this.token = storedToken;
+
+    const token = getCookie("token");
+    console.log("INIT  AUTTTT", token);
+
+    if (token) {
+      this._token = token;
+      // this.fetchProfile();
     }
   }
 
-  register = async (email: string, login: string, password: string) => {
-    runInAction(() => {
-      this.meta = Meta.loading;
-      this.user = null;
-    });
+  login(token: string, user: ProfileModel) {
+    setCookie("token", token);
+    this.setIsAuth(true);
+    this.setUser(user);
+  }
 
-    const { isError, data } = await AuthService.Register({ email: email, username: login, password: password });
-    if (isError) {
-      this.setMeta(Meta.error);
-      return;
-    }
+  logout() {
+    removeCookie("token");
+    this.setIsAuth(false);
+  }
 
-    runInAction(() => {
-      this.meta = Meta.success;
-      this.user = login;
+  setUser(newUser: ProfileModel) {
+    this._user = newUser;
+  }
 
-      console.log("SS", login)
-    });
-  };
+  setIsAuth(newIsAuth: boolean) {
+    this._isAuth = newIsAuth;
+  }
 
-  logout = () => {
-    this.user = null;
-    localStorage.removeItem('user');
-  };
+  get user() {
+    return this._user;
+  }
 
-  login = async (login: string, password: string) => {
-    runInAction(() => {
-      this.meta = Meta.loading;
-      this.user = null;
-    });
+  get token() {
+    return this._token;
+  }
 
-    const { isError, data } = await AuthService.Login({ username: login, password: password });
-    if (isError) {
-      this.setMeta(Meta.error);
-      return;
-    }
-
-    runInAction(() => {
-      this.meta = Meta.success;
-      this.user = login;
-
-      console.log("SS", data)
-    });
-  };
+  get isAuth() {
+    const token = getCookie("token");
+    token ? this.setIsAuth(true) : this.setIsAuth(false);
+    return this._isAuth;
+  }
 
   setMeta(newMeta: Meta) {
     this.meta = newMeta;
