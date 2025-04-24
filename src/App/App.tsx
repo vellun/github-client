@@ -68,10 +68,10 @@ const routes: RouteObject[] = [
       {
         path: routesConfig.userRepos.mask,
         element: (
-          <AuthRoute>
+          <>
             <InitializeReposQueryParams />
             <UserReposPage />
-          </AuthRoute>
+          </>
         ),
       },
       {

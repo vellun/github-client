@@ -1,37 +1,36 @@
 import { Button } from "components/Button";
 import { Text } from "components/Text";
 import { auth } from "config/firebase";
+import { routesConfig } from "config/routes";
 import { GithubAuthProvider, signInWithPopup } from "firebase/auth";
 import { observer } from "mobx-react-lite";
+import { useNavigate } from "react-router-dom";
 import { rootStore } from "store/RootStore";
 import styles from "./LoginPage.module.scss";
-import { apiUrls } from "config/apiUrls";
-import { useNavigate } from "react-router-dom";
 
 export const LoginPage = observer(() => {
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    
+  const handleLogin = async () => {
     const provider = new GithubAuthProvider();
 
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        const user = result.user;
-        const credential = GithubAuthProvider.credentialFromResult(result);
-        const token = credential?.accessToken;
-        rootStore.auth.login(token, {
-          uid: user.uid,
-          name: user.displayName,
-          email: user.email,
-          avatarURL: user.photoURL,
-        });
-      })
-      .catch((error) => {
-        console.error("Popup error:", error);
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      const credential = GithubAuthProvider.credentialFromResult(result);
+      const token = credential?.accessToken;
+
+      await rootStore.auth.login(token, {
+        uid: user.uid,
+        name: user.displayName,
+        email: user.email,
+        avatarURL: user.photoURL,
       });
 
-    navigate(apiUrls.users.userByLogin(rootStore.auth.user.));
+      navigate(routesConfig.repositories.create());
+    } catch (error) {
+      console.error("Popup error:", error);
+    }
   };
 
   return (

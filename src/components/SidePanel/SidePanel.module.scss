@@ -37,6 +37,8 @@
   transition: transform 0.3s ease;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
   z-index: 1001;
+
+  border-radius: $border-radius;
 }
 
 .panel.open {
@@ -64,9 +66,12 @@
   display: block;
   padding: 10px 0;
   text-decoration: none;
-  //   color: $text-color;
 }
 
 .panel__link:hover {
   background-color: #f0f0f0;
+}
+
+.panel__link:hover {
+  color: $brand;
 }

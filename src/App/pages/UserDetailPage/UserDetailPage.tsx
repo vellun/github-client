@@ -30,6 +30,7 @@ const UserDetailPageContent: React.FC = observer(() => {
       </div>
       <Text>{user.bio}</Text>
       <Link className="link" to={routesConfig.userRepos.create(user.login)}><Button>Repositories</Button></Link>
+      {store?.isCurrent && <Button>Добавить репуупупу</Button>}
       <UserReposSection store={store} />
     </div>
   );

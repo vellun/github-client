@@ -43,14 +43,10 @@ export const Navbar: React.FC<NavbarProps> = observer(({ openSidebar }) => {
       </div>
       <div>
         {rootStore.auth.isAuth ? (
-          // <Link to={routesConfig.login.create()}>
-          // <label for="showSide">
           <button onClick={openSidebar}>
-            <UserLogo alt="User Avatar" />
+            <UserLogo src={rootStore.auth.user?.avatarUrl} alt="Current User Avatar" />
           </button>
         ) : (
-          // </label>
-          // </Link>
           <Link className="link" to={routesConfig.login.create()}>
             <Button>Log in</Button>
           </Link>

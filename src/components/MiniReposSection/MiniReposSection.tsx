@@ -7,8 +7,9 @@ import { routesConfig } from "config/routes";
 import { Link } from "react-router";
 import { RepoModel } from "store/models";
 import styles from "./MiniReposSection.module.scss";
+import { observer } from "mobx-react-lite";
 
-export const MiniReposSection: React.FC = ({ repos }: { repos: RepoModel[] }) => {
+export const MiniReposSection: React.FC = observer(({ repos }: { repos: RepoModel[] }) => {
     return (
         <div className={styles.root}>
             <div className={styles.root__repos}>
@@ -24,4 +25,4 @@ export const MiniReposSection: React.FC = ({ repos }: { repos: RepoModel[] }) =>
             </div>
         </div>
     );
-};
+});
