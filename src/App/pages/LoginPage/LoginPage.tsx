@@ -1,3 +1,5 @@
+import githubLogo from "assets/icons/github-logo.svg";
+import cn from "classnames";
 import { Button } from "components/Button";
 import { Text } from "components/Text";
 import { auth } from "config/firebase";
@@ -34,9 +36,14 @@ export const LoginPage = observer(() => {
   };
 
   return (
-    <div className={styles.root}>
-      <Text>GitHub Authorization</Text>
-      <Button onClick={handleLogin}>Log in</Button>
+    <div className={cn("flex-container", styles.root)}>
+      <div className={cn("flex-container", styles.root__form)}>
+        <img src={githubLogo} alt="GitHub User Logo" width="47px" height="47px" />
+        <Text className={styles.root__title} tag="h1" weight="bold" color="primary">
+          GitHub Authorization
+        </Text>
+        <Button onClick={handleLogin}>Log in</Button>
+      </div>
     </div>
   );
 });

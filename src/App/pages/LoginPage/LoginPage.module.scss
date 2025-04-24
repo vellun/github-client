@@ -1,0 +1,12 @@
+@use "styles/Roboto/fonts";
+@use "styles/variables" as *;
+
+.root {
+  &__form {
+    background-color: white;
+    border-radius: $border-radius;
+    padding: $space-xl $content-margin;
+    border: 1px solid $brand-secondary;
+    margin-top: 10%;
+  }
+}
