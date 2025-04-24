@@ -11,7 +11,11 @@ import { rootStore } from "store/RootStore";
 import { Button } from "components/Button";
 import { observer } from "mobx-react-lite";
 
-export const Navbar = observer(() => {
+interface NavbarProps {
+  openSidebar: () => void;
+}
+
+export const Navbar: React.FC<NavbarProps> = observer(({ openSidebar }) => {
   const [active, setActive] = useState<string>("repos");
 
   return (
@@ -39,12 +43,14 @@ export const Navbar = observer(() => {
       </div>
       <div>
         {rootStore.auth.isAuth ? (
-          <Link to={routesConfig.login.create()}>
-            <label for="showSide">
-              <UserLogo alt="User Avatar" />
-            </label>
-          </Link>
+          // <Link to={routesConfig.login.create()}>
+          // <label for="showSide">
+          <button onClick={openSidebar}>
+            <UserLogo alt="User Avatar" />
+          </button>
         ) : (
+          // </label>
+          // </Link>
           <Link className="link" to={routesConfig.login.create()}>
             <Button>Log in</Button>
           </Link>

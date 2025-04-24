@@ -1,18 +1,72 @@
 @use "styles/mixins" as mixins;
+@use "styles/variables" as *;
 
 .panel {
-    background-color: aqua;
+  background-color: white;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: calc(((100vw - 1440px) / 2) + 300px);
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  z-index: 1001;
 
-    &__title {
-        @include mixins.flex;
-        gap: 14         px
-    }
+  &__title {
+    @include mixins.flex;
+    gap: 14px;
+  }
 
-    &__link {
-        text-decoration: none;
-    }
+  &__link {
+    text-decoration: none;
+  }
 
-    &__menu {
-        list-style: none;
-    }
+  &__menu {
+    list-style: none;
+  }
+}
+
+.panel {
+  background-color: white;
+  height: 100%;
+  position: fixed;
+  right: 0;
+  width: calc(((100vw - 1440px) / 2) + 300px);
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  z-index: 1001;
+}
+
+.panel.open {
+  transform: translateX(0);
+}
+
+.panel__content {
+  padding: 20px;
+}
+
+.panel__title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.panel__menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.panel__link {
+  display: block;
+  padding: 10px 0;
+  text-decoration: none;
+  //   color: $text-color;
+}
+
+.panel__link:hover {
+  background-color: #f0f0f0;
 }

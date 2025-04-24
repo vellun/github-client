@@ -1,13 +1,20 @@
 import { Button } from "components/Button";
 import { Text } from "components/Text";
 import { auth } from "config/firebase";
-import { GithubAuthProvider, signInWithPopup, signOut } from "firebase/auth";
+import { GithubAuthProvider, signInWithPopup } from "firebase/auth";
 import { observer } from "mobx-react-lite";
 import { rootStore } from "store/RootStore";
+import styles from "./LoginPage.module.scss";
+import { apiUrls } from "config/apiUrls";
+import { useNavigate } from "react-router-dom";
 
 export const LoginPage = observer(() => {
+  const navigate = useNavigate();
+
   const handleLogin = () => {
+    
     const provider = new GithubAuthProvider();
+
     signInWithPopup(auth, provider)
       .then((result) => {
         const user = result.user;
@@ -17,29 +24,20 @@ export const LoginPage = observer(() => {
           uid: user.uid,
           name: user.displayName,
           email: user.email,
-          avatarURL: user.photoURL
+          avatarURL: user.photoURL,
         });
       })
       .catch((error) => {
         console.error("Popup error:", error);
       });
-  };
 
-  const handleLogout = () => {
-    signOut(auth)
-      .then(() => {
-        rootStore.auth.logout()
-      })
-      .catch((error) => {
-        console.error('Logout error:', error);
-      });
+    navigate(apiUrls.users.userByLogin(rootStore.auth.user.));
   };
 
   return (
-    <div>
+    <div className={styles.root}>
       <Text>GitHub Authorization</Text>
       <Button onClick={handleLogin}>Log in</Button>
-      <Button onClick={handleLogout}>Log out</Button>
     </div>
   );
 });

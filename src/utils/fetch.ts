@@ -11,7 +11,7 @@ export const fetch = async (
 ): Promise<ApiResp<RepoModel>> => {
   const token = getCookie("token");
   if (token) {
-    headers["Authorization"] = `token ${token}`;
+    headers["Authorization"] = `Bearer ${token}`;
   }
 
   try {

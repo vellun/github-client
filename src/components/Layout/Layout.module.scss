@@ -5,4 +5,35 @@
   background-color: $body-background;
   max-width: 1440px;
   margin: 0 auto;
+  position: relative;
+  min-height: 100vh;
 }
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  height: 100%;
+  z-index: 1001;
+}
+
+// .sidebar {
+//   background-color: white;
+//   position: absolute;
+//   height: 100%;
+//   right: 0;
+//   z-index: 1001;
+//   width: 300px;
+//   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+//   transition: transform 0.3s ease;
+//   transform: translateX(0);
+// }
