@@ -25,7 +25,7 @@ button {
 }
 
 .noMarginText {
-  margin: 0
+  margin: 0;
 }
 
 .flex-container {
@@ -42,5 +42,12 @@ button {
   margin-left: $content-margin;
   margin-right: $content-margin;
   max-width: 1440px;
+}
 
+.form {
+  background-color: white;
+  border-radius: $border-radius;
+  padding: $space-xl $content-margin;
+  border: 1px solid $brand-secondary;
+  margin-top: 5%;
 }

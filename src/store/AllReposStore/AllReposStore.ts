@@ -36,8 +36,11 @@ export class AllReposStore implements IStoreWithReaction {
   }
 
   async fetch(): Promise<void> {
-    this.setMeta(Meta.loading);
-    this._repos.clear();
+    runInAction(() => {
+      this.setMeta(Meta.loading);
+      this._repos.clear();
+    });
+    
     const reposParams = rootStore.query.getApiReposParams();
     const userReposParams = rootStore.query.getApiUserReposParams();
 
@@ -47,6 +50,8 @@ export class AllReposStore implements IStoreWithReaction {
     } else {
       ({ isError, data, pagesCount } = await ReposService.getAllUserRepos(userReposParams, this.ownerLogin));
     }
+
+    console.log("GGGGGGG", isError, data)
 
     if (isError) {
       this.setMeta(Meta.error);

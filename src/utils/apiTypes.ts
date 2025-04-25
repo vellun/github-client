@@ -9,3 +9,11 @@ export type ApiResp<SuccessData = any, ErrorData = any> =
     data: ErrorData;
     headers: null;
   };
+
+  export type PostApiResp<SuccessData = any, ErrorData = any> =
+  | {
+    isError: false;
+  }
+  | {
+    isError: true;
+  };

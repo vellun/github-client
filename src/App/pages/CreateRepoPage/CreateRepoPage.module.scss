@@ -1,0 +1,16 @@
+@use "styles/mixins" as mixins;
+@use "styles/variables" as *;
+
+.root {
+  &__field {
+    margin-bottom: $space-xs;
+    border: 1px solid $brand-secondary;
+    border-radius: $border-radius;
+  }
+
+  &__private {
+    @include mixins.flex;
+    gap: $space-xxs;
+    margin-bottom: $space-s;
+  }
+}

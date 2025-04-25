@@ -11,16 +11,13 @@ export const fetch = async (
 ): Promise<ApiResp<RepoModel>> => {
   const token = getCookie("token");
   if (token) {
-    headers["Authorization"] = `token ${token}`;
+    headers["Authorization"] = `Bearer ${token}`;
   }
 
   try {
     let response = "";
     if (method === "post") {
-      response = await axios.post(url, {
-        headers: headers,
-        params: params,
-      });
+      response = await axios.post(url, params, { headers: headers });
     } else {
       response = await axios(url, {
         headers: headers,
@@ -37,7 +34,7 @@ export const fetch = async (
     console.log(e);
     return {
       isError: true,
-      data: null,
+      data: e,
       headers: null,
     };
   }

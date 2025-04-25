@@ -11,7 +11,11 @@ import { rootStore } from "store/RootStore";
 import { Button } from "components/Button";
 import { observer } from "mobx-react-lite";
 
-export const Navbar = observer(() => {
+interface NavbarProps {
+  openSidebar: () => void;
+}
+
+export const Navbar: React.FC<NavbarProps> = observer(({ openSidebar }) => {
   const [active, setActive] = useState<string>("repos");
 
   return (
@@ -26,24 +30,22 @@ export const Navbar = observer(() => {
         </div>
       </Link>
       <div className={styles.navbar__menu}>
-        <Link id="repos" className="link" to={`/`}>
-          <Text weight="medium" view="p-18">
+        <Link id="repos" className="link" to={`/`} onClick={() => setActive("repos")}>
+          <Text weight="medium" view="p-18" color={active === "repos" ? "accent": "primary"}>
             Repositories
           </Text>
         </Link>
-        <Link id="users" className="link" to={`/users`}>
-          <Text weight="medium" view="p-18">
+        <Link id="users" className="link" to={`/users`} onClick={() => setActive("users")}>
+          <Text weight="medium" view="p-18" color={active === "users" ? "accent": "primary"}>
             Users
           </Text>
         </Link>
       </div>
       <div>
         {rootStore.auth.isAuth ? (
-          <Link to={routesConfig.login.create()}>
-            <label for="showSide">
-              <UserLogo alt="User Avatar" />
-            </label>
-          </Link>
+          <button onClick={openSidebar}>
+            <UserLogo src={rootStore.auth.user?.avatarUrl} alt="Current User Avatar" />
+          </button>
         ) : (
           <Link className="link" to={routesConfig.login.create()}>
             <Button>Log in</Button>

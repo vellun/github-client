@@ -14,3 +14,9 @@ export type RepoModel = {
   forksCount: number;
   languages: object;
 };
+
+export type CreateRepoModel = {
+  name: string;
+  description: string;
+  private: boolean;
+};

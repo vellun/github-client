@@ -1,5 +1,6 @@
 import UsersService from "api/UsersService";
 import { computed, makeObservable, observable, runInAction } from "mobx";
+import { rootStore } from "store/RootStore";
 import { RepoModel } from "store/models";
 import { UserModel } from "store/models/users";
 import { Collection } from "utils/collection";
@@ -8,6 +9,7 @@ import { Meta } from "utils/meta";
 export class UserStore {
   _user: UserModel | null = null;
   _repos: Collection<number, RepoModel> = new Collection();
+  _isCurrent: boolean = false;
   userMeta: Meta = Meta.initial;
   reposMeta: Meta = Meta.initial;
 
@@ -18,13 +20,18 @@ export class UserStore {
       userMeta: observable,
       reposMeta: observable,
       user: computed,
-      repos: computed
+      repos: computed,
     });
   }
 
   init(login: string) {
-    this.fetchUser(login);
-    this.fetchRepos(login)
+    if (rootStore.auth.user && login === rootStore.auth.user.login) {
+      this.setIsCurrent(true);
+      rootStore.auth.fetchRepos();
+    } else {
+      this.fetchUser(login);
+      this.fetchRepos(login);
+    }
   }
 
   async fetchUser(login: string): Promise<void> {
@@ -42,6 +49,10 @@ export class UserStore {
     runInAction(() => {
       this.userMeta = Meta.success;
       this._user = data;
+
+      if (this._user.login === rootStore.auth.user.login) {
+        this.setIsCurrent(true);
+      }
     });
   }
 
@@ -49,15 +60,19 @@ export class UserStore {
     return this._user;
   }
 
+  get isCurrent(): boolean {
+    return this._isCurrent;
+  }
+
   setUserMeta(newMeta: Meta) {
     this.userMeta = newMeta;
   }
 
-  async fetchRepos(login: string): Promise<void> {
-    if (this.reposMeta === Meta.loading || this.reposMeta === Meta.success) {
-      return;
-    }
+  setIsCurrent(newIsCurrent: boolean) {
+    this._isCurrent = newIsCurrent;
+  }
 
+  async fetchRepos(login: string): Promise<void> {
     runInAction(() => {
       this.reposMeta = Meta.loading;
       this._repos.clear();

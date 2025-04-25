@@ -1,10 +1,11 @@
+import { CreateRepoPage } from "App/pages/CreateRepoPage";
 import { AllReposPage } from "App/pages/AllReposPage";
 import { AllUsersPage } from "App/pages/AllUsersPage";
 import { LoginPage } from "App/pages/LoginPage";
-import { RegisterPage } from "App/pages/RegisterPage";
 import { RepoDetailPage } from "App/pages/RepoDetailPage";
 import { UserDetailPage } from "App/pages/UserDetailPage";
 import { UserReposPage } from "App/pages/UserReposPage";
+import { AuthRoute } from "components/AuthRoute";
 import { Layout } from "components/Layout";
 import { routesConfig } from "config/routes";
 import { useEffect } from "react";
@@ -81,6 +82,14 @@ const routes: RouteObject[] = [
       {
         path: routesConfig.login.mask,
         element: <LoginPage />,
+      },
+      {
+        path: routesConfig.createRepo.mask,
+        element: (
+          <AuthRoute>
+            <CreateRepoPage />
+          </AuthRoute>
+        ),
       },
     ],
   },
