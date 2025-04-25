@@ -22,12 +22,13 @@ const App = () => {
 
 const InitializeReposQueryParams = () => {
   useEffect(() => {
-    if (rootStore.query.getParam("per_page") === undefined) {
-      const searchParams = rootStore.query.updateQueryParam({ per_page: 6 });
+    const updateQuery = rootStore.query.updateQueryParam;
+    if (updateQuery !== null && rootStore.query.getParam("per_page") === undefined) {
+      const searchParams = updateQuery({ per_page: 6 });
       rootStore.query.setSearch(searchParams);
     }
-    if (rootStore.query.getParam("page") === undefined) {
-      const searchParams = rootStore.query.updateQueryParam({ page: 1 });
+    if (updateQuery !== null && rootStore.query.getParam("page") === undefined) {
+      const searchParams = updateQuery({ page: 1 });
       rootStore.query.setSearch(searchParams);
     }
   }, []);
