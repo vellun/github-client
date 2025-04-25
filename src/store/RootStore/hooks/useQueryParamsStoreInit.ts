@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router";
 
-import { rootStore } from "../instance";
 import { useEffect } from "react";
+import { rootStore } from "../instance";
 
 export const useQueryParamsStoreInit = (): void => {
   const { search } = useLocation();
@@ -11,7 +11,7 @@ export const useQueryParamsStoreInit = (): void => {
     const searchParams = new URLSearchParams(window.location.hash.split("?")[1] || "");
     Object.keys(params).forEach((key) => {
       const value = params[key];
-      if (value !== null) {
+      if (value !== "") {
         searchParams.set(key, value.toString());
       } else {
         searchParams.delete(key);
