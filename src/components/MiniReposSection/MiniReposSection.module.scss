@@ -2,18 +2,14 @@
 @use "styles/variables" as *;
 
 .root {
-    &__repos {
-        @include mixins.flex;
-        gap: $space-s;
-        align-items: stretch;
-        flex-wrap: wrap;
+  &__repos {
+    @include mixins.flex;
+    gap: $space-s;
+    align-items: stretch;
+    flex-wrap: wrap;
+    justify-content: end;
+  }
 
-        &__item {
-            flex: 1;
-
-        }
-    }
-
-    margin-bottom: $space-xl;
-    width: 100%
+  margin-bottom: $space-xl;
+  width: 100%;
 }

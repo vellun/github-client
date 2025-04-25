@@ -33,26 +33,32 @@ const UserDetailPageContent: React.FC = observer(() => {
 
   return (
     <div className={cn("container", styles.user)}>
-      <UserLogo src={user.avatarUrl} width="250px" height="250px" alt="User Avatar" />
-      <div className={styles.user__name}>
-        <Text className="noMarginText" view="p-20" weight="medium">
-          {user.name}
-        </Text>
-        <Text className="noMarginText" color="secondary">
-          {user.login}
-        </Text>
+      <div>
+        <UserLogo src={user.avatarUrl} width="250px" height="250px" alt="User Avatar" />
+        <div className={styles.user__name}>
+          <Text className="noMarginText" view="p-20" weight="medium">
+            {user.name}
+          </Text>
+          <Text className="noMarginText" color="secondary">
+            {user.login}
+          </Text>
+        </div>
+        <Text>{user.bio}</Text>
       </div>
-      <Text>{user.bio}</Text>
-      <Link className="link" to={routesConfig.userRepos.create(user.login)}>
-        <Button>Repositories</Button>
-      </Link>
+      <div className={styles.user__repos}>
+        <div className={styles.user__repos__menu}>
+          <Link className={cn("link", styles.user__repos)} to={routesConfig.userRepos.create(user.login)}>
+            <Button>Repositories</Button>
+          </Link>
 
-      {isCurrent && (
-        <Link className="link" to={routesConfig.createRepo.create()}>
-          <Button>Добавить репуупупу</Button>
-        </Link>
-      )}
-      <UserReposSection store={store} />
+          {isCurrent && (
+            <Link className="link" to={routesConfig.createRepo.create()}>
+              <Button>Add repo</Button>
+            </Link>
+          )}
+        </div>
+        <UserReposSection store={store} />
+      </div>
     </div>
   );
 });

@@ -48,7 +48,6 @@ export class PaginationStore implements IStoreWithReaction {
   private readonly _qpReaction: IReactionDisposer = reaction(
     () => this.page,
     (page) => {
-      console.log("TTTTTTT", this.page)
       if (rootStore.query.updateQueryParam !== null) {
         rootStore.query.updateQueryParam({ page: page });
       }

@@ -31,9 +31,6 @@ export const Pagination = observer(({ store }: { store: AllReposStore }) => {
   }
 
   const handlePageChange = (newPage: number) => {
-    if (newPage > 3) {
-
-    }
     setbuttonActive(newPage);
     paginationStore.setPage(newPage);
     setArrowsColors()
@@ -49,7 +46,6 @@ export const Pagination = observer(({ store }: { store: AllReposStore }) => {
 
   useEffect(() => {
     setArrowsColors()
-    console.log("KKKdK", paginationStore.page)
   }, []);
 
 
