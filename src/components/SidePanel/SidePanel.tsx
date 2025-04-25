@@ -36,7 +36,14 @@ export const SidePanel: React.FC<SidePanelProps> = observer(({ className, isOpen
         <Link className={cn("link", styles.panel__link)} to={routesConfig.userDetail.create(curUser)}>
           <div className={styles.panel__title}>
             <UserLogo src={rootStore.auth.user?.avatarUrl} alt="Current User Avatar" />
-            <Text className="noMarginText">{curUser}</Text>
+            <div>
+              <Text weight="medium" className="noMarginText">
+                {rootStore.auth.user.name}
+              </Text>
+              <Text color="secondary" className="noMarginText">
+                {curUser}
+              </Text>
+            </div>
           </div>
         </Link>
 

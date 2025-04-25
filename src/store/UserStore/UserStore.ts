@@ -25,8 +25,13 @@ export class UserStore {
   }
 
   init(login: string) {
-    this.fetchUser(login);
-    this.fetchRepos(login);
+    if (rootStore.auth.user && login === rootStore.auth.user.login) {
+      this.setIsCurrent(true);
+      rootStore.auth.fetchRepos();
+    } else {
+      this.fetchUser(login);
+      this.fetchRepos(login);
+    }
   }
 
   async fetchUser(login: string): Promise<void> {

@@ -14,6 +14,7 @@ export const apiUrls = {
     currentUser: (): string => githubApi(`user`),
     users: (): string => githubApi(`users`),
     userByLogin: (login: string): string => githubApi(`users/${login}`),
+    currentUserRepos: (): string => githubApi(`user/repos`),
     userRepos: (login: string): string => githubApi(`users/${login}/repos`),
   },
   search: {

@@ -63,4 +63,9 @@ export default class UsersService {
     const response = await fetch(apiUrls.users.userRepos(login));
     return { isError: response.isError, data: normalizeReposToCollection(response.data), headers: response.headers };
   }
+
+  static async getCurrentUserRepos(): Promise<ApiResp<Collection<number, RepoModel>>> {
+    const response = await fetch(apiUrls.users.currentUserRepos());
+    return { isError: response.isError, data: normalizeReposToCollection(response.data), headers: response.headers };
+  }
 }

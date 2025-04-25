@@ -1,5 +1,6 @@
 import { ReposApiRequestParams, UsersReposApiRequestParams } from "api/types";
 import { apiUrls } from "config/apiUrls";
+import { rootStore } from "store/RootStore";
 import {
   CreateRepoModel,
   RepoModel,
@@ -37,6 +38,10 @@ export default class ReposService {
       page: params.page,
     });
 
+    if (response.isError) {
+      return { isError: true, data: response.data };
+    }
+
     let pagesCount = 1;
 
     if (response.headers?.link !== undefined) {
@@ -58,6 +63,11 @@ export default class ReposService {
     ownerLogin: string,
   ): Promise<ApiResp<Collection<number, RepoModel>>> {
     let url = apiUrls.users.userRepos(ownerLogin);
+
+    if (rootStore.auth.user.login === ownerLogin) {
+      url = apiUrls.users.currentUserRepos();
+    }
+
     let q = [];
 
     if (isParam(params.repoName)) {

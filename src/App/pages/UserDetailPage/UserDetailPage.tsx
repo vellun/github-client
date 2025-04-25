@@ -11,18 +11,28 @@ import { Meta } from "utils/meta";
 import { useUserPageStore } from "./context";
 import { UserProvider } from "./provider";
 import styles from "./UserDetailPage.module.scss";
+import { rootStore } from "store/RootStore";
 
 const UserDetailPageContent: React.FC = observer(() => {
-  const store = useUserPageStore();
+  let store = useUserPageStore();
+  let isCurrent = store.isCurrent;
+
+  if (store.isCurrent) {
+    store = rootStore.auth;
+  }
+
   const user = store.user;
 
-  if (!user) {
-    return <div>юзер не найден</div>;
+  if (store.userMeta === Meta.loading) {
+    return <Loader />;
+  }
+
+  if (store.userMeta === Meta.error || !user) {
+    return <div>User not found</div>;
   }
 
   return (
     <div className={cn("container", styles.user)}>
-      {store.userMeta === Meta.loading && <Loader />}
       <UserLogo src={user.avatarUrl} width="250px" height="250px" alt="User Avatar" />
       <div className={styles.user__name}>
         <Text className="noMarginText" view="p-20" weight="medium">
@@ -37,7 +47,7 @@ const UserDetailPageContent: React.FC = observer(() => {
         <Button>Repositories</Button>
       </Link>
 
-      {store?.isCurrent && (
+      {isCurrent && (
         <Link className="link" to={routesConfig.createRepo.create()}>
           <Button>Добавить репуупупу</Button>
         </Link>
