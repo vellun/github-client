@@ -3,7 +3,7 @@ import { createContext, useContext } from "react";
 import { AllReposStore } from "store/AllReposStore";
 import { AllUsersStore } from "store/AllUsersStore";
 import { FiltersType } from "store/RootStore";
-import { FiltersStore } from "store";
+import { FiltersStore } from "store/FiltersStore";
 
 export type FiltersContextType = {
   options: typeof usersFilterOptions | typeof orgReposFilterOptions;
@@ -24,5 +24,3 @@ export const useFilterStore = () => {
   const filtersContext = useContext(FiltersContext);
   return filtersContext?.filtersStore;
 };
-
-

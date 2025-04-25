@@ -15,7 +15,7 @@ export class FiltersStore {
     if (this.filter !== newFilter) {
       this.filter = newFilter;
 
-      if (rootStore.query.updateQueryParam !== null) {
+      if (newFilter !== "" && rootStore.query.updateQueryParam !== null) {
         rootStore.query.updateQueryParam({ filter: newFilter });
       }
     }
@@ -26,10 +26,10 @@ export class FiltersStore {
   }
 
   setSearch(newSearch: string, searchType: FiltersType | undefined | null) {
-    if (this.search !== newSearch) {
+    if (this.search !== newSearch && newSearch) {
       this.search = newSearch;
 
-      if (rootStore.query.updateQueryParam !== null) {
+      if (newSearch !== null && rootStore.query.updateQueryParam !== null) {
         rootStore.query.updateQueryParam({ search: newSearch });
       }
     }
