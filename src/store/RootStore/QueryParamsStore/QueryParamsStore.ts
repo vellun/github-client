@@ -1,12 +1,10 @@
 import { makeAutoObservable } from "mobx";
 import qs from "qs";
 
-type PrivateFields = "_params";
-
 export class QueryParamsStore {
   private _params: qs.ParsedQs = {};
   private _search: string = "";
-  updateQueryParam: ((params: Record<string, string | number | null | number[]>) => void) | null = null;
+  updateQueryParam: ((params: Record<string, string | number | null | number[]>) => string) | null = null;
 
   constructor() {
     makeAutoObservable(this);
