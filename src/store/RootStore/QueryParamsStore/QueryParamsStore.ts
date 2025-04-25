@@ -1,5 +1,4 @@
 import { makeAutoObservable } from "mobx";
-import { makeAutoObservable } from "mobx";
 import qs from "qs";
 
 export class QueryParamsStore {
@@ -8,7 +7,7 @@ export class QueryParamsStore {
   updateQueryParam: ((params: Record<string, string | number | null | number[]>) => string) | null = null;
 
   constructor() {
-    makeAutoObservable<QueryParamsStore, PrivateFields>(this);
+   makeAutoObservable<QueryParamsStore, PrivateFields>(this);
   }
 
   getParam(key: string): undefined | string | qs.ParsedQs | (string | qs.ParsedQs)[] {

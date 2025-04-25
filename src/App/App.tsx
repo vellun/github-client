@@ -22,7 +22,7 @@ const App = () => {
 
 const InitializeReposQueryParams = () => {
   useEffect(() => {
-    const updateQuery = rootStore.query.updateQueryParam;
+  const updateQuery = rootStore.query.updateQueryParam;
     if (updateQuery !== null && rootStore.query.getParam("per_page") === undefined) {
       const searchParams = updateQuery({ per_page: 6 });
       rootStore.query.setSearch(searchParams);
