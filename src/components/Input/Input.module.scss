@@ -14,7 +14,7 @@
 
   &:focus {
     outline: none;
-    border: 1px solid var(--brand);
+    border: 1px solid $brand;
   }
 
   &:disabled {

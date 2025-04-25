@@ -1,3 +1,4 @@
+import { CreateRepoPage } from "App/pages/CreateRepoPage";
 import { AllReposPage } from "App/pages/AllReposPage";
 import { AllUsersPage } from "App/pages/AllUsersPage";
 import { LoginPage } from "App/pages/LoginPage";
@@ -81,6 +82,14 @@ const routes: RouteObject[] = [
       {
         path: routesConfig.login.mask,
         element: <LoginPage />,
+      },
+      {
+        path: routesConfig.createRepo.mask,
+        element: (
+          <AuthRoute>
+            <CreateRepoPage />
+          </AuthRoute>
+        ),
       },
     ],
   },

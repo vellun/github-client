@@ -1,91 +1,97 @@
 import { ReposApiRequestParams, UsersReposApiRequestParams } from "api/types";
 import { apiUrls } from "config/apiUrls";
 import {
+  CreateRepoModel,
   RepoModel,
   RepoOwnerModel,
   normalizeRepoModel,
   normalizeRepoOwnersToCollection,
   normalizeReposToCollection,
 } from "store/models";
-import { ApiResp } from "utils/apiTypes";
+import { ApiResp, PostApiResp } from "utils/apiTypes";
 import { Collection } from "utils/collection";
 import { fetch } from "utils/fetch";
 
 const isParam = (param: any) => {
-  return param !== undefined && param !== null
-}
+  return param !== undefined && param !== null;
+};
 
 export default class ReposService {
-  static async getAllOrgRepos(params: ReposApiRequestParams, type: "org" | "user", ownerLogin?: string): Promise<ApiResp<Collection<number, RepoModel>>> {
+  static async getAllOrgRepos(
+    params: ReposApiRequestParams,
+    type: "org" | "user",
+    ownerLogin?: string,
+  ): Promise<ApiResp<Collection<number, RepoModel>>> {
     if (params.org === undefined || params.org === null) {
       params.org = "ktsstudio";
     }
 
-    let url = apiUrls.repos.organizationRepos(params.org)
+    let url = apiUrls.repos.organizationRepos(params.org);
     if (type == "user" && ownerLogin) {
-      url = apiUrls.users.userRepos(ownerLogin)
+      url = apiUrls.users.userRepos(ownerLogin);
     }
 
     const response = await fetch(url, {
       type: params.type,
       per_page: params.perPage,
       page: params.page,
-
     });
 
-    let pagesCount = 1
+    let pagesCount = 1;
 
     if (response.headers?.link !== undefined) {
-      const linkMatchLast = response.headers?.link.match(/page=(\d+)>; rel="last"/)
-      const linkMatchPrev = response.headers?.link.match(/page=(\d+)>; rel="prev"/)
+      const linkMatchLast = response.headers?.link.match(/page=(\d+)>; rel="last"/);
+      const linkMatchPrev = response.headers?.link.match(/page=(\d+)>; rel="prev"/);
 
       if (linkMatchLast !== null) {
-        pagesCount = Number(linkMatchLast[1])
+        pagesCount = Number(linkMatchLast[1]);
       } else {
-        pagesCount = Number(linkMatchPrev[1]) + 1
+        pagesCount = Number(linkMatchPrev[1]) + 1;
       }
     }
-
 
     return { isError: response.isError, data: normalizeReposToCollection(response.data), pagesCount: pagesCount };
   }
 
-  static async getAllUserRepos(params: UsersReposApiRequestParams, ownerLogin: string): Promise<ApiResp<Collection<number, RepoModel>>> {
-    let url = apiUrls.users.userRepos(ownerLogin)
-    let q = []
+  static async getAllUserRepos(
+    params: UsersReposApiRequestParams,
+    ownerLogin: string,
+  ): Promise<ApiResp<Collection<number, RepoModel>>> {
+    let url = apiUrls.users.userRepos(ownerLogin);
+    let q = [];
 
     if (isParam(params.repoName)) {
-      url = apiUrls.search.repos()
-      q.push(`${params.repoName} in:name user:${ownerLogin}`)
+      url = apiUrls.search.repos();
+      q.push(`${params.repoName} in:name user:${ownerLogin}`);
     }
 
     const reqParams = {
       type: params.type,
       per_page: params.perPage,
       page: params.page,
-    }
+    };
 
     if (q.length) {
-      reqParams.q = q.join(" ")
+      reqParams.q = q.join(" ");
     }
 
     const response = await fetch(url, reqParams);
-    let responseData = response.data
+    let responseData = response.data;
 
     if (isParam(params.repoName)) {
       responseData = response.data.items;
     }
 
-    let pagesCount = 1
+    let pagesCount = 1;
 
     if (response.headers?.link !== undefined) {
-      const linkMatchLast = response.headers?.link.match(/page=(\d+)>; rel="last"/)
-      const linkMatchPrev = response.headers?.link.match(/page=(\d+)>; rel="prev"/)
+      const linkMatchLast = response.headers?.link.match(/page=(\d+)>; rel="last"/);
+      const linkMatchPrev = response.headers?.link.match(/page=(\d+)>; rel="prev"/);
 
       if (linkMatchLast !== null) {
-        pagesCount = Number(linkMatchLast[1])
+        pagesCount = Number(linkMatchLast[1]);
       } else {
-        pagesCount = Number(linkMatchPrev[1]) + 1
+        pagesCount = Number(linkMatchPrev[1]) + 1;
       }
     }
 
@@ -119,5 +125,11 @@ export default class ReposService {
     const response = await fetch(apiUrls.repos.repoLanguages(orgName, repoName));
 
     return { isError: response.isError, data: response.data };
+  }
+
+  static async createRepo(params: CreateRepoModel): Promise<PostApiResp> {
+    const response = await fetch(apiUrls.repos.createRepo(), params, {}, "post");
+
+    return { isError: response.isError };
   }
 }

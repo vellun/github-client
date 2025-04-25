@@ -15,6 +15,7 @@ export const LoginPage = observer(() => {
 
   const handleLogin = async () => {
     const provider = new GithubAuthProvider();
+    provider.addScope("repo");
 
     try {
       const result = await signInWithPopup(auth, provider);

@@ -25,12 +25,23 @@ const UserDetailPageContent: React.FC = observer(() => {
       {store.userMeta === Meta.loading && <Loader />}
       <UserLogo src={user.avatarUrl} width="250px" height="250px" alt="User Avatar" />
       <div className={styles.user__name}>
-        <Text className="noMarginText" view="p-20" weight="medium">{user.name}</Text>
-        <Text className="noMarginText" color="secondary">{user.login}</Text>
+        <Text className="noMarginText" view="p-20" weight="medium">
+          {user.name}
+        </Text>
+        <Text className="noMarginText" color="secondary">
+          {user.login}
+        </Text>
       </div>
       <Text>{user.bio}</Text>
-      <Link className="link" to={routesConfig.userRepos.create(user.login)}><Button>Repositories</Button></Link>
-      {store?.isCurrent && <Button>Добавить репуупупу</Button>}
+      <Link className="link" to={routesConfig.userRepos.create(user.login)}>
+        <Button>Repositories</Button>
+      </Link>
+
+      {store?.isCurrent && (
+        <Link className="link" to={routesConfig.createRepo.create()}>
+          <Button>Добавить репуупупу</Button>
+        </Link>
+      )}
       <UserReposSection store={store} />
     </div>
   );

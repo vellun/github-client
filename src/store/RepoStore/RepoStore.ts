@@ -1,6 +1,6 @@
 import ReposService from "api/ReposService";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
-import { RepoModel, RepoOwnerModel } from "store/models";
+import { CreateRepoModel, RepoModel, RepoOwnerModel } from "store/models";
 import { Collection } from "utils/collection";
 import { Meta } from "utils/meta";
 
@@ -59,6 +59,22 @@ export class RepoStore {
     runInAction(() => {
       this.repoMeta = Meta.success;
       this._repo = data;
+    });
+  }
+
+  async createRepo(repo: CreateRepoModel): Promise<void> {
+    runInAction(() => {
+      this.repoMeta = Meta.loading;
+    });
+
+    const isError = await ReposService.createRepo(repo);
+    if (isError) {
+      this.setRepoMeta(Meta.error);
+      return;
+    }
+
+    runInAction(() => {
+      this.repoMeta = Meta.success;
     });
   }
 

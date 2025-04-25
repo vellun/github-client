@@ -23,6 +23,10 @@ export const routesConfig = {
     mask: "/users/:login/repos",
     create: (login: string) => `/users/${login}/repos`,
   },
+  createRepo: {
+    mask: "/create",
+    create: (login: string) => `/create`,
+  },
   login: {
     mask: "/login",
     create: () => `/login`,

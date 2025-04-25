@@ -11,7 +11,7 @@ export type InputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, "onCh
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, value, onChange, afterSlot, ...props }, ref) => (
-    <div className={cn(`styles.${className}`, styles.input__content)}>
+    <div className={cn(className, styles.input__content)}>
       <input
         ref={ref}
         type="text"
