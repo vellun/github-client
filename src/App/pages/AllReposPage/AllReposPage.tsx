@@ -21,7 +21,7 @@ const AllReposPageContent: React.FC = observer(() => {
           <Text className={styles.title} weight="medium" view="p-20" maxLines={2}>
             Last seen repositories
           </Text>
-          <MiniReposSection repos={lastSeenRepos} />
+          <MiniReposSection className={styles["last-seen-repos"]} repos={lastSeenRepos} />
         </>
       )}
 

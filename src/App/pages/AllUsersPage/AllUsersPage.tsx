@@ -17,11 +17,11 @@ const AllUsersPageContent: React.FC = observer(() => {
         List of users
       </Text>
 
-      <UsersFiltersProvider><FiltersSection /></UsersFiltersProvider>
+      <UsersFiltersProvider>
+        <FiltersSection />
+      </UsersFiltersProvider>
 
       <UsersSection store={store} />
-
-      <Pagination store={store} />
     </div>
   );
 });

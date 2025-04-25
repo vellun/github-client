@@ -2,7 +2,6 @@ import { useFiltersContext, useFilterStore } from "components/FiltersSection/con
 import { MultiDropdown, Option } from "components/MultiDropdown";
 import { observer } from "mobx-react-lite";
 import { useCallback, useEffect } from "react";
-import { FiltersType } from "store/RootStore";
 import styles from "./Filters.module.scss";
 
 export const Filters = observer(() => {
@@ -14,7 +13,7 @@ export const Filters = observer(() => {
     return () => {
       store?.setFilter("", null);
     };
-  }, []);
+  }, [store]);
 
   const handleSelect = (selectedOptions: Option[]) => {
     const selectedType = selectedOptions.at(-1)?.key;

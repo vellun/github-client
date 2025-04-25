@@ -1,4 +1,4 @@
-import { action, makeObservable, observable } from "mobx";
+import { makeAutoObservable } from "mobx";
 import qs from "qs";
 
 type PrivateFields = "_params";
@@ -9,10 +9,7 @@ export class QueryParamsStore {
   updateQueryParam: ((params: Record<string, string | number | null | number[]>) => void) | null = null;
 
   constructor() {
-    makeObservable<QueryParamsStore, PrivateFields>(this, {
-      _params: observable.ref,
-      setSearch: action,
-    });
+    makeAutoObservable(this);
   }
 
   getParam(key: string): undefined | string | qs.ParsedQs | (string | qs.ParsedQs)[] {

@@ -1,4 +1,4 @@
-import { action, computed, IReactionDisposer, makeObservable, observable, reaction, runInAction } from "mobx";
+import { IReactionDisposer, makeAutoObservable, reaction, runInAction } from "mobx";
 
 import { RepoModel } from "store/models";
 import { Collection } from "utils/collection";
@@ -6,8 +6,7 @@ import { Meta } from "utils/meta";
 
 import ReposService from "api/ReposService";
 import { IStoreWithReaction } from "store/interfaces";
-import { filtersStore, FiltersType, rootStore } from "store/RootStore";
-import { PaginationStore } from "store/RootStore";
+import { filtersStore, FiltersType, PaginationStore, rootStore } from "store/RootStore";
 
 export class AllReposStore implements IStoreWithReaction {
   _repos: Collection<number, RepoModel> = new Collection();
@@ -19,16 +18,7 @@ export class AllReposStore implements IStoreWithReaction {
 
   constructor() {
     this.pagination = new PaginationStore();
-    makeObservable(this, {
-      _repos: observable,
-      meta: observable,
-      type: observable,
-      fetch: action.bound,
-      setMeta: action.bound,
-      setType: action,
-      setOwnerLogin: action,
-      repos: computed,
-    });
+    makeAutoObservable(this);
   }
 
   init() {
@@ -40,18 +30,18 @@ export class AllReposStore implements IStoreWithReaction {
       this.setMeta(Meta.loading);
       this._repos.clear();
     });
-    
+
     const reposParams = rootStore.query.getApiReposParams();
     const userReposParams = rootStore.query.getApiUserReposParams();
 
-    let isError = false, data = {}, pagesCount = 0;
+    let isError = false,
+      data = {},
+      pagesCount = 0;
     if (this.type === "org") {
       ({ isError, data, pagesCount } = await ReposService.getAllOrgRepos(reposParams, this.type, this.ownerLogin));
     } else {
       ({ isError, data, pagesCount } = await ReposService.getAllUserRepos(userReposParams, this.ownerLogin));
     }
-
-    console.log("GGGGGGG", isError, data)
 
     if (isError) {
       this.setMeta(Meta.error);
@@ -63,7 +53,7 @@ export class AllReposStore implements IStoreWithReaction {
 
       this._repos.setAll(data.order, data.entities);
 
-      this.pagination.setTotalPages(pagesCount)
+      this.pagination.setTotalPages(pagesCount);
     });
   }
 
@@ -80,13 +70,12 @@ export class AllReposStore implements IStoreWithReaction {
   }
 
   setOwnerLogin(newLogin: string) {
-    this.ownerLogin = newLogin
+    this.ownerLogin = newLogin;
   }
 
   private readonly _filterChangeReaction: IReactionDisposer = reaction(
     () => rootStore.query.getParam("filter"),
     (filter) => {
-
       if (filter !== null && filtersStore.filtersType === FiltersType.repos) {
         this.fetch();
       }
