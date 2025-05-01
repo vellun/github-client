@@ -30,7 +30,7 @@ export const Search = observer(() => {
     <div className={styles.search}>
       <Input
         className={styles.search__input}
-        value={store.search}
+        value={store?.search}
         onChange={handleInputChange}
         placeholder={context?.inputPlaceholder}
       ></Input>

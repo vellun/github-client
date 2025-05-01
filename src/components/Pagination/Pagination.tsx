@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { AllReposStore } from "store/AllReposStore";
 
 export const Pagination = observer(({ store }: { store: AllReposStore }) => {
-  const paginationStore = store.pagination
+  const paginationStore = store.pagination;
 
   const [buttonActive, setbuttonActive] = useState<number | string>(paginationStore.page);
   const [leftArrowColor, setLeftArrowColor] = useState<"primary" | "secondary" | "accent">("secondary");
@@ -18,36 +18,35 @@ export const Pagination = observer(({ store }: { store: AllReposStore }) => {
 
   const setArrowsColors = () => {
     if (paginationStore.page === 1) {
-      setLeftArrowColor("secondary")
+      setLeftArrowColor("secondary");
     } else {
-      setLeftArrowColor("primary")
+      setLeftArrowColor("primary");
     }
 
     if (paginationStore.page === totalPages) {
-      setRightArrowColor("secondary")
+      setRightArrowColor("secondary");
     } else {
-      setRightArrowColor("primary")
+      setRightArrowColor("primary");
     }
-  }
+  };
 
   const handlePageChange = (newPage: number) => {
     setbuttonActive(newPage);
     paginationStore.setPage(newPage);
-    setArrowsColors()
+    setArrowsColors();
   };
 
   const handleClick = (value: number | string) => {
-    if (value === "...") {
-      setbuttonActive(value);
-    } else {
+    if (typeof value === "number") {
       handlePageChange(value);
+    } else {
+      setbuttonActive(value);
     }
   };
 
   useEffect(() => {
-    setArrowsColors()
+    setArrowsColors();
   }, []);
-
 
   return (
     <div className={styles.pagination}>
@@ -73,14 +72,13 @@ export const Pagination = observer(({ store }: { store: AllReposStore }) => {
           </button>
         ))}
       </div>
-      <button className={cn(styles.pagination__arrow, styles.pagination__item)} onClick={() => handlePageChange(paginationStore.page + 1)} disabled={paginationStore.page === totalPages}>
-        <ArrowRightIcon
-          className={styles["pagination__arrow-right"]}
-          width="32"
-          height="32"
-          color={rightArrowColor}
-        />
+      <button
+        className={cn(styles.pagination__arrow, styles.pagination__item)}
+        onClick={() => handlePageChange(paginationStore.page + 1)}
+        disabled={paginationStore.page === totalPages}
+      >
+        <ArrowRightIcon className={styles["pagination__arrow-right"]} width="32" height="32" color={rightArrowColor} />
       </button>
-    </div >
+    </div>
   );
 });

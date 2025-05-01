@@ -30,11 +30,7 @@ export class PaginationStore implements IStoreWithReaction {
     this.totalPages = totalPages
   }
 
-  getPagesArray(curPage: number) {
-    if (curPage > 3) {
-
-    }
-
+  getPagesArray() {
     if (this.totalPages > 4) {
       return [1, 2, 3, "...", this.totalPages]
     }

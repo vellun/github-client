@@ -19,7 +19,7 @@ export const Filters = observer(() => {
     const selectedType = selectedOptions.at(-1)?.key;
 
     if (selectedType) {
-      store.setFilter(selectedType, context?.filterType);
+      store?.setFilter(selectedType, context?.filterType);
     }
 
     pageStore?.pagination.setPage(1);
@@ -33,7 +33,7 @@ export const Filters = observer(() => {
     <MultiDropdown
       className={styles.root}
       options={context?.options}
-      value={store.filter ? [{ key: store.filter, value: store.filter }] : []}
+      value={store?.filter ? [{ key: store?.filter, value: store?.filter }] : []}
       onChange={handleSelect}
       getTitle={getTitle}
     />

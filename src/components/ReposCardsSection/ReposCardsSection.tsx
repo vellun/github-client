@@ -18,18 +18,23 @@ export const ReposCardsSection = observer(({ repos }: { repos: RepoModel[] }) =>
           className={styles.root__link}
           to={routesConfig.repoDetail.create(repo.owner.login, repo.name)}
         >
-          <Card className={styles.root__card} image={repo.owner.avatarUrl}
-            title={repo.name} subtitle={repo.description}
+          <Card
+            className={styles.root__card}
+            image={repo.owner.avatarUrl}
+            title={repo.name}
+            subtitle={repo.description}
             captionSlot={
               <div className={styles.root__card__caption}>
                 <div className={styles.root__card__stars}>
                   <StarIcon width={14} height={14} />
-                  <Text className={"noMarginText"} view="p-14">{repo.stargazersCount}</Text>
+                  <Text className={"noMarginText"} view="p-14">
+                    {repo.stargazersCount}
+                  </Text>
                 </div>
                 <Text className={"noMarginText"}>{formatDate(repo.pushedAt)}</Text>
               </div>
-            }>
-          </Card>
+            }
+          ></Card>
         </Link>
       ))}
     </div>

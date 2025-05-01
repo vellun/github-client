@@ -5,7 +5,6 @@ import { Text } from "components/Text";
 import styles from "./Card.module.scss";
 
 export type CardProps = {
-  /** Дополнительный classname */
   className?: string;
   /** URL изображения */
   image: string;
@@ -32,7 +31,7 @@ export const Card: React.FC<CardProps> = ({
   contentSlot,
   onClick,
   actionSlot,
-}) => {
+}: CardProps) => {
   return (
     <div className={cn(styles.card, className)} onClick={onClick}>
       <img className={styles.card__image} src={image} alt="Repo's card image"></img>
