@@ -1,31 +1,23 @@
-import AuthService from "api/AuthService";
 import cn from "classnames";
 import { Text } from "components/Text";
-import { routesConfig } from "config/routes";
 import { observer } from "mobx-react-lite";
-import { Link, useNavigate } from "react-router";
-import { rootStore } from "store/RootStore";
+import { Link } from "react-router";
 import styles from "./SidePanel.module.scss";
+
+interface SidePanelLink {
+  title: string;
+  href: string;
+  onClick?: React.MouseEventHandler;
+}
 
 interface SidePanelProps {
   className?: string;
   titleSlot?: React.ReactNode;
+  links: SidePanelLink[];
   close: () => void;
 }
 
-export const SidePanel: React.FC<SidePanelProps> = observer(({ className, titleSlot, close }) => {
-  const navigate = useNavigate();
-
-  let curUser = "";
-  if (rootStore.auth.user !== undefined && rootStore.auth.user !== null) {
-    curUser = rootStore.auth.user.login;
-  }
-
-  const handleLogout = () => {
-    AuthService.logout();
-    navigate(routesConfig.login.create());
-  };
-
+export const SidePanel: React.FC<SidePanelProps> = observer(({ className, titleSlot, links, close }) => {
   return (
     <div className={cn(className, styles.panel)}>
       <div className={styles.panel__content}>
@@ -35,38 +27,14 @@ export const SidePanel: React.FC<SidePanelProps> = observer(({ className, titleS
             +
           </button>
         </div>
-
         <ul className={styles.panel__menu}>
-          <li>
-            <Link
-              onClick={close}
-              className={cn("link", styles.panel__link)}
-              to={routesConfig.userDetail.create(curUser)}
-            >
-              <Text className="noMarginText">Profile</Text>
-            </Link>
-          </li>
-          <li>
-            <Link
-              onClick={close}
-              className={cn("link", styles.panel__link)}
-              to={routesConfig.userRepos.create(curUser)}
-            >
-              <Text className="noMarginText">Repositories</Text>
-            </Link>
-          </li>
-          <li>
-            <Link
-              onClick={() => {
-                handleLogout();
-                close();
-              }}
-              className={cn("link", styles.panel__link)}
-              to="#"
-            >
-              <Text className={cn("noMarginText")}>Log out</Text>
-            </Link>
-          </li>
+          {links.map((link, index) => (
+            <li key={index}>
+              <Link onClick={link.onClick} className={cn("link", styles.panel__link)} to={link.href}>
+                <Text className="noMarginText">{link.title}</Text>
+              </Link>
+            </li>
+          ))}
         </ul>
       </div>
     </div>

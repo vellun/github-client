@@ -1,7 +1,10 @@
+import AuthService from "api/AuthService";
 import cn from "classnames";
 import { SidePanel } from "components/SidePanel";
 import { Text } from "components/Text";
 import { UserLogo } from "components/UserLogo";
+import { routesConfig } from "config/routes";
+import { useNavigate } from "react-router-dom";
 import { rootStore } from "store/RootStore";
 import styles from "./Sidebar.module.scss";
 
@@ -29,9 +32,34 @@ const SidebarTitleSlot = () => {
 };
 
 export const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }: SidebarProps) => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    AuthService.logout();
+    navigate(routesConfig.login.create());
+  };
+
   const closeSidebar = () => {
     setIsOpen(false);
   };
+
+  let curUser = "";
+  if (rootStore.auth.user !== undefined && rootStore.auth.user !== null) {
+    curUser = rootStore.auth.user.login;
+  }
+
+  const sidebarLinks = [
+    { title: "Profile", href: routesConfig.userDetail.create(curUser), onClick: closeSidebar },
+    { title: "Repositories", href: routesConfig.userRepos.create(curUser), onClick: closeSidebar },
+    {
+      title: "Log out",
+      href: "#",
+      onClick: () => {
+        handleLogout();
+        closeSidebar();
+      },
+    },
+  ];
 
   return (
     <div>
@@ -40,6 +68,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }: SidebarPr
         className={cn(styles.sidebar, { [styles["sidebar-open"]]: isOpen })}
         titleSlot={<SidebarTitleSlot />}
         close={closeSidebar}
+        links={sidebarLinks}
       />
     </div>
   );
