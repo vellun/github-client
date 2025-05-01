@@ -1,3 +1,4 @@
+import AuthService from "api/AuthService";
 import UsersService from "api/UsersService";
 import { makeAutoObservable, runInAction } from "mobx";
 import { ProfileModel, RepoModel, UserModel } from "store/models";
@@ -63,7 +64,7 @@ export class AuthStore {
     });
   }
 
-  login(token: string, user: ProfileModel) {
+  async login(token: string, user: ProfileModel) {
     setCookie("token", token);
     this.setIsAuth(true);
     this.setUser(user);

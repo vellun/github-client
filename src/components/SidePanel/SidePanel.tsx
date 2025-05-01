@@ -1,9 +1,7 @@
+import AuthService from "api/AuthService";
 import cn from "classnames";
 import { Text } from "components/Text";
-import { UserLogo } from "components/UserLogo";
-import { auth } from "config/firebase";
 import { routesConfig } from "config/routes";
-import { signOut } from "firebase/auth";
 import { observer } from "mobx-react-lite";
 import { Link, useNavigate } from "react-router";
 import { rootStore } from "store/RootStore";
@@ -11,55 +9,61 @@ import styles from "./SidePanel.module.scss";
 
 interface SidePanelProps {
   className?: string;
-  isOpen: boolean;
+  titleSlot?: React.ReactNode;
+  close: () => void;
 }
 
-export const SidePanel: React.FC<SidePanelProps> = observer(({ className, isOpen }) => {
+export const SidePanel: React.FC<SidePanelProps> = observer(({ className, titleSlot, close }) => {
   const navigate = useNavigate();
-  const curUser = rootStore.auth.user?.login;
+
+  let curUser = "";
+  if (rootStore.auth.user !== undefined && rootStore.auth.user !== null) {
+    curUser = rootStore.auth.user.login;
+  }
 
   const handleLogout = () => {
-    signOut(auth)
-      .then(() => {
-        rootStore.auth.logout();
-      })
-      .catch((error) => {
-        console.error("Logout error:", error);
-      });
-
+    AuthService.logout();
     navigate(routesConfig.login.create());
   };
 
   return (
-    <div className={cn(className, styles.panel, { [styles.open]: isOpen })}>
+    <div className={cn(className, styles.panel)}>
       <div className={styles.panel__content}>
-        <Link className={cn("link", styles.panel__link)} to={routesConfig.userDetail.create(curUser)}>
-          <div className={styles.panel__title}>
-            <UserLogo src={rootStore.auth.user?.avatarUrl} alt="Current User Avatar" />
-            <div>
-              <Text weight="medium" className="noMarginText">
-                {rootStore.auth.user.name}
-              </Text>
-              <Text color="secondary" className="noMarginText">
-                {curUser}
-              </Text>
-            </div>
-          </div>
-        </Link>
+        <div className={styles.panel__title}>
+          {titleSlot}
+          <button onClick={close} className={styles.panel__close}>
+            +
+          </button>
+        </div>
 
         <ul className={styles.panel__menu}>
           <li>
-            <Link className={cn("link", styles.panel__link)} to={routesConfig.userDetail.create(curUser)}>
+            <Link
+              onClick={close}
+              className={cn("link", styles.panel__link)}
+              to={routesConfig.userDetail.create(curUser)}
+            >
               <Text className="noMarginText">Profile</Text>
             </Link>
           </li>
           <li>
-            <Link className={cn("link", styles.panel__link)} to={routesConfig.userRepos.create(curUser)}>
+            <Link
+              onClick={close}
+              className={cn("link", styles.panel__link)}
+              to={routesConfig.userRepos.create(curUser)}
+            >
               <Text className="noMarginText">Repositories</Text>
             </Link>
           </li>
           <li>
-            <Link className={cn("link", styles.panel__link)} onClick={handleLogout} to="#">
+            <Link
+              onClick={() => {
+                handleLogout();
+                close();
+              }}
+              className={cn("link", styles.panel__link)}
+              to="#"
+            >
               <Text className={cn("noMarginText")}>Log out</Text>
             </Link>
           </li>

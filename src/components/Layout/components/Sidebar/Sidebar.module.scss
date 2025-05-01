@@ -1,0 +1,38 @@
+@use "styles/mixins" as mixins;
+@use "styles/variables" as *;
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  height: 100%;
+
+  z-index: 1001;
+  right: -360px;
+
+  transition: 0.5s;
+
+  &__title {
+    &__name {
+      @include mixins.flex;
+      gap: 10px;
+    }
+  }
+
+  &-open {
+    right: 0;
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.overlay__open {
+  display: none;
+}

@@ -2,7 +2,7 @@ import { toJS } from "mobx";
 import { RepoModel } from "store/models";
 
 export const getViewedRepos = () => {
-//   localStorage.clear()
+  // localStorage.clear()
   const viewedRepos = localStorage.getItem("viewedRepos");
   return viewedRepos ? JSON.parse(viewedRepos) : [];
 };

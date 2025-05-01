@@ -7,7 +7,7 @@ export class QueryParamsStore {
   updateQueryParam: ((params: Record<string, string | number | null | number[]>) => string) | null = null;
 
   constructor() {
-   makeAutoObservable<QueryParamsStore, PrivateFields>(this);
+    makeAutoObservable<QueryParamsStore>(this);
   }
 
   getParam(key: string): undefined | string | qs.ParsedQs | (string | qs.ParsedQs)[] {
