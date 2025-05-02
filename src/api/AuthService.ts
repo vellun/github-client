@@ -10,13 +10,17 @@ export default class AuthService {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
       const credential = GithubAuthProvider.credentialFromResult(result);
-      const token = credential?.accessToken;
+
+      let token = "";
+      if (credential?.accessToken !== undefined) {
+        token = credential?.accessToken;
+      }
 
       rootStore.auth.login(token, {
-        uid: user.uid,
-        name: user.displayName,
-        email: user.email,
-        avatarURL: user.photoURL,
+        id: user.uid,
+        name: user.displayName || "",
+        email: user.email || "",
+        avatar: user.photoURL,
       });
     } catch (error) {
       console.error("Popup error:", error);

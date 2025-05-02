@@ -44,7 +44,7 @@ const RepoDetailPageContent: React.FC = observer(() => {
           <LanguagesSection store={store} />
         </div>
 
-        <Readme store={store} />
+        {store.readmeMeta === Meta.success && <Readme store={store} />}
       </div>
     </div>
   );

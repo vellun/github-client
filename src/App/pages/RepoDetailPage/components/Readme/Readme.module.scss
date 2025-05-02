@@ -3,6 +3,7 @@
 .root {
   border: 1px solid $brand-secondary;
   border-radius: 4px;
+  max-width: 900px;
 
   &__title {
     margin: $space-m;
@@ -10,5 +11,29 @@
 
   &__content {
     margin: 32px;
+
+    img {
+      max-width: 100%;
+    }
+
+    pre {
+      background-color: $body-background;
+      padding: 16px;
+      border-radius: 4px;
+      width: 100%;
+      overflow-x: auto;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .root__content {
+    margin: 22px;
+  }
+}
+
+@media (max-width: 400px) {
+  .root__content {
+    word-break: break-all;
   }
 }

@@ -16,12 +16,12 @@ export const Layout: React.FC<LayoutProps> = () => {
   };
 
   return (
-    <div>
+    <>
       <Navbar openSidebar={openSidebar} />
       <div className={styles.layout}>
         <Outlet />
         <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
       </div>
-    </div>
+    </>
   );
 };

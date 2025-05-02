@@ -24,6 +24,7 @@ export const fetch = async (
         params: params,
       });
     }
+    console.log("AAAAAAAAAAAAAA", response)
 
     return {
       isError: false,

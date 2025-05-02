@@ -79,9 +79,9 @@ export class RepoStore {
   }
 
   async fetchReadme(orgName: string, repoName: string): Promise<void> {
-    if (this.readmeMeta === Meta.loading || this.readmeMeta === Meta.success) {
-      return;
-    }
+    // if (this.readmeMeta === Meta.loading || this.readmeMeta === Meta.success) {
+    //   return;
+    // }
 
     runInAction(() => {
       this.readmeMeta = Meta.loading;
@@ -89,6 +89,7 @@ export class RepoStore {
     });
 
     const { isError, data } = await ReposService.getReadme(orgName, repoName);
+    console.log("METAAAAA22222", isError)
     if (isError) {
       this.setReadmeMeta(Meta.error);
       return;
@@ -96,6 +97,7 @@ export class RepoStore {
 
     runInAction(() => {
       this.readmeMeta = Meta.success;
+      console.log("DDDDDD", (data))
       this._readme = data;
     });
   }

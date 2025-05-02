@@ -1,5 +1,7 @@
 import { ReposApiRequestParams, UsersReposApiRequestParams } from "api/types";
 import { apiUrls } from "config/apiUrls";
+import { marked } from "marked";
+import { Buffer } from "buffer";
 import { rootStore } from "store/RootStore";
 import {
   CreateRepoModel,
@@ -115,14 +117,14 @@ export default class ReposService {
   }
 
   static async getReadme(orgName: string, repoName: string): Promise<ApiResp<string>> {
-    const response = await fetch(
-      apiUrls.repos.repoReadme(orgName, repoName),
-      {},
-      {
-        Accept: "application/vnd.github.html+json",
-      },
-    );
-    return response;
+    const response = await fetch(apiUrls.repos.repoReadme(orgName, repoName), { Accept: "application/vnd.github.raw" });
+
+    let readme = "";
+    if (!response.isError) {
+      readme = Buffer.from(response.data.content, "base64").toString("utf-8");
+    }
+
+    return { isError: response.isError, data: readme };
   }
 
   static async getContributors(orgName: string, repoName: string): Promise<ApiResp<RepoOwnerModel>> {

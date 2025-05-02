@@ -1,4 +1,3 @@
-import AuthService from "api/AuthService";
 import UsersService from "api/UsersService";
 import { makeAutoObservable, runInAction } from "mobx";
 import { ProfileModel, RepoModel, UserModel } from "store/models";
