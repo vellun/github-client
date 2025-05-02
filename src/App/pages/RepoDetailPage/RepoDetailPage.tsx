@@ -13,10 +13,18 @@ import { TopicSection } from "./components/TopicSection/TopicSection";
 import { useRepoPageStore } from "./context";
 import { RepoProvider } from "./provider";
 import styles from "./RepoDetailPage.module.scss";
+import { useEffect } from "react";
+import { useBackground } from "components/Layout/context";
 
 const RepoDetailPageContent: React.FC = observer(() => {
   const store = useRepoPageStore();
-  const repo = store.repo;
+  const repo = store?.repo;
+  const { setBackgroundColor } = useBackground();
+
+  useEffect(() => {
+    setBackgroundColor("accent");
+    return () => setBackgroundColor("normal")
+  }, [setBackgroundColor]);
 
   if (!repo) {
     return <div>Репозиторий не найден</div>;
