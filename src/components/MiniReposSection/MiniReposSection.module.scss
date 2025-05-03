@@ -1,15 +1,19 @@
-@use "styles/mixins" as mixins;
 @use "styles/variables" as *;
+@use "styles/funcs" as funcs;
 
 .root {
   &__repos {
-    @include mixins.flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: $space-s;
-    align-items: stretch;
-    flex-wrap: wrap;
-    justify-content: end;
   }
 
   margin-bottom: $space-xl;
   width: 100%;
+}
+
+@media (max-width: funcs.rem(650)) {
+  .root__repos {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

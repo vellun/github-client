@@ -1,0 +1,27 @@
+@use "sass:math";
+@use "sass:string";
+
+@function rem($pixel) {
+  @if type-of($pixel) == "string" and string.slice($pixel, -2) == "px" {
+    $pixel: math.div(to-number(string.slice($pixel, 1, -2)), 16);
+  } @else {
+    $pixel: math.div($pixel, 16);
+  }
+
+  @return #{$pixel}rem;
+}
+
+@function fluid($max: 100, $min: 16) {
+  $maxViewportWidth: 1440;
+  $minViewportWidth: 360;
+
+  $maxSize: math.div($max, 16);
+  $minSize: math.div($min, 16);
+  $maxWidth: math.div($maxViewportWidth, 16);
+  $minWidth: math.div($minViewportWidth, 16);
+
+  $slope: math.div(($maxSize - $minSize), ($maxWidth - $minWidth));
+  $yAxisIntersection: -$minWidth * $slope + $minSize;
+
+  @return clamp(#{$minSize * 1rem}, #{$yAxisIntersection * 1rem} + #{$slope * 100vw}, #{$maxSize * 1rem});
+}

@@ -1,4 +1,6 @@
 @use "styles/variables" as *;
+@use "styles/mixins" as mixins;
+@use "styles/funcs" as funcs;
 
 .text {
   display: -webkit-box;
@@ -30,13 +32,14 @@
       }
     }
     &-title {
-      font-size: 44px;
-      line-height: 48px;
+      font-size: funcs.fluid(44, 28);
+      line-height: funcs.fluid(48, 32);
       text-align: center;
     }
 
     &-button {
-      font-size: 18px;
+      font-size: funcs.fluid(16, 14);
+      margin: 0;
     }
   }
 

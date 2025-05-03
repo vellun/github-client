@@ -48,12 +48,12 @@ const UserDetailPageContent: React.FC = observer(() => {
       <div className={styles.user__repos}>
         <div className={styles.user__repos__menu}>
           <Link className={cn("link", styles.user__repos)} to={routesConfig.userRepos.create(user.login)}>
-            <Button>Repositories</Button>
+            <Button><Text view="button">Repositories</Text></Button>
           </Link>
 
           {isCurrent && (
             <Link className="link" to={routesConfig.createRepo.create()}>
-              <Button>Add repo</Button>
+              <Button><Text view="button">Add Repo</Text></Button>
             </Link>
           )}
         </div>

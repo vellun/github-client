@@ -2,27 +2,25 @@
 @use "styles/variables" as *;
 
 .card {
-    border: 1px solid $brand-secondary;
-    border-radius: $border-radius;
-    background-color: white;
-    padding: $space-xs $space-s;
-    width: 400px;
+  border: 1px solid $brand-secondary;
+  border-radius: $border-radius;
+  background-color: white;
+  padding: $space-xs $space-s;
 
-    height: 100%;
+  height: 100%;
 
-    transition: 0.2s;
+  transition: 0.2s;
 
+  &__title {
+    @include mixins.flex;
+    gap: 12px;
+  }
 
-    &__title {
-        @include mixins.flex;
-        gap: 12px
-    }
-
-    &:hover {
-        @include mixins.shadow
-    }
+  &:hover {
+    @include mixins.shadow;
+  }
 }
 
 .text {
-    margin: 0
+  margin: 0;
 }

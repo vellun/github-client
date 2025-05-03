@@ -24,7 +24,7 @@ export const Navbar: React.FC<NavbarProps> = observer(({ openSidebar }) => {
       <Link className="link" to={`/`}>
         <div className={cn(styles.navbar__logo, styles.logo)}>
           <img src={githubLogo} alt="GitHub User Logo" width="32px" height="32px" />
-          <Text weight="bold" view="p-20">
+          <Text className={styles["navbar__logo-text"]} weight="bold" view="p-20">
             GitHub Client
           </Text>
         </div>

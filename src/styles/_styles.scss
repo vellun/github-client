@@ -1,12 +1,12 @@
 @use "styles/Roboto/fonts";
 @use "styles/variables" as *;
+@use "styles/funcs" as funcs;
 
 html,
 body {
   font-family: "Roboto";
   margin: 0;
   padding: 0;
-  // background-color: $body-background;
 }
 
 * {
@@ -50,4 +50,11 @@ button {
   padding: $space-xl $content-margin;
   border: 1px solid $brand-secondary;
   margin-top: 5%;
+}
+
+@media (max-width: funcs.rem(1440)) {
+  .flex-container {
+    margin-left: funcs.rem(50);
+    margin-right: funcs.rem(50);
+  }
 }

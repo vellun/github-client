@@ -1,5 +1,6 @@
 @use "styles/variables" as *;
 @use "styles/mixins" as mixins;
+@use "styles/funcs" as funcs;
 
 .navbar {
   @include mixins.flex;
@@ -18,10 +19,27 @@
 
   &__menu {
     @include mixins.flex;
-    gap: 40px;
+    gap: funcs.rem(40);
   }
 }
 
 .panel__check {
   display: none;
+}
+
+@media (max-width: funcs.rem(1440)) {
+  .navbar {
+    padding-left: funcs.rem(50);
+    padding-right: funcs.rem(50);
+  }
+}
+
+@media (max-width: funcs.rem(600)) {
+  .navbar__logo-text {
+    display: none;
+  }
+
+  .navbar__menu {
+    gap: funcs.rem(20);
+  }
 }

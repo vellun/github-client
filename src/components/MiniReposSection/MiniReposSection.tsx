@@ -19,7 +19,7 @@ export const MiniReposSection: React.FC = observer(
               className={cn("link", styles.root__repos__item)}
               to={routesConfig.repoDetail.create(repo.owner.login, repo.name)}
             >
-              <MiniCard repo={repo}></MiniCard>
+              <MiniCard className={styles.root__repos__ite} repo={repo}></MiniCard>
             </Link>
           ))}
         </div>
