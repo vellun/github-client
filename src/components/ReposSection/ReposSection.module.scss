@@ -7,8 +7,7 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: stretch;
-  row-gap: funcs.rem(80);
-  column-gap: funcs.rem(80);
+  gap: funcs.rem(80);
   margin-bottom: 40px;
 
   &__card {
@@ -30,6 +29,6 @@
 
 @media (max-width: funcs.rem(1340)) {
   .root {
-    column-gap: funcs.rem(40);
+    gap: funcs.rem(40);
   }
 }

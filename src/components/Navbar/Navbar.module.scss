@@ -34,6 +34,13 @@
   }
 }
 
+@media (max-width: funcs.rem(460)) {
+  .navbar {
+    padding-left: funcs.rem(20);
+    padding-right: funcs.rem(20);
+  }
+}
+
 @media (max-width: funcs.rem(600)) {
   .navbar__logo-text {
     display: none;

@@ -7,6 +7,7 @@ body {
   font-family: "Roboto";
   margin: 0;
   padding: 0;
+  background-color: $body-background;
 }
 
 * {
@@ -53,8 +54,17 @@ button {
 }
 
 @media (max-width: funcs.rem(1440)) {
-  .flex-container {
+  .flex-container,
+  .container {
     margin-left: funcs.rem(50);
     margin-right: funcs.rem(50);
+  }
+}
+
+@media (max-width: funcs.rem(460)) {
+  .flex-container,
+  .container {
+    margin-left: funcs.rem(20);
+    margin-right: funcs.rem(20);
   }
 }

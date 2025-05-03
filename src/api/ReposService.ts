@@ -113,7 +113,12 @@ export default class ReposService {
   static async getByRepoName(orgName: string, repoName: string): Promise<ApiResp<RepoModel>> {
     const response = await fetch(apiUrls.repos.repoByName(orgName, repoName));
 
-    return { isError: response.isError, data: normalizeRepoModel(response.data) };
+    let data = ""
+    if (!response.isError) {
+      data = normalizeRepoModel(response.data)
+    }
+
+    return { isError: response.isError, data: data };
   }
 
   static async getReadme(orgName: string, repoName: string): Promise<ApiResp<string>> {

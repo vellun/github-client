@@ -17,7 +17,7 @@ export const ReposSection = observer(({ store }: { store: AllReposStore }) => {
   }
 
   if (store.meta === Meta.error) {
-    return <div>Repozitories not found</div>;
+    return <div>Repositories not found</div>;
   }
 
   return (

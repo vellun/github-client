@@ -1,18 +1,27 @@
 @use "styles/variables" as *;
 @use "styles/mixins" as mixins;
+@use "styles/funcs" as funcs;
 
 .root {
   background-color: white;
   padding-bottom: 80px;
   min-height: 100vh;
 
-  &__page {
-    margin-left: $content-margin;
-    margin-right: $content-margin;
-  }
-
   &__info {
     display: flex;
-    gap: 80px;
+    gap: funcs.rem(80);
+  }
+}
+
+@media (max-width: funcs.rem(600)) {
+  .root__info {
+    gap: funcs.rem(40);
+  }
+}
+
+@media (max-width: funcs.rem(550)) {
+  .root__info {
+    flex-direction: column;
+    row-gap: funcs.rem(5);
   }
 }
