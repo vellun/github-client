@@ -5,14 +5,14 @@ import { IStoreWithReaction } from "store/interfaces";
 export class PaginationStore implements IStoreWithReaction {
   page: number = Number(rootStore.query.getParam("page")) || 1;
   perPage = Number(rootStore.query.getParam("per_page")) || 6;
-  totalPages = 0
+  totalPages = 0;
 
   constructor() {
     makeObservable(this, {
       page: observable,
       totalPages: observable,
       setPage: action,
-      setTotalPages: action
+      setTotalPages: action,
     });
   }
 
@@ -27,14 +27,27 @@ export class PaginationStore implements IStoreWithReaction {
   }
 
   setTotalPages(totalPages: number) {
-    this.totalPages = totalPages
+    this.totalPages = totalPages;
   }
 
   getPagesArray() {
-    if (this.totalPages > 4) {
-      return [1, 2, 3, "...", this.totalPages]
+    if (this.totalPages <= 5) {
+      return [...Array(this.totalPages).keys()].map((i) => i + 1);
     }
-    return [...Array(this.totalPages).keys()].map(i => i + 1)
+
+    if (this.page < 3) {
+      return [1, 2, 3, "...", this.totalPages];
+    } else if (this.page === 3) {
+      return [1, 2, 3, 4, "...", this.totalPages];
+    }
+
+    if (this.page === this.totalPages || this.page === this.totalPages - 1) {
+      return [1, "...", this.totalPages - 2, this.totalPages - 1, this.totalPages];
+    } else if (this.page === this.totalPages - 2) {
+      return [1, "...", this.totalPages - 3, this.totalPages - 2, this.totalPages - 1, this.totalPages];
+    }
+
+    return [1, "...", this.page - 1, this.page, this.page + 1, "...", this.totalPages];
   }
 
   destroy(): void {

@@ -39,8 +39,6 @@ export const Pagination = observer(({ store }: { store: AllReposStore }) => {
   const handleClick = (value: number | string) => {
     if (typeof value === "number") {
       handlePageChange(value);
-    } else {
-      setbuttonActive(value);
     }
   };
 
