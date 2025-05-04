@@ -13,12 +13,12 @@ export const Search = observer(() => {
 
   useEffect(() => {
     return () => {
-      store?.setSearch("", null);
+      store.setSearch("", null);
     };
   }, [store]);
 
   const handleInputChange = (value: string) => {
-    store?.setSearch(value, context?.filterType);
+    store?.setSearch(value, context.filterType);
   };
 
   const handleButtonClick = () => {
@@ -30,7 +30,7 @@ export const Search = observer(() => {
     <div className={styles.search}>
       <Input
         className={styles.search__input}
-        value={store?.search}
+        value={store.search}
         onChange={handleInputChange}
         placeholder={context?.inputPlaceholder}
       ></Input>

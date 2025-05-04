@@ -13,7 +13,13 @@ export type FiltersContextType = {
   inputPlaceholder: string;
 };
 
-export const FiltersContext = createContext<FiltersContextType | null>(null);
+export const FiltersContext = createContext<FiltersContextType>({
+  options: orgReposFilterOptions,
+  filterType: FiltersType.repos,
+  filtersStore: new FiltersStore(),
+  pageStore: new AllReposStore(),
+  inputPlaceholder: "",
+});
 
 export const useFiltersContext = () => {
   const filtersContext = useContext(FiltersContext);
@@ -22,5 +28,5 @@ export const useFiltersContext = () => {
 
 export const useFilterStore = () => {
   const filtersContext = useContext(FiltersContext);
-  return filtersContext?.filtersStore;
+  return filtersContext.filtersStore;
 };

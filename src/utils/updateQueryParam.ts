@@ -1,19 +1,16 @@
-import { NavigateFunction } from 'react-router-dom';
+import { NavigateFunction } from "react-router-dom";
+import { rootStore } from "store/RootStore";
 
-export const updateQueryParam = (
-  navigate: NavigateFunction,
-  params: Record<string, string | number | null | number[]>,
-) => {
-  const searchParams = new URLSearchParams();
-
+export const updateQueryParam = (params: Record<string, string | number | null | number[]>) => {
+  const searchParams = new URLSearchParams(window.location.hash.split("?")[1] || "");
   Object.keys(params).forEach((key) => {
     const value = params[key];
-    if (value !== null) {
+    if (value !== "" && value !== null) {
       searchParams.set(key, value.toString());
     } else {
       searchParams.delete(key);
     }
   });
-
-  navigate(`?${searchParams.toString()}`, { replace: true });
+  rootStore.query.navigate(`?${searchParams.toString()}`, { replace: true });
+  return searchParams.toString();
 };

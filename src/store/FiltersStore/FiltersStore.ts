@@ -1,10 +1,11 @@
 import { makeAutoObservable } from "mobx";
 import { ParsedQs } from "qs";
 import { FiltersType, rootStore } from "store/RootStore";
+import { updateQueryParam } from "utils/updateQueryParam";
 
 export class FiltersStore {
   filter: string | ParsedQs | (string | ParsedQs)[] | undefined = rootStore.query.getParam("filter");
-  search: string | ParsedQs | (string | ParsedQs)[] | undefined = rootStore.query.getParam("search");
+  search: string | ParsedQs | (string | ParsedQs)[] = rootStore.query.getParam("search");
   filtersType: FiltersType | null = null;
 
   constructor() {
@@ -14,10 +15,7 @@ export class FiltersStore {
   setFilter(newFilter: string, filterType: FiltersType | undefined | null) {
     if (this.filter !== newFilter) {
       this.filter = newFilter;
-
-      if (newFilter !== "" && rootStore.query.updateQueryParam !== null) {
-        rootStore.query.updateQueryParam({ filter: newFilter });
-      }
+      updateQueryParam({ filter: newFilter });
     }
 
     if (filterType) {
@@ -26,12 +24,9 @@ export class FiltersStore {
   }
 
   setSearch(newSearch: string, searchType: FiltersType | undefined | null) {
-    if (this.search !== newSearch && newSearch) {
+    if (this.search !== newSearch) {
       this.search = newSearch;
-
-      if (newSearch !== null && rootStore.query.updateQueryParam !== null) {
-        rootStore.query.updateQueryParam({ search: newSearch });
-      }
+      updateQueryParam({ search: newSearch });
     }
 
     if (searchType) {

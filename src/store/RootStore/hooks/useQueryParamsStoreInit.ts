@@ -7,21 +7,9 @@ export const useQueryParamsStoreInit = (): void => {
   const { search } = useLocation();
   const navigate = useNavigate();
 
-  const updateQueryParam = (params: Record<string, string | number | null | number[]>) => {
-    const searchParams = new URLSearchParams(window.location.hash.split("?")[1] || "");
-    Object.keys(params).forEach((key) => {
-      const value = params[key];
-      if (value !== "") {
-        searchParams.set(key, value.toString());
-      } else {
-        searchParams.delete(key);
-      }
-    });
-    navigate(`?${searchParams.toString()}`, { replace: true });
-    return searchParams.toString();
-  };
+  
   useEffect(() => {
     rootStore.query.setSearch(search);
-    rootStore.query.updateQueryParam = updateQueryParam;
-  }, [search]);
+    rootStore.query.setNavigate(navigate);
+  }, [search, navigate]);
 };

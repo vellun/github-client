@@ -34,6 +34,13 @@ export class AllReposStore implements IStoreWithReaction {
     const reposParams = rootStore.query.getApiReposParams();
     const userReposParams = rootStore.query.getApiUserReposParams();
 
+    if (!reposParams.page) {
+      reposParams.page = this.pagination._page
+    }
+    if (!reposParams.perPage) {
+      reposParams.perPage = this.pagination.perPage
+    }
+
     let isError = false,
       data = {},
       pagesCount = 0;

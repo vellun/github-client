@@ -13,7 +13,7 @@ interface LayoutProps {
 export const Layout: React.FC<LayoutProps> = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [backgroundColor, setBackgroundColor] = useState("normal");
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState("light");
 
   const openSidebar = () => {
     setIsSidebarOpen(true);

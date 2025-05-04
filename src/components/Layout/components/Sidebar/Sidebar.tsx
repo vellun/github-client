@@ -4,6 +4,7 @@ import { SidePanel } from "components/SidePanel";
 import { Text } from "components/Text";
 import { UserLogo } from "components/UserLogo";
 import { routesConfig } from "config/routes";
+import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router-dom";
 import { rootStore } from "store/RootStore";
 import styles from "./Sidebar.module.scss";
@@ -13,7 +14,7 @@ export type SidebarProps = {
   setIsOpen: (val: boolean) => void;
 };
 
-const SidebarTitleSlot = () => {
+const SidebarTitleSlot = observer(() => {
   const curUser = rootStore.auth.user?.login;
 
   return (
@@ -29,9 +30,9 @@ const SidebarTitleSlot = () => {
       </div>
     </div>
   );
-};
+});
 
-export const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }: SidebarProps) => {
+export const Sidebar: React.FC<SidebarProps> = observer(({ isOpen, setIsOpen }: SidebarProps) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -72,4 +73,4 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }: SidebarPr
       />
     </div>
   );
-};
+});
