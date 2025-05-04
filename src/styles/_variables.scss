@@ -20,8 +20,11 @@ $border-radius: 6px;
 $container-width: 1237px;
 $container-padding-x: 15px;
 
-$body-background: #f6f8fa;
-$background-accent: #ffffff;
+$body-background-light: #f6f8fa;
+$background-accent-light: #ffffff;
+
+$body-background-dark: #222521;
+$background-accent-dark: #222521;
 
 $loader-bg: #1f883d;
 $button-primary-bg: #1f883d;
@@ -59,4 +62,4 @@ $card-bg: #ffffff;
 $dropdown-options-bg: #ffffff;
 $dropdown-focus: #151411;
 
-$star-accent: #FF9432;
+$star-accent: #ff9432;

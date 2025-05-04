@@ -10,6 +10,7 @@ import { routesConfig } from "config/routes";
 import { rootStore } from "store/RootStore";
 import { Button } from "components/Button";
 import { observer } from "mobx-react-lite";
+import { ThemeToggler } from "./components/ThemeToggler";
 
 interface NavbarProps {
   openSidebar: () => void;
@@ -51,6 +52,7 @@ export const Navbar: React.FC<NavbarProps> = observer(({ openSidebar }) => {
             <Button>Log in</Button>
           </Link>
         )}
+        <ThemeToggler />
       </div>
     </div>
   );
