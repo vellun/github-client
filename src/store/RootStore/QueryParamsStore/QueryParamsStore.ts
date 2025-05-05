@@ -13,7 +13,6 @@ export class QueryParamsStore {
   }
 
   getParam(key: string): undefined | string | qs.ParsedQs | (string | qs.ParsedQs)[] {
-    console.log("PAGEEEEEE222", toJS(this._params))
     return this._params[key];
   }
 
@@ -34,19 +33,35 @@ export class QueryParamsStore {
     return this._navigate;
   }
 
-  initParams() {
-    if (this.getParam("per_page") === undefined) {
-      const searchParams = updateQueryParam({ per_page: 6 });
-      this.setSearch(searchParams);
+  updateQueryParams = (params: Record<string, string | number | null | number[]>) => {
+    const searchParams = new URLSearchParams(window.location.hash.split("?")[1] || "");
+    Object.keys(params).forEach((key) => {
+      const value = params[key];
+      if (value !== "" && value !== null) {
+        searchParams.set(key, value.toString());
+      } else {
+        searchParams.delete(key);
+      }
+    });
+    if (this._navigate) {
+      this._navigate(`?${searchParams.toString()}`, { replace: true });
     }
+    // return searchParams.toString();
+  };
+
+  initParams() {
+    // if (this.getParam("per_page") === undefined) {
+    //   const searchParams = updateQueryParam({ per_page: 6 });
+    //   this.setSearch(searchParams);
+    // }
     if (this.getParam("page") === undefined) {
       const searchParams = updateQueryParam({ page: 1 });
       this.setSearch(searchParams);
     }
-    if (this.getParam("search") === undefined) {
-      const searchParams = updateQueryParam({ search: "ktsstudio" });
-      this.setSearch(searchParams);
-    }
+    // if (this.getParam("search") === undefined) {
+    //   const searchParams = updateQueryParam({ search: "ktsstudio" });
+    //   this.setSearch(searchParams);
+    // }
   }
 
   getApiReposParams() {

@@ -1,36 +1,47 @@
-import { makeAutoObservable } from "mobx";
-import { ParsedQs } from "qs";
+import { makeAutoObservable, reaction } from "mobx";
+import { QueryParamsStore } from "store/RootStore/QueryParamsStore";
 import { FiltersType, rootStore } from "store/RootStore";
 import { updateQueryParam } from "utils/updateQueryParam";
 
 export class FiltersStore {
-  filter: string | ParsedQs | (string | ParsedQs)[] | undefined = rootStore.query.getParam("filter");
-  search: string | ParsedQs | (string | ParsedQs)[] = rootStore.query.getParam("search");
-  filtersType: FiltersType | null = null;
+  private _queryStore: QueryParamsStore;
 
-  constructor() {
+  constructor(queryStore: QueryParamsStore) {
+    this._queryStore = queryStore;
+
     makeAutoObservable(this);
+
+    reaction(
+      () => ({
+        filter: this._queryStore.getParam("filter"),
+        search: this._queryStore.getParam("search"),
+      }),
+      ({ filter, search }) => {
+        if (filter !== undefined) {
+          this.filter = filter;
+        }
+        if (search !== undefined) {
+          this.search = search;
+        }
+      },
+      { fireImmediately: true },
+    );
   }
 
-  setFilter(newFilter: string, filterType: FiltersType | undefined | null) {
+  filter: string;
+  search: string;
+
+  setFilter(newFilter: string) {
     if (this.filter !== newFilter) {
       this.filter = newFilter;
-      updateQueryParam({ filter: newFilter });
-    }
-
-    if (filterType) {
-      this.filtersType = filterType;
+      this._queryStore.updateQueryParams({ filter: newFilter });
     }
   }
 
-  setSearch(newSearch: string, searchType: FiltersType | undefined | null) {
+  setSearch(newSearch: string) {
     if (this.search !== newSearch) {
       this.search = newSearch;
-      updateQueryParam({ search: newSearch });
-    }
-
-    if (searchType) {
-      this.filtersType = searchType;
+      this._queryStore.updateQueryParams({ search: newSearch });
     }
   }
 

@@ -1,26 +1,48 @@
-import { makeAutoObservable } from "mobx";
-import { rootStore } from "store/RootStore";
-import { updateQueryParam } from "utils/updateQueryParam";
+import { makeAutoObservable, reaction } from "mobx";
+import { QueryParamsStore } from "store/RootStore/QueryParamsStore";
 
 export class PaginationStore {
-  private _page: number = Number(rootStore.query.getParam("page")) || 1;
-  perPage = Number(rootStore.query.getParam("per_page")) || 6;
   totalPages = 0;
+  private _queryStore: QueryParamsStore;
 
-  constructor() {
+  constructor(queryStore: QueryParamsStore) {
+    this._queryStore = queryStore;
+
     makeAutoObservable(this);
+
+    reaction(
+      () => ({
+        page: this._queryStore.getParam("page"),
+        perPage: this._queryStore.getParam("per_page"),
+      }),
+      ({ page, perPage }) => {
+        if (page !== undefined) {
+          this._page = Number(page);
+        }
+        if (perPage !== undefined) {
+          this._perPage = Number(perPage);
+        }
+      },
+      { fireImmediately: true },
+    );
   }
+
+  private _page: number = 1;
+  private _perPage: number = 6;
 
   setPage(newPage: number) {
     if (this._page !== newPage) {
       this._page = newPage;
-      updateQueryParam({ page: newPage });
+      this._queryStore.updateQueryParams({ page: newPage });
     }
   }
 
   get page() {
-    console.log("PAGEEEEEE", this._page)
     return this._page;
+  }
+
+  get perPage() {
+    return this._perPage;
   }
 
   setTotalPages(totalPages: number) {

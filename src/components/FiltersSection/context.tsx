@@ -3,23 +3,15 @@ import { createContext, useContext } from "react";
 import { AllReposStore } from "store/AllReposStore";
 import { AllUsersStore } from "store/AllUsersStore";
 import { FiltersType } from "store/RootStore";
-import { FiltersStore } from "store/FiltersStore";
 
 export type FiltersContextType = {
   options: typeof usersFilterOptions | typeof orgReposFilterOptions;
   filterType: FiltersType;
-  filtersStore: FiltersStore;
   pageStore: AllReposStore | AllUsersStore;
   inputPlaceholder: string;
 };
 
-export const FiltersContext = createContext<FiltersContextType>({
-  options: orgReposFilterOptions,
-  filterType: FiltersType.repos,
-  filtersStore: new FiltersStore(),
-  pageStore: new AllReposStore(),
-  inputPlaceholder: "",
-});
+export const FiltersContext = createContext<FiltersContextType | null>(null);
 
 export const useFiltersContext = () => {
   const filtersContext = useContext(FiltersContext);
@@ -28,5 +20,5 @@ export const useFiltersContext = () => {
 
 export const useFilterStore = () => {
   const filtersContext = useContext(FiltersContext);
-  return filtersContext.filtersStore;
+  return filtersContext?.pageStore.filters;
 };

@@ -16,6 +16,10 @@ export const Pagination = observer(({ store }: { store: AllReposStore }) => {
 
   const totalPages = paginationStore.totalPages;
 
+  useEffect(() => {
+    setbuttonActive(paginationStore.page);
+  }, [paginationStore.page]);
+
   const setArrowsColors = () => {
     if (paginationStore.page === 1) {
       setLeftArrowColor("secondary");

@@ -7,9 +7,11 @@ import styles from "./AllUsersPage.module.scss";
 import { UsersSection } from "./components/UsersSection";
 import { useUsersPageStore } from "./context";
 import { UsersFiltersProvider, UsersProvider } from "./provider";
+import { useQueryParamsStoreInit } from "store/RootStore/hooks";
 
 const AllUsersPageContent: React.FC = observer(() => {
   const store = useUsersPageStore();
+  useQueryParamsStoreInit(store.query);
 
   return (
     <div className={cn("flex-container", styles.root)}>

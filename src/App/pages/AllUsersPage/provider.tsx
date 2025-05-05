@@ -1,8 +1,6 @@
 import { FiltersContext } from "components/FiltersSection/context";
 import { usersFilterOptions } from "config/filterOptions";
 import { AllUsersStore } from "store/AllUsersStore";
-import { FiltersType } from "store/RootStore";
-import { filtersStore } from "store";
 import { UsersContext, useUsersPageStore } from "./context";
 
 export const UsersProvider = ({ children }: { children: React.ReactNode }) => {
@@ -18,9 +16,7 @@ export const UsersFiltersProvider = ({ children }: { children: React.ReactNode }
       value={{
         inputPlaceholder: "Enter user login",
         pageStore: usersStore,
-        filtersStore: filtersStore,
         options: usersFilterOptions,
-        filterType: FiltersType.users,
       }}
     >
       {children}

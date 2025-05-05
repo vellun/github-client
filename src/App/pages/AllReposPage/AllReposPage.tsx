@@ -9,10 +9,13 @@ import { ReposSection } from "../../../components/ReposSection";
 import styles from "./AllReposPage.module.scss";
 import { useReposPageStore } from "./context";
 import { ReposFiltersProvider, ReposProvider } from "./provider";
+import { useQueryParamsStoreInit } from "store/RootStore/hooks";
 
 const AllReposPageContent: React.FC = observer(() => {
   const store = useReposPageStore();
   const lastSeenRepos = getViewedRepos();
+  
+  useQueryParamsStoreInit(store.query);
 
   return (
     <div className={cn("flex-container", styles.root)}>

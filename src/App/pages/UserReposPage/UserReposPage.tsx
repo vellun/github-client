@@ -7,9 +7,12 @@ import { ReposSection } from "components/ReposSection";
 import { Text } from "components/Text";
 import { useParams } from "react-router";
 import styles from "./UserReposPage.module.scss";
+import { useQueryParamsStoreInit } from "store/RootStore/hooks";
 
 const UserReposPageContent = () => {
   const store = useReposPageStore();
+
+  useQueryParamsStoreInit(store.query);
 
   return (
     <div className={cn("container", styles.root)}>

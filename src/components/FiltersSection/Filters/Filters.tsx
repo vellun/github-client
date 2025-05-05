@@ -1,7 +1,7 @@
 import { useFiltersContext, useFilterStore } from "components/FiltersSection/context";
 import { MultiDropdown, Option } from "components/MultiDropdown";
 import { observer } from "mobx-react-lite";
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import styles from "./Filters.module.scss";
 
 export const Filters = observer(() => {
@@ -9,17 +9,11 @@ export const Filters = observer(() => {
   const store = useFilterStore();
   const pageStore = context?.pageStore;
 
-  useEffect(() => {
-    return () => {
-      store?.setFilter("", null);
-    };
-  }, [store]);
-
   const handleSelect = (selectedOptions: Option[]) => {
     const selectedType = selectedOptions.at(-1)?.key;
 
     if (selectedType) {
-      store?.setFilter(selectedType, context?.filterType);
+      store?.setFilter(selectedType);
     }
 
     pageStore?.pagination.setPage(1);

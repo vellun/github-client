@@ -1,27 +1,47 @@
-import { IReactionDisposer, makeAutoObservable, reaction, runInAction } from "mobx";
+import { makeAutoObservable, reaction, runInAction } from "mobx";
 
 import { RepoModel } from "store/models";
 import { Collection } from "utils/collection";
 import { Meta } from "utils/meta";
 
 import ReposService from "api/ReposService";
-import { IStoreWithReaction } from "store/interfaces";
-import { filtersStore, FiltersType, PaginationStore, rootStore } from "store/RootStore";
+import { FiltersStore } from "store/FiltersStore";
+import { PaginationStore } from "store/RootStore";
+import { QueryParamsStore } from "store/RootStore/QueryParamsStore";
 
-export class AllReposStore implements IStoreWithReaction {
+export class AllReposStore {
   _repos: Collection<number, RepoModel> = new Collection();
   pagination: PaginationStore;
+  query: QueryParamsStore;
+  filters: FiltersStore;
   meta: Meta = Meta.initial;
 
   type: "org" | "user" = "org";
   ownerLogin: string | undefined = undefined;
 
   constructor() {
-    this.pagination = new PaginationStore();
+    this.query = new QueryParamsStore();
+    this.pagination = new PaginationStore(this.query);
+    this.filters = new FiltersStore(this.query);
+
     makeAutoObservable(this);
+
+    reaction(
+      () => ({
+        filter: this.query.getParam("filter"),
+        page: this.query.getParam("page"),
+      }),
+      ({ filter, page }, { filter: previousFilter, page: previousPage }) => {
+        if (filter !== previousFilter || page !== previousPage) {
+          this.fetch();
+        }
+      },
+      { fireImmediately: true },
+    );
   }
 
   init() {
+    console.log("INIIIIIIIT")
     this.fetch();
   }
 
@@ -31,14 +51,14 @@ export class AllReposStore implements IStoreWithReaction {
       this._repos.clear();
     });
 
-    const reposParams = rootStore.query.getApiReposParams();
-    const userReposParams = rootStore.query.getApiUserReposParams();
+    const reposParams = this.query.getApiReposParams();
+    const userReposParams = this.query.getApiUserReposParams();
 
     if (!reposParams.page) {
-      reposParams.page = this.pagination._page
+      reposParams.page = this.pagination.page;
     }
     if (!reposParams.perPage) {
-      reposParams.perPage = this.pagination.perPage
+      reposParams.perPage = this.pagination.perPage;
     }
 
     let isError = false,
@@ -78,28 +98,5 @@ export class AllReposStore implements IStoreWithReaction {
 
   setOwnerLogin(newLogin: string) {
     this.ownerLogin = newLogin;
-  }
-
-  private readonly _filterChangeReaction: IReactionDisposer = reaction(
-    () => rootStore.query.getParam("filter"),
-    (filter) => {
-      if (filter !== null && filtersStore.filtersType === FiltersType.repos) {
-        this.fetch();
-      }
-    },
-  );
-
-  private readonly _pageChangeReaction: IReactionDisposer = reaction(
-    () => rootStore.query.getParam("page"),
-    (page) => {
-      if (page !== null) {
-        this.fetch();
-      }
-    },
-  );
-
-  destroy(): void {
-    this._filterChangeReaction();
-    this._pageChangeReaction();
   }
 }

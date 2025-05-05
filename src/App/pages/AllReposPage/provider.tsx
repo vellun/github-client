@@ -1,8 +1,6 @@
 import { FiltersContext } from "components/FiltersSection/context";
 import { orgReposFilterOptions, userReposFilterOptions } from "config/filterOptions";
 import { AllReposStore } from "store/AllReposStore";
-import { FiltersType } from "store/RootStore";
-import { filtersStore } from "store";
 import { ReposContext, useReposPageStore } from "./context";
 
 export const ReposProvider = ({
@@ -36,9 +34,7 @@ export const ReposFiltersProvider = ({ type, children }: { type: "org" | "user";
       value={{
         inputPlaceholder: placeholder,
         pageStore: reposStore,
-        filtersStore: filtersStore,
         options: options,
-        filterType: FiltersType.repos,
       }}
     >
       {children}

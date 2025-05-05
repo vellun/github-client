@@ -1,15 +1,14 @@
 import { useLocation, useNavigate } from "react-router";
 
 import { useEffect } from "react";
-import { rootStore } from "../instance";
+import { QueryParamsStore } from "store/RootStore/QueryParamsStore";
 
-export const useQueryParamsStoreInit = (): void => {
+export const useQueryParamsStoreInit = (queryStore: QueryParamsStore): void => {
   const { search } = useLocation();
   const navigate = useNavigate();
 
-  
   useEffect(() => {
-    rootStore.query.setSearch(search);
-    rootStore.query.setNavigate(navigate);
-  }, [search, navigate]);
+    queryStore.setNavigate(navigate);
+    queryStore.setSearch(search);
+  }, [search, navigate, queryStore]);
 };

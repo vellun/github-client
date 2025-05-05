@@ -27,7 +27,7 @@ export default class ReposService {
   ): Promise<ApiResp<Collection<number, RepoModel>>> {
     if (params.org === undefined || params.org === null) {
       params.org = "ktsstudio";
-    }
+    } 
 
     let url = apiUrls.repos.organizationRepos(params.org);
     if (type == "user" && ownerLogin) {
