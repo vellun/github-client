@@ -4,8 +4,8 @@
 .card {
   border: 1px solid $brand-secondary;
   border-radius: $border-radius;
-  background-color: white;
   padding: $space-xs $space-s;
+  background-color: var(--card-background);
 
   height: 100%;
 

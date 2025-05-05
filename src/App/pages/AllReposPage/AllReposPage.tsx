@@ -18,7 +18,7 @@ const AllReposPageContent: React.FC = observer(() => {
     <div className={cn("flex-container", styles.root)}>
       {lastSeenRepos.length !== 0 && (
         <>
-          <Text className={styles.title} weight="medium" view="p-20" maxLines={2}>
+          <Text className={styles.title} color="primary" weight="medium" view="p-20" maxLines={2}>
             Last seen repositories
           </Text>
           <MiniReposSection className={styles["last-seen-repos"]} repos={lastSeenRepos} />

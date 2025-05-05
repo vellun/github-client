@@ -12,7 +12,7 @@ const AllUsersPageContent: React.FC = observer(() => {
   const store = useUsersPageStore();
 
   return (
-    <div className={cn("container", styles.root)}>
+    <div className={cn("flex-container", styles.root)}>
       <Text className={styles.root__title} tag="h1" weight="bold" color="primary" view="title">
         List of users
       </Text>

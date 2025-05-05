@@ -21,13 +21,13 @@ export const Layout: React.FC<LayoutProps> = () => {
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
-  }, [theme]);
+  });
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       <BackgroundContext.Provider value={{ backgroundColor, setBackgroundColor }}>
         <Navbar openSidebar={openSidebar} />
-        <div className={styles[`background-${backgroundColor}-${theme}`]}>
+        <div className={styles[`background-${backgroundColor}`]}>
           <div className={styles.layout}>
             <Outlet />
             <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />

@@ -9,12 +9,14 @@
   padding-left: $content-margin;
   padding-right: $content-margin;
   border-bottom: 2px solid $brand-secondary;
+  background-color: var(--body-background);
 
-  &__logo {
+  &__logo,
+  &__side-menu {
     @include mixins.flex;
 
     justify-content: space-between;
-    gap: $space-xl;
+    gap: $space-s;
   }
 
   &__menu {

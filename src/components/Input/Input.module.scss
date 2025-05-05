@@ -11,6 +11,8 @@
   display: block;
   padding: 14px 12px;
   border-radius: $border-radius;
+  background-color: var(--input-bg);
+  color: var(--text-primary);
 
   &:focus {
     outline: none;

@@ -2,7 +2,7 @@
 @use "styles/variables" as *;
 
 .panel {
-  background-color: white;
+  background-color: var(--body-background);
   width: 320px;
 
   border-radius: $border-radius;

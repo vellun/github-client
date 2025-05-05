@@ -1,0 +1,29 @@
+:root {
+  --body-background-light: #f6f8fa;
+  --background-accent-light: #ffffff;
+  --card-background-light: #ffffff;
+  --text-primary-light: #000000;
+  --input-bg-light: #ffffff;
+
+  --body-background-dark: #222521;
+  --background-accent-dark: #30342e;
+  --card-background-dark: #363c33;
+  --text-primary-dark: #e0eee1;
+  --input-bg-dark: #151714;
+}
+
+[data-theme="light"] {
+  --body-background: var(--body-background-light);
+  --background-accent: var(--background-accent-light);
+  --card-background: var(--card-background-light);
+  --text-primary: var(--text-primary-light);
+  --input-bg: var(--input-bg-light);
+}
+
+[data-theme="dark"] {
+  --body-background: var(--body-background-dark);
+  --background-accent: var(--background-accent-dark);
+  --text-primary: var(--text-primary-dark);
+  --card-background: var(--card-background-dark);
+  --input-bg: var(--input-bg-dark);
+}

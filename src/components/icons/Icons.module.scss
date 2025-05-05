@@ -9,7 +9,7 @@
       fill: $text-secondary;
     }
     &-primary {
-      fill: $text-primary;
+      fill: var(--text-primary);
     }
     &-accent {
       fill: $star-accent;
@@ -24,7 +24,7 @@
       stroke: $text-secondary;
     }
     &-primary {
-      stroke: $text-primary;
+      stroke: var(--text-primary);
     }
   }
 }

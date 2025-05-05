@@ -4,6 +4,7 @@
   border: 1px solid $brand-secondary;
   border-radius: 4px;
   max-width: 900px;
+  color: var(--text-primary);
 
   &__title {
     margin: $space-m;
@@ -17,7 +18,7 @@
     }
 
     pre {
-      // background-color: $body-background;
+      background-color: var(--body-background);
       padding: 16px;
       border-radius: 4px;
       width: 100%;

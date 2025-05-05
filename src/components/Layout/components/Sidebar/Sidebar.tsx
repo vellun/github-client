@@ -21,7 +21,7 @@ const SidebarTitleSlot = observer(() => {
     <div className={styles.sidebar__title__name}>
       <UserLogo src={rootStore.auth.user?.avatarUrl} alt="Current User Avatar" />
       <div>
-        <Text weight="medium" className="noMarginText">
+        <Text weight="medium" color="primary" className="noMarginText">
           {rootStore.auth.user?.name}
         </Text>
         <Text color="secondary" className="noMarginText">

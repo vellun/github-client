@@ -31,7 +31,7 @@ export const SidePanel: React.FC<SidePanelProps> = observer(({ className, titleS
           {links.map((link, index) => (
             <li key={index}>
               <Link onClick={link.onClick} className={cn("link", styles.panel__link)} to={link.href}>
-                <Text className="noMarginText">{link.title}</Text>
+                <Text className="noMarginText" color="primary">{link.title}</Text>
               </Link>
             </li>
           ))}
