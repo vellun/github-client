@@ -36,14 +36,14 @@ const UserDetailPageContent: React.FC = observer(() => {
       <div>
         <UserLogo src={user.avatarUrl} width="250px" height="250px" alt="User Avatar" />
         <div className={styles.user__name}>
-          <Text className="noMarginText" view="p-20" weight="medium">
+          <Text className="noMarginText" view="p-20" weight="medium" color="primary">
             {user.name}
           </Text>
           <Text className="noMarginText" color="secondary">
             {user.login}
           </Text>
         </div>
-        <Text>{user.bio}</Text>
+        <Text color="primary">{user.bio}</Text>
       </div>
       <div className={styles.user__repos}>
         <div className={styles.user__repos__menu}>

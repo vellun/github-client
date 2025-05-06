@@ -23,4 +23,27 @@
 
 .text {
   margin: 0;
+  margin-bottom: 4px;
+}
+
+.lang {
+  @include mixins.flex;
+  gap: 6px;
+
+  &__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+}
+
+.private {
+  border: 1px solid $brand-secondary;
+  // background-color: #daedff;
+  border-radius: 20px;
+  padding: 4px 14px;
+
+  &__name {
+    margin: 0;
+  }
 }
