@@ -6,6 +6,7 @@ import cn from "classnames";
 import { ArrowRightIcon } from "components/icons/ArrowRightIcon";
 import { useEffect, useState } from "react";
 import { AllReposStore } from "store/AllReposStore";
+import { autorun } from "mobx";
 
 export const Pagination = observer(({ store }: { store: AllReposStore }) => {
   const paginationStore = store.pagination;
@@ -17,27 +18,16 @@ export const Pagination = observer(({ store }: { store: AllReposStore }) => {
   const totalPages = paginationStore.totalPages;
 
   useEffect(() => {
-    setbuttonActive(paginationStore.page);
-  }, [paginationStore.page]);
-
-  const setArrowsColors = () => {
-    if (paginationStore.page === 1) {
-      setLeftArrowColor("secondary");
-    } else {
-      setLeftArrowColor("primary");
-    }
-
-    if (paginationStore.page === totalPages) {
-      setRightArrowColor("secondary");
-    } else {
-      setRightArrowColor("primary");
-    }
-  };
+    return autorun(() => {
+      setbuttonActive(paginationStore.page);
+      setLeftArrowColor(paginationStore.page === 1 ? "secondary" : "primary");
+      setRightArrowColor(paginationStore.page === totalPages ? "secondary" : "primary");
+    });
+  }, [paginationStore.page, totalPages]);
 
   const handlePageChange = (newPage: number) => {
     setbuttonActive(newPage);
     paginationStore.setPage(newPage);
-    setArrowsColors();
   };
 
   const handleClick = (value: number | string) => {
@@ -45,10 +35,6 @@ export const Pagination = observer(({ store }: { store: AllReposStore }) => {
       handlePageChange(value);
     }
   };
-
-  useEffect(() => {
-    setArrowsColors();
-  }, []);
 
   return (
     <div className={styles.pagination}>
