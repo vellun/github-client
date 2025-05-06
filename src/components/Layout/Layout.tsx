@@ -13,7 +13,9 @@ interface LayoutProps {
 export const Layout: React.FC<LayoutProps> = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [backgroundColor, setBackgroundColor] = useState("normal");
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem("theme") || "light";
+  });
 
   const openSidebar = () => {
     setIsSidebarOpen(true);
@@ -21,7 +23,8 @@ export const Layout: React.FC<LayoutProps> = () => {
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
-  });
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
