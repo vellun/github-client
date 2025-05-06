@@ -26,6 +26,11 @@ export const Layout: React.FC<LayoutProps> = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [location]);
 
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       <BackgroundContext.Provider value={{ backgroundColor, setBackgroundColor }}>
