@@ -1,10 +1,10 @@
 import { Navbar } from "components/Navbar";
 import { useEffect, useState } from "react";
-import { Outlet } from "react-router";
+import { Outlet, useLocation } from "react-router";
+import "styles/_variables.scss";
 import { Sidebar } from "./components/Sidebar";
 import { BackgroundContext, ThemeContext } from "./context";
 import styles from "./Layout.module.scss";
-import "styles/_variables.scss";
 
 interface LayoutProps {
   children?: React.ReactNode;
@@ -16,15 +16,15 @@ export const Layout: React.FC<LayoutProps> = () => {
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem("theme") || "light";
   });
+  const location = useLocation();
 
   const openSidebar = () => {
     setIsSidebarOpen(true);
   };
 
   useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
-  }, [theme]);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [location]);
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>

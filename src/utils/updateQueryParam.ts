@@ -1,4 +1,3 @@
-import { NavigateFunction } from "react-router-dom";
 import { rootStore } from "store/RootStore";
 
 export const updateQueryParam = (params: Record<string, string | number | null | number[]>) => {
