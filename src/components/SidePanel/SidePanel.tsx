@@ -17,7 +17,7 @@ interface SidePanelProps {
   close: () => void;
 }
 
-export const SidePanel: React.FC<SidePanelProps> = observer(({ className, titleSlot, links, close }) => {
+export const SidePanel: React.FC<SidePanelProps> = ({ className, titleSlot, links, close }) => {
   return (
     <div className={cn(className, styles.panel)}>
       <div className={styles.panel__content}>
@@ -31,7 +31,9 @@ export const SidePanel: React.FC<SidePanelProps> = observer(({ className, titleS
           {links.map((link, index) => (
             <li key={index}>
               <Link onClick={link.onClick} className={cn("link", styles.panel__link)} to={link.href}>
-                <Text className="noMarginText" color="primary">{link.title}</Text>
+                <Text className="noMarginText" color="primary">
+                  {link.title}
+                </Text>
               </Link>
             </li>
           ))}
@@ -39,4 +41,4 @@ export const SidePanel: React.FC<SidePanelProps> = observer(({ className, titleS
       </div>
     </div>
   );
-});
+};

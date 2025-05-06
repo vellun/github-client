@@ -20,19 +20,12 @@ const isParam = (param: any) => {
 };
 
 export default class ReposService {
-  static async getAllOrgRepos(
-    params: ReposApiRequestParams,
-    type: "org" | "user",
-    ownerLogin?: string,
-  ): Promise<ApiResp<Collection<number, RepoModel>>> {
+  static async getAllOrgRepos(params: ReposApiRequestParams): Promise<ApiResp<Collection<number, RepoModel>>> {
     if (params.org === undefined || params.org === null) {
       params.org = "ktsstudio";
-    } 
-
-    let url = apiUrls.repos.organizationRepos(params.org);
-    if (type == "user" && ownerLogin) {
-      url = apiUrls.users.userRepos(ownerLogin);
     }
+
+    const url = apiUrls.repos.organizationRepos(params.org);
 
     const response = await fetch(url, {
       type: params.type,
@@ -66,7 +59,7 @@ export default class ReposService {
   ): Promise<ApiResp<Collection<number, RepoModel>>> {
     let url = apiUrls.users.userRepos(ownerLogin);
 
-    if (rootStore.auth.user.login === ownerLogin) {
+    if (rootStore.auth.user?.login === ownerLogin) {
       url = apiUrls.users.currentUserRepos();
     }
 
@@ -113,9 +106,9 @@ export default class ReposService {
   static async getByRepoName(orgName: string, repoName: string): Promise<ApiResp<RepoModel>> {
     const response = await fetch(apiUrls.repos.repoByName(orgName, repoName));
 
-    let data = ""
+    let data = "";
     if (!response.isError) {
-      data = normalizeRepoModel(response.data)
+      data = normalizeRepoModel(response.data);
     }
 
     return { isError: response.isError, data: data };

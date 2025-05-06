@@ -1,7 +1,5 @@
 import { makeAutoObservable, reaction } from "mobx";
 import { QueryParamsStore } from "store/RootStore/QueryParamsStore";
-import { FiltersType, rootStore } from "store/RootStore";
-import { updateQueryParam } from "utils/updateQueryParam";
 
 export class FiltersStore {
   private _queryStore: QueryParamsStore;
@@ -13,8 +11,8 @@ export class FiltersStore {
 
     reaction(
       () => ({
-        filter: this._queryStore.getParam("filter"),
-        search: this._queryStore.getParam("search"),
+        filter: this._queryStore?.getParam("filter"),
+        search: this._queryStore?.getParam("search"),
       }),
       ({ filter, search }) => {
         if (filter !== undefined) {
@@ -24,7 +22,7 @@ export class FiltersStore {
           this.search = search;
         }
       },
-      { fireImmediately: true },
+      // { fireImmediately: true },
     );
   }
 

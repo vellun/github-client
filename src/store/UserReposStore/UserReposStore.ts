@@ -1,11 +1,11 @@
-import { makeAutoObservable, runInAction } from "mobx";
+import { runInAction } from "mobx";
 
 import { Meta } from "utils/meta";
 
 import ReposService from "api/ReposService";
 import { BaseReposStore } from "store/BaseReposStore";
 
-export class AllReposStore extends BaseReposStore {
+export class UserReposStore extends BaseReposStore {
   ownerLogin: string | undefined = undefined;
 
   constructor() {
@@ -18,16 +18,16 @@ export class AllReposStore extends BaseReposStore {
       this._repos.clear();
     });
 
-    const reposParams = this.query.getApiReposParams();
+    const userReposParams = this.query.getApiUserReposParams();
 
-    if (!reposParams.page) {
-      reposParams.page = this.pagination.page;
+    if (!userReposParams.page) {
+      userReposParams.page = this.pagination.page;
     }
-    if (!reposParams.perPage) {
-      reposParams.perPage = this.pagination.perPage;
+    if (!userReposParams.perPage) {
+      userReposParams.perPage = this.pagination.perPage;
     }
 
-    const { isError, data, pagesCount } = await ReposService.getAllOrgRepos(reposParams, this.type, this.ownerLogin);
+    const { isError, data, pagesCount } = await ReposService.getAllUserRepos(userReposParams, this.ownerLogin);
 
     if (isError) {
       this.setMeta(Meta.error);
@@ -36,7 +36,9 @@ export class AllReposStore extends BaseReposStore {
 
     runInAction(() => {
       this.meta = Meta.success;
+
       this._repos.setAll(data.order, data.entities);
+
       this.pagination.setTotalPages(pagesCount);
     });
   }

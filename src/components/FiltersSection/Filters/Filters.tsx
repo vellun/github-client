@@ -3,6 +3,7 @@ import { MultiDropdown, Option } from "components/MultiDropdown";
 import { observer } from "mobx-react-lite";
 import { useCallback } from "react";
 import styles from "./Filters.module.scss";
+import { autorun } from "mobx";
 
 export const Filters = observer(() => {
   const context = useFiltersContext();
@@ -16,7 +17,9 @@ export const Filters = observer(() => {
       store?.setFilter(selectedType);
     }
 
-    pageStore?.pagination.setPage(1);
+    autorun(() => {
+      pageStore?.pagination.setPage(1);
+    });
   };
 
   const getTitle = useCallback((values: Option[]) => {

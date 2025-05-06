@@ -2,19 +2,19 @@ import cn from "classnames";
 import { FiltersSection } from "components/FiltersSection";
 import { MiniReposSection } from "components/MiniReposSection";
 import { Pagination } from "components/Pagination";
+import { ReposSection } from "components/ReposSection";
 import { Text } from "components/Text";
 import { observer } from "mobx-react-lite";
+import { useQueryParamsStoreInit } from "store/RootStore/hooks";
 import { getViewedRepos } from "utils/viewedRepos";
-import { ReposSection } from "../../../components/ReposSection";
 import styles from "./AllReposPage.module.scss";
 import { useReposPageStore } from "./context";
 import { ReposFiltersProvider, ReposProvider } from "./provider";
-import { useQueryParamsStoreInit } from "store/RootStore/hooks";
 
 const AllReposPageContent: React.FC = observer(() => {
   const store = useReposPageStore();
   const lastSeenRepos = getViewedRepos();
-  
+
   useQueryParamsStoreInit(store.query);
 
   return (
@@ -32,7 +32,7 @@ const AllReposPageContent: React.FC = observer(() => {
         List of organization repositories
       </Text>
 
-      <ReposFiltersProvider type="org">
+      <ReposFiltersProvider>
         <FiltersSection />
       </ReposFiltersProvider>
 
@@ -45,7 +45,7 @@ const AllReposPageContent: React.FC = observer(() => {
 
 export const AllReposPage = () => {
   return (
-    <ReposProvider type="org">
+    <ReposProvider>
       <AllReposPageContent />
     </ReposProvider>
   );

@@ -43,6 +43,7 @@ export const Card: React.FC<CardProps> = ({
             weight="medium"
             view="p-14"
             color="secondary"
+            tag="div"
           >
             {captionSlot}
           </Text>

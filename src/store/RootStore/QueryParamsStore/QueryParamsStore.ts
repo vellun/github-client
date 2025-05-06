@@ -1,7 +1,6 @@
-import { makeAutoObservable, toJS } from "mobx";
+import { makeAutoObservable } from "mobx";
 import qs from "qs";
 import { NavigateFunction } from "react-router-dom";
-import { updateQueryParam } from "utils/updateQueryParam";
 
 export class QueryParamsStore {
   private _params: qs.ParsedQs = {};
@@ -46,23 +45,7 @@ export class QueryParamsStore {
     if (this._navigate) {
       this._navigate(`?${searchParams.toString()}`, { replace: true });
     }
-    // return searchParams.toString();
   };
-
-  initParams() {
-    // if (this.getParam("per_page") === undefined) {
-    //   const searchParams = updateQueryParam({ per_page: 6 });
-    //   this.setSearch(searchParams);
-    // }
-    if (this.getParam("page") === undefined) {
-      const searchParams = updateQueryParam({ page: 1 });
-      this.setSearch(searchParams);
-    }
-    // if (this.getParam("search") === undefined) {
-    //   const searchParams = updateQueryParam({ search: "ktsstudio" });
-    //   this.setSearch(searchParams);
-    // }
-  }
 
   getApiReposParams() {
     return {

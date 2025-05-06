@@ -1,5 +1,5 @@
 import UsersService from "api/UsersService";
-import { computed, makeObservable, observable, runInAction } from "mobx";
+import { computed, makeAutoObservable, observable, runInAction } from "mobx";
 import { rootStore } from "store/RootStore";
 import { RepoModel } from "store/models";
 import { UserModel } from "store/models/users";
@@ -14,14 +14,7 @@ export class UserStore {
   reposMeta: Meta = Meta.initial;
 
   constructor() {
-    makeObservable(this, {
-      _user: observable,
-      _repos: observable,
-      userMeta: observable,
-      reposMeta: observable,
-      user: computed,
-      repos: computed,
-    });
+    makeAutoObservable(this);
   }
 
   init(login: string) {
@@ -50,7 +43,7 @@ export class UserStore {
       this.userMeta = Meta.success;
       this._user = data;
 
-      if (this._user.login === rootStore.auth.user.login) {
+      if (this._user.login === rootStore.auth.user?.login) {
         this.setIsCurrent(true);
       }
     });
