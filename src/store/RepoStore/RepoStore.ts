@@ -1,5 +1,6 @@
 import ReposService from "api/ReposService";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
+import { toast } from "react-toastify";
 import { CreateRepoModel, RepoModel, RepoOwnerModel } from "store/models";
 import { Collection } from "utils/collection";
 import { Meta } from "utils/meta";
@@ -63,8 +64,10 @@ export class RepoStore {
       this.repoMeta = Meta.loading;
     });
 
-    const isError = await ReposService.createRepo(repo);
+    const { isError, data } = await ReposService.createRepo(repo);
+
     if (isError) {
+      toast.error("Error: " + data[0].message);
       this.setRepoMeta(Meta.error);
       return;
     }
@@ -72,6 +75,8 @@ export class RepoStore {
     runInAction(() => {
       this.repoMeta = Meta.success;
     });
+
+    toast.success("Repo successfully created");
   }
 
   async fetchReadme(orgName: string, repoName: string): Promise<void> {

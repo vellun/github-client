@@ -2,7 +2,14 @@
 @use "styles/variables" as *;
 
 .root {
+  height: 90vh;
+
+  &__form {
+    background-color: var(--card-background);
+  }
+
   &__field {
+    display: block;
     margin-bottom: $space-xs;
     border: 1px solid $brand-secondary;
     border-radius: $border-radius;
@@ -10,7 +17,12 @@
 
   &__private {
     @include mixins.flex;
+    text-align: left;
     gap: $space-xxs;
     margin-bottom: $space-s;
+
+    &__field {
+      flex-shrink: 0;
+    }
   }
 }

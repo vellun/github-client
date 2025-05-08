@@ -10,6 +10,7 @@ import { getViewedRepos } from "utils/viewedRepos";
 import styles from "./AllReposPage.module.scss";
 import { useReposPageStore } from "./context";
 import { ReposFiltersProvider, ReposProvider } from "./provider";
+import { toast } from "react-toastify";
 
 const AllReposPageContent: React.FC = observer(() => {
   const store = useReposPageStore();

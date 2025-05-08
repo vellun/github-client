@@ -137,9 +137,9 @@ export default class ReposService {
     return { isError: response.isError, data: response.data };
   }
 
-  static async createRepo(params: CreateRepoModel): Promise<PostApiResp> {
+  static async createRepo(params: CreateRepoModel): Promise<ApiResp> {
     const response = await fetch(apiUrls.repos.createRepo(), params, {}, "post");
 
-    return { isError: response.isError };
+    return { isError: response.isError, data: response.data };
   }
 }

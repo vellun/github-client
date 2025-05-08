@@ -5,6 +5,7 @@ import "styles/_variables.scss";
 import { Sidebar } from "./components/Sidebar";
 import { BackgroundContext, ThemeContext } from "./context";
 import styles from "./Layout.module.scss";
+import { Bounce, ToastContainer } from "react-toastify";
 
 interface LayoutProps {
   children?: React.ReactNode;
@@ -34,6 +35,19 @@ export const Layout: React.FC<LayoutProps> = () => {
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       <BackgroundContext.Provider value={{ backgroundColor, setBackgroundColor }}>
+        <ToastContainer
+          position="bottom-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick={false}
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme={theme}
+          transition={Bounce}
+        />
         <Navbar openSidebar={openSidebar} />
         <div className={styles[`background-${backgroundColor}`]}>
           <div className={styles.layout}>

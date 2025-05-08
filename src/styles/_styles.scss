@@ -7,7 +7,6 @@ body {
   font-family: "Roboto";
   margin: 0;
   padding: 0;
-  // background-color: $body-background;
 }
 
 * {
@@ -47,11 +46,16 @@ button {
 }
 
 .form {
-  background-color: white;
+  text-align: center;
+  background-color: var(--card-background);
   border-radius: $border-radius;
   padding: $space-xl $content-margin;
   border: 1px solid $brand-secondary;
-  margin-top: 5%;
+  @media (max-width: 720px) {
+    & {
+      padding: $space-xl $content-margin-xs;
+    }
+  }
 }
 
 @media (max-width: funcs.rem(1440)) {

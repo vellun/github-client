@@ -28,6 +28,7 @@ export const Text: React.FC<TextProps> = ({
   React.useEffect(() => {
     if (elementRef.current && maxLines !== undefined) {
       elementRef.current.style.setProperty("-webkit-line-clamp", maxLines.toString());
+      elementRef.current.style.setProperty("display", "-webkit-box");
     }
   }, [maxLines]);
 
@@ -38,6 +39,7 @@ export const Text: React.FC<TextProps> = ({
       ref={elementRef}
       className={cn(
         "text",
+        styles.text,
         className,
         styles[`text_color-${color}`],
         styles[`text_view-${view}`],

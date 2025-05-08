@@ -20,8 +20,8 @@ export const CheckBox: React.FC<CheckBoxProps> = ({ className, onChange, disable
       />
       <CheckIcon
         className={cn(styles.checkBoxIcon, disabled && styles.checkBoxIconDisabled)}
-        width={40}
-        height={40}
+        width={20}
+        height={20}
         color="accent"
       />
     </label>

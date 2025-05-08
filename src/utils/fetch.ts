@@ -34,7 +34,7 @@ export const fetch = async (
     console.log(e);
     return {
       isError: true,
-      data: e,
+      data: e.response.data.errors,
       headers: null,
     };
   }

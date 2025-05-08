@@ -1,6 +1,5 @@
-# Github Client
-
-https://vellun.github.io/github-client
+![Иллюстрация к проекту](for_readme/preview.png)
+Потыкать можно здесь -> https://vellun.github.io/github-client
 
 ![Иллюстрация к проекту](for_readme/screen.png)
 

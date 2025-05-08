@@ -21,7 +21,7 @@ export const MiniCard: React.FC = ({ className, repo }: { className: string; rep
           </Text>
         </div>
       </div>
-      <Text className={styles.text} color="primary" view="p-14">
+      <Text className={styles.text} maxLines="2" color="primary" view="p-14">
         {repo.description}
       </Text>
       {repo.language && (

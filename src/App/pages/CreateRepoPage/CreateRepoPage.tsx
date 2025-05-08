@@ -15,8 +15,6 @@ export const CreateRepoPage: React.FC = () => {
 
   const repoStore = useLocalObservable(() => new RepoStore());
 
-  console.log("SSSSSS", repoStore.repoMeta);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -47,9 +45,11 @@ export const CreateRepoPage: React.FC = () => {
             onChange={(value) => setDescription(value)}
           ></Input>
           <div className={styles.root__private}>
-            <CheckBox className={styles.root__field} checked={isPrivate} onChange={(value) => setIsPrivate(value)} />
+            <CheckBox className={cn(styles.root__field, styles.root__private__field)} checked={isPrivate} onChange={(value) => setIsPrivate(value)} />
             <div>
-              <Text className="noMarginText">Private</Text>
+              <Text className="noMarginText" color="primary">
+                Private
+              </Text>
               <Text className="noMarginText" view="p-14" color="secondary">
                 You choose who can see and commit to this repository
               </Text>

@@ -70,6 +70,7 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = (props: MultiDropdown
             } else {
               onChange([...value, option]);
             }
+            setIsOpen(false);
           }}
           key={option.key}
         >

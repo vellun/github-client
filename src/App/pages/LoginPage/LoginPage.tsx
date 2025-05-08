@@ -1,7 +1,7 @@
 import AuthService from "api/AuthService";
-import githubLogo from "assets/icons/github-logo.svg";
 import cn from "classnames";
 import { Button } from "components/Button";
+import { GhLogo } from "components/icons/GhLogo";
 import { Text } from "components/Text";
 import { routesConfig } from "config/routes";
 import { observer } from "mobx-react-lite";
@@ -18,8 +18,8 @@ export const LoginPage = observer(() => {
 
   return (
     <div className={cn("flex-container", styles.root)}>
-      <div className={cn("flex-container", styles.root__form)}>
-        <img src={githubLogo} alt="GitHub User Logo" width="47px" height="47px" />
+      <div className={cn("flex-container", "form", styles.root__form)}>
+        <GhLogo width="32px" height="32px" />
         <Text className={styles.root__title} tag="h1" weight="bold" color="primary">
           GitHub Authorization
         </Text>
