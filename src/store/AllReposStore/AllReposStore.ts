@@ -1,4 +1,4 @@
-import { makeAutoObservable, runInAction } from "mobx";
+import { runInAction } from "mobx";
 
 import { Meta } from "utils/meta";
 

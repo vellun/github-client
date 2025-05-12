@@ -1,12 +1,12 @@
 import axios from "axios";
-import { RepoModel } from "store/models";
+import { RepoApiModel, RepoModel } from "store/models";
 import { getCookie } from "typescript-cookie";
 import { ApiResp } from "utils/apiTypes";
 
 export const fetch = async (
   url: string,
-  params: any = {},
-  headers: any = {},
+  params: object = {},
+  headers: object = {},
   method: "get" | "post" = "get",
 ): Promise<ApiResp<RepoModel>> => {
   const token = getCookie("token");

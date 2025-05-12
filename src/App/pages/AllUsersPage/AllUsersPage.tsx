@@ -1,13 +1,12 @@
 import cn from "classnames";
 import { FiltersSection } from "components/FiltersSection";
-import { Pagination } from "components/Pagination";
 import { Text } from "components/Text";
 import { observer } from "mobx-react-lite";
+import { useQueryParamsStoreInit } from "store/RootStore/hooks";
 import styles from "./AllUsersPage.module.scss";
 import { UsersSection } from "./components/UsersSection";
 import { useUsersPageStore } from "./context";
 import { UsersFiltersProvider, UsersProvider } from "./provider";
-import { useQueryParamsStoreInit } from "store/RootStore/hooks";
 
 const AllUsersPageContent: React.FC = observer(() => {
   const store = useUsersPageStore();

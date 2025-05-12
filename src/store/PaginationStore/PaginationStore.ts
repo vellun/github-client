@@ -1,13 +1,11 @@
 import { action, computed, makeObservable, observable, reaction } from "mobx";
-import { rootStore } from "store/RootStore";
-import { updateQueryParam } from "utils/updateQueryParam";
 import { QueryParamsStore } from "store/RootStore/QueryParamsStore";
 
 export class PaginationStore {
   totalPages = 0;
-  private _queryStore: QueryParamsStore;
-  private _page: number = 1;
-  private _perPage: number = 6;
+  _queryStore: QueryParamsStore;
+  _page: number = 1;
+  _perPage: number = 6;
 
   constructor(queryStore: QueryParamsStore) {
     this._queryStore = queryStore;

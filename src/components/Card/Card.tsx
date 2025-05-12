@@ -1,7 +1,6 @@
 import cn from "classnames";
 import React from "react";
 
-import { useTheme } from "components/Layout/context";
 import { Text } from "components/Text";
 import styles from "./Card.module.scss";
 

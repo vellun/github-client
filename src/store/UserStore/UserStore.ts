@@ -1,5 +1,5 @@
 import UsersService from "api/UsersService";
-import { computed, makeAutoObservable, observable, runInAction } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 import { rootStore } from "store/RootStore";
 import { RepoModel } from "store/models";
 import { UserModel } from "store/models/users";

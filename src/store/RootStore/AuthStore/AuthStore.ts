@@ -45,20 +45,18 @@ export class AuthStore {
 
   async fetchRepos(): Promise<void> {
     runInAction(() => {
-      // this.reposMeta = Meta.loading;
+      this.meta = Meta.loading;
       this._repos.clear();
     });
 
-    console.log("aa");
-
     const { isError, data } = await UsersService.getCurrentUserRepos();
-    // if (isError) {
-    //   this.setUserMeta(Meta.error);
-    //   return;
-    // }
+    if (isError) {
+      this.setMeta(Meta.error);
+      return;
+    }
 
     runInAction(() => {
-      // this.reposMeta = Meta.success;
+      this.meta = Meta.success;
       this._repos.setAll(data.order, data.entities);
     });
   }
@@ -97,7 +95,9 @@ export class AuthStore {
 
   get isAuth() {
     const token = getCookie("token");
-    token ? this.setIsAuth(true) : this.setIsAuth(false);
+    if (token !== undefined) {
+      this.setIsAuth(true)
+    } 
     return this._isAuth;
   }
 

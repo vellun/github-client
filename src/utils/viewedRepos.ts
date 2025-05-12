@@ -10,7 +10,7 @@ export const getViewedRepos = () => {
 export const addViewedRepo = (repo: RepoModel) => {
   let viewedRepos = getViewedRepos();
 
-  if (viewedRepos.some((r) => r.name === repo.name)) {
+  if (viewedRepos.some((r: string) => r.name === repo.name)) {
     return;
   }
 

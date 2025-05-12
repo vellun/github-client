@@ -4,6 +4,7 @@ import { apiUrls } from "config/apiUrls";
 import { rootStore } from "store/RootStore";
 import {
   CreateRepoModel,
+  RepoApiModel,
   RepoModel,
   RepoOwnerModel,
   normalizeRepoModel,
@@ -14,7 +15,7 @@ import { ApiResp } from "utils/apiTypes";
 import { Collection } from "utils/collection";
 import { fetch } from "utils/fetch";
 
-const isParam = (param: any) => {
+const isParam = (param: string | number) => {
   return param !== undefined && param !== null;
 };
 
@@ -105,9 +106,9 @@ export default class ReposService {
   static async getByRepoName(orgName: string, repoName: string): Promise<ApiResp<RepoModel>> {
     const response = await fetch(apiUrls.repos.repoByName(orgName, repoName));
 
-    let data = "";
+    let data;
     if (!response.isError) {
-      data = normalizeRepoModel(response.data);
+      data = normalizeRepoModel(response.data as RepoApiModel);
     }
 
     return { isError: response.isError, data: data };

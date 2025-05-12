@@ -3,7 +3,7 @@ export type LoginModel = {
 };
 
 export type ProfileModel = {
-  id: number;
+  id: number | string;
   email: string;
   name: string;
   avatar: string;

@@ -7,7 +7,7 @@ import { ApiResp } from "utils/apiTypes";
 import { Collection } from "utils/collection";
 import { fetch } from "utils/fetch";
 
-const isParam = (param: any) => {
+const isParam = (param: string | number) => {
   return param !== undefined && param !== null;
 };
 

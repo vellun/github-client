@@ -6,7 +6,8 @@
     "target": "es5",
     "jsx": "react-jsx",
     "allowJs": true,
-    "moduleResolution": "node",
+    "moduleResolution": "Node",
+    "downlevelIteration": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "baseUrl": "src",
@@ -20,7 +21,7 @@
       "hooks": ["hooks/*"],
       "api": ["api/*"],
       "store": ["store/*"],
-      "meta": ["store/*"]
+      "meta": ["store/*"],
     }
   },
   "ts-node": {

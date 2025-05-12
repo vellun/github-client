@@ -1,16 +1,14 @@
-export type ApiResp<SuccessData = any, ErrorData = any> =
+export type ApiResp<SuccessData = unknown, ErrorData = unknown> =
   | {
     isError: false;
     data: SuccessData;
-    headers: object;
   }
   | {
     isError: true;
     data: ErrorData;
-    headers: null;
   };
 
-  export type PostApiResp<SuccessData = any, ErrorData = any> =
+  export type PostApiResp =
   | {
     isError: false;
   }
