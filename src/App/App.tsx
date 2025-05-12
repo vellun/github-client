@@ -9,7 +9,7 @@ import { AuthRoute } from "components/AuthRoute";
 import { Layout } from "components/Layout";
 import { routesConfig } from "config/routes";
 import { createHashRouter, Navigate, RouteObject } from "react-router";
-import "styles/_styles.scss";
+import "styles/styles.scss";
 
 const App = () => {
   return <Layout />;

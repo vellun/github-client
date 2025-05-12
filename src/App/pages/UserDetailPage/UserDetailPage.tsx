@@ -15,7 +15,7 @@ import { rootStore } from "store/RootStore";
 
 const UserDetailPageContent: React.FC = observer(() => {
   let store = useUserPageStore();
-  let isCurrent = store.isCurrent;
+  const isCurrent = store.isCurrent;
 
   if (store.isCurrent) {
     store = rootStore.auth;

@@ -1,6 +1,5 @@
 import cn from "classnames";
 import { Text } from "components/Text";
-import { observer } from "mobx-react-lite";
 import { Link } from "react-router";
 import styles from "./SidePanel.module.scss";
 

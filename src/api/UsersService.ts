@@ -19,7 +19,7 @@ export default class UsersService {
 
   static async getAll(params: UsersApiRequestParams): Promise<ApiResp<Collection<number, RepoOwnerModel>>> {
     let url = apiUrls.users.users();
-    let q = [];
+    const q = [];
 
     if (isParam(params.login)) {
       url = apiUrls.search.users();

@@ -2,14 +2,14 @@
 @use "styles/funcs" as funcs;
 
 .root {
+  margin-bottom: $space-xl;
+  width: 100%;
+
   &__repos {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: $space-s;
   }
-
-  margin-bottom: $space-xl;
-  width: 100%;
 }
 
 @media (max-width: funcs.rem(650)) {

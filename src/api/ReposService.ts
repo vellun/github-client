@@ -1,7 +1,6 @@
 import { ReposApiRequestParams, UsersReposApiRequestParams } from "api/types";
-import { apiUrls } from "config/apiUrls";
-import { marked } from "marked";
 import { Buffer } from "buffer";
+import { apiUrls } from "config/apiUrls";
 import { rootStore } from "store/RootStore";
 import {
   CreateRepoModel,
@@ -11,7 +10,7 @@ import {
   normalizeRepoOwnersToCollection,
   normalizeReposToCollection,
 } from "store/models";
-import { ApiResp, PostApiResp } from "utils/apiTypes";
+import { ApiResp } from "utils/apiTypes";
 import { Collection } from "utils/collection";
 import { fetch } from "utils/fetch";
 
@@ -63,7 +62,7 @@ export default class ReposService {
       url = apiUrls.users.currentUserRepos();
     }
 
-    let q = [];
+    const q = [];
 
     if (isParam(params.repoName)) {
       url = apiUrls.search.repos();

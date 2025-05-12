@@ -1,8 +1,9 @@
 @use "sass:math";
 @use "sass:string";
+@use 'sass:meta';
 
 @function rem($pixel) {
-  @if type-of($pixel) == "string" and string.slice($pixel, -2) == "px" {
+  @if meta.type-of($pixel) == "string" and string.slice($pixel, -2) == "px" {
     $pixel: math.div(to-number(string.slice($pixel, 1, -2)), 16);
   } @else {
     $pixel: math.div($pixel, 16);
