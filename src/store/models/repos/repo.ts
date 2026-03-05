@@ -13,4 +13,12 @@ export type RepoModel = {
   watchersCount: number;
   forksCount: number;
   languages: object;
+  language: string;
+  private: boolean;
+};
+
+export type CreateRepoModel = {
+  name: string;
+  description: string;
+  private: boolean;
 };

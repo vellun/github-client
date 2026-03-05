@@ -1,32 +1,30 @@
-import React, { useState } from 'react';
-import { observer } from 'mobx-react-lite';
-import { Input } from 'components/Input';
+import AuthService from "api/AuthService";
+import cn from "classnames";
+import { Button } from "components/Button";
+import { GhLogo } from "components/icons/GhLogo";
+import { Text } from "components/Text";
+import { routesConfig } from "config/routes";
+import { observer } from "mobx-react-lite";
+import { useNavigate } from "react-router-dom";
 import styles from "./LoginPage.module.scss";
-import { rootStore } from 'store/RootStore';
-import { Button } from 'components/Button';
 
 export const LoginPage = observer(() => {
-  // const [formData, setFormData] = useState({
-  //   username: '',
-  //   email: '',
-  //   password: '',
-  // });
-  const [login, setLogin] = useState('');
-  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    rootStore.auth.login(login, password);
-    // if (authStore.user) {
-    //   history.push('/'); // Перенаправление на главную страницу после успешной регистрации
-    // }
+  const handleLogin = async () => {
+    await AuthService.login();
+    navigate(routesConfig.repositories.create());
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-        <Input onChange={(value) => setLogin(value)} placeholder="Login" />
-        <Input onChange={(value) => setPassword(value)} placeholder="Password" type="password" />
-        <Button type="submit">Sign in</Button>
-    </form>
+    <div className={cn("flex-container", styles.root)}>
+      <div className={cn("flex-container", "form", styles.root__form)}>
+        <GhLogo width="32px" height="32px" />
+        <Text className={styles.root__title} tag="h1" weight="bold" color="primary">
+          GitHub Authorization
+        </Text>
+        <Button onClick={handleLogin}>Log in</Button>
+      </div>
+    </div>
   );
 });

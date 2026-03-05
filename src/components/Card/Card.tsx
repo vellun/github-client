@@ -1,11 +1,10 @@
-import React from "react";
 import cn from "classnames";
+import React from "react";
 
 import { Text } from "components/Text";
 import styles from "./Card.module.scss";
 
 export type CardProps = {
-  /** Дополнительный classname */
   className?: string;
   /** URL изображения */
   image: string;
@@ -32,7 +31,7 @@ export const Card: React.FC<CardProps> = ({
   contentSlot,
   onClick,
   actionSlot,
-}) => {
+}: CardProps) => {
   return (
     <div className={cn(styles.card, className)} onClick={onClick}>
       <img className={styles.card__image} src={image} alt="Repo's card image"></img>
@@ -43,6 +42,7 @@ export const Card: React.FC<CardProps> = ({
             weight="medium"
             view="p-14"
             color="secondary"
+            tag="div"
           >
             {captionSlot}
           </Text>

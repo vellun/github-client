@@ -3,6 +3,7 @@
 
 .root {
   @include mixins.flex;
+  flex-wrap: wrap;
 
   gap: $space-xxs;
   margin-bottom: $space-l;

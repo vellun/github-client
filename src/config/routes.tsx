@@ -23,9 +23,9 @@ export const routesConfig = {
     mask: "/users/:login/repos",
     create: (login: string) => `/users/${login}/repos`,
   },
-  register: {
-    mask: "/register",
-    create: () => `/register`,
+  createRepo: {
+    mask: "/create",
+    create: () => `/create`,
   },
   login: {
     mask: "/login",

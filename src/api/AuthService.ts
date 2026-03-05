@@ -1,21 +1,39 @@
-import { LoginRequestParams, RegisterRequestParams } from "api/types";
-import axios from "axios";
-import { apiUrls } from "config/apiUrls";
-import { LoginModel, normalizeRegisterModel } from "store/models";
-import { RegisterModel } from "store/models";
-import { ApiResp } from "utils/apiTypes";
-import { fetch } from "utils/fetch";
+import { auth } from "config/firebase";
+import { GithubAuthProvider, signInWithPopup, signOut } from "firebase/auth";
+import { rootStore } from "store/RootStore";
 
 export default class AuthService {
-    static async Register(params: RegisterRequestParams): Promise<ApiResp<RegisterModel>> {
-        const response = await fetch(apiUrls.auth.register(), params, {}, "post");
-        console.log("DDDDDDDDD", response)
-            
-        return { isError: response.isError, data: normalizeRegisterModel(response.data) };
-    }
+  static async login() {
+    const provider = new GithubAuthProvider();
+    provider.addScope("repo");
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      const credential = GithubAuthProvider.credentialFromResult(result);
 
-    static async Login(params: LoginRequestParams): Promise<ApiResp<LoginModel>> {
-        const response = await fetch(apiUrls.auth.login(), params, {}, "post");
-        return { isError: response.isError, data: response.data };
+      let token = "";
+      if (credential?.accessToken !== undefined) {
+        token = credential?.accessToken;
+      }
+
+      rootStore.auth.login(token, {
+        id: user.uid,
+        name: user.displayName || "",
+        email: user.email || "",
+        avatar: user.photoURL,
+      });
+    } catch (error) {
+      console.error("Popup error:", error);
     }
+  }
+
+  static logout() {
+    signOut(auth)
+      .then(() => {
+        rootStore.auth.logout();
+      })
+      .catch((error) => {
+        console.error("Logout error:", error);
+      });
+  }
 }

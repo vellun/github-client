@@ -11,7 +11,7 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   className?: string;
 };
 
-export const Button: React.FC<ButtonProps> = ({ loading, children, disabled, className, ...props }) => (
+export const Button: React.FC<ButtonProps> = ({ loading, children, disabled, className, ...props }: ButtonProps) => (
   <button
     className={cn(
       styles.button,

@@ -1,8 +1,17 @@
-@use "styles/Roboto/fonts";
 @use "styles/variables" as *;
 
 .layout {
-  background-color: $body-background;
   max-width: 1440px;
   margin: 0 auto;
+  min-height: 100vh;
+}
+
+.background {
+  &-normal {
+    background-color: var(--body-background);
+  }
+
+  &-accent {
+    background-color: var(--background-accent);
+  }
 }

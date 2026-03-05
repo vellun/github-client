@@ -1,30 +1,55 @@
+import UsersService from "api/UsersService";
 import { makeAutoObservable, runInAction } from "mobx";
-import bcrypt from 'bcryptjs';
+import { ProfileModel, RepoModel, UserModel } from "store/models";
+import { getCookie, removeCookie, setCookie } from "typescript-cookie";
+import { Collection } from "utils/collection";
 import { Meta } from "utils/meta";
-import AuthService from "api/AuthService";
 
 export class AuthStore {
-  user: string | null = null;
-  token: string | null = null;
+  private _user: UserModel | null = null;
+  private _repos: Collection<number, RepoModel> = new Collection();
+  private _token: string | null = null;
+  private _isAuth: boolean = false;
   meta: Meta = Meta.initial;
 
   constructor() {
     makeAutoObservable(this);
-    const storedUser = localStorage.getItem('user');
-    const storedToken = localStorage.getItem('token');
-    if (storedUser && storedToken) {
-      this.user = storedUser;
-      this.token = storedToken;
+
+    const token = getCookie("token");
+
+    if (token) {
+      this._token = token;
+      this.fetchCurrentUser();
     }
   }
 
-  register = async (email: string, login: string, password: string) => {
+  async fetchCurrentUser(): Promise<void> {
     runInAction(() => {
       this.meta = Meta.loading;
-      this.user = null;
+      this._user = null;
     });
 
-    const { isError, data } = await AuthService.Register({ email: email, username: login, password: password });
+    const { isError, data } = await UsersService.getCurrentUser();
+    if (isError) {
+      this.setMeta(Meta.error);
+      return;
+    }
+
+    this.setUser(data);
+
+    runInAction(() => {
+      this.meta = Meta.success;
+      this._user = data;
+    });
+  }
+
+  async fetchRepos(): Promise<void> {
+    runInAction(() => {
+      this.meta = Meta.loading;
+      this._repos.clear();
+    });
+
+    const { isError, data } = await UsersService.getCurrentUserRepos();
     if (isError) {
       this.setMeta(Meta.error);
       return;
@@ -32,36 +57,49 @@ export class AuthStore {
 
     runInAction(() => {
       this.meta = Meta.success;
-      this.user = login;
-
-      console.log("SS", login)
+      this._repos.setAll(data.order, data.entities);
     });
-  };
+  }
 
-  logout = () => {
-    this.user = null;
-    localStorage.removeItem('user');
-  };
+  async login(token: string, user: ProfileModel) {
+    setCookie("token", token);
+    this.setIsAuth(true);
+    this.setUser(user);
+    this.fetchCurrentUser();
+  }
 
-  login = async (login: string, password: string) => {
-    runInAction(() => {
-      this.meta = Meta.loading;
-      this.user = null;
-    });
+  logout() {
+    removeCookie("token");
+    this.setIsAuth(false);
+  }
 
-    const { isError, data } = await AuthService.Login({ username: login, password: password });
-    if (isError) {
-      this.setMeta(Meta.error);
-      return;
-    }
+  setUser(newUser: ProfileModel) {
+    this._user = newUser;
+  }
 
-    runInAction(() => {
-      this.meta = Meta.success;
-      this.user = login;
+  setIsAuth(newIsAuth: boolean) {
+    this._isAuth = newIsAuth;
+  }
 
-      console.log("SS", data)
-    });
-  };
+  get user() {
+    return this._user;
+  }
+
+  get token() {
+    return this._token;
+  }
+
+  get repos(): RepoModel[] | null {
+    return this._repos.getAll;
+  }
+
+  get isAuth() {
+    const token = getCookie("token");
+    if (token !== undefined) {
+      this.setIsAuth(true)
+    } 
+    return this._isAuth;
+  }
 
   setMeta(newMeta: Meta) {
     this.meta = newMeta;

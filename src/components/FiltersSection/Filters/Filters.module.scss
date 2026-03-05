@@ -1,4 +1,18 @@
+@use "styles/funcs" as funcs;
+
 .root {
   z-index: 2;
-  width: 300px;
+  width: 30%;
+}
+
+@media (max-width: funcs.rem(980)) {
+  .root {
+    width: 50%;
+  }
+}
+
+@media (max-width: funcs.rem(570)) {
+  .root {
+    width: 100%;
+  }
 }

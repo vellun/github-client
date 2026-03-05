@@ -2,15 +2,13 @@ import { orgReposFilterOptions, usersFilterOptions } from "config/filterOptions"
 import { createContext, useContext } from "react";
 import { AllReposStore } from "store/AllReposStore";
 import { AllUsersStore } from "store/AllUsersStore";
-import { FiltersType, SearchStore } from "store/RootStore";
-import { FiltersStore } from "store/RootStore/FiltersStore";
+import { FiltersType } from "store/RootStore";
 
 export type FiltersContextType = {
   options: typeof usersFilterOptions | typeof orgReposFilterOptions;
   filterType: FiltersType;
-  filtersStore: FiltersStore;
-  searchStore: SearchStore;
   pageStore: AllReposStore | AllUsersStore;
+  inputPlaceholder: string;
 };
 
 export const FiltersContext = createContext<FiltersContextType | null>(null);
@@ -22,11 +20,5 @@ export const useFiltersContext = () => {
 
 export const useFilterStore = () => {
   const filtersContext = useContext(FiltersContext);
-  return filtersContext?.filtersStore;
+  return filtersContext?.pageStore.filters;
 };
-
-export const useSearchStore = () => {
-  const filtersContext = useContext(FiltersContext);
-  return filtersContext?.searchStore;
-};
-

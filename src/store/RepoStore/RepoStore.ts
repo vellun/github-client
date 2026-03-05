@@ -1,6 +1,7 @@
 import ReposService from "api/ReposService";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
-import { RepoModel, RepoOwnerModel } from "store/models";
+import { toast } from "react-toastify";
+import { CreateRepoModel, RepoModel, RepoOwnerModel } from "store/models";
 import { Collection } from "utils/collection";
 import { Meta } from "utils/meta";
 
@@ -41,10 +42,6 @@ export class RepoStore {
   }
 
   async fetchRepo(orgName: string, repoName: string): Promise<void> {
-    if (this.repoMeta === Meta.loading || this.repoMeta === Meta.success) {
-      return;
-    }
-
     runInAction(() => {
       this.repoMeta = Meta.loading;
       this._repo = null;
@@ -62,11 +59,27 @@ export class RepoStore {
     });
   }
 
-  async fetchReadme(orgName: string, repoName: string): Promise<void> {
-    if (this.readmeMeta === Meta.loading || this.readmeMeta === Meta.success) {
+  async createRepo(repo: CreateRepoModel): Promise<void> {
+    runInAction(() => {
+      this.repoMeta = Meta.loading;
+    });
+
+    const { isError, data } = await ReposService.createRepo(repo);
+
+    if (isError) {
+      toast.error("Error: " + data[0].message);
+      this.setRepoMeta(Meta.error);
       return;
     }
 
+    runInAction(() => {
+      this.repoMeta = Meta.success;
+    });
+
+    toast.success("Repo successfully created");
+  }
+
+  async fetchReadme(orgName: string, repoName: string): Promise<void> {
     runInAction(() => {
       this.readmeMeta = Meta.loading;
       this._readme = null;

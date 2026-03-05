@@ -6,7 +6,7 @@
     justify-content: space-between;
     border: 1px solid $brand-secondary;
     border-radius: $border-radius;
-    background-color: white;
+    background-color: var(--card-background);
 
     padding: $space-s;
 

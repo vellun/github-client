@@ -1,9 +1,6 @@
 import { FiltersContext } from "components/FiltersSection/context";
 import { usersFilterOptions } from "config/filterOptions";
 import { AllUsersStore } from "store/AllUsersStore";
-import { FiltersType } from "store/RootStore";
-import { filtersStore } from "store/RootStore/FiltersStore/instance";
-import { searchStore } from "store/RootStore/SearchStore/instance";
 import { UsersContext, useUsersPageStore } from "./context";
 
 export const UsersProvider = ({ children }: { children: React.ReactNode }) => {
@@ -13,6 +10,16 @@ export const UsersProvider = ({ children }: { children: React.ReactNode }) => {
 };
 
 export const UsersFiltersProvider = ({ children }: { children: React.ReactNode }) => {
-  const usersStore = useUsersPageStore()
-  return <FiltersContext.Provider value={{ pageStore: usersStore, filtersStore: filtersStore, searchStore: searchStore, options: usersFilterOptions, filterType: FiltersType.users }}>{children}</FiltersContext.Provider>;
+  const usersStore = useUsersPageStore();
+  return (
+    <FiltersContext.Provider
+      value={{
+        inputPlaceholder: "Enter user login",
+        pageStore: usersStore,
+        options: usersFilterOptions,
+      }}
+    >
+      {children}
+    </FiltersContext.Provider>
+  );
 };

@@ -19,13 +19,3 @@ export type UsersReposApiRequestParams = {
     perPage: number | null;
 };
 
-export type RegisterRequestParams = {
-    email: string | null;
-    username: string | null;
-    password: string | null;
-};
-
-export type LoginRequestParams = {
-    username: string | null;
-    password: string | null;
-};

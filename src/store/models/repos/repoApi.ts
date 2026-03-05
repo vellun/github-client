@@ -14,6 +14,9 @@ export type RepoApiModel = {
   stargazers_count: number;
   watchers_count: number;
   forks_count: number;
+  languages: object,
+  language: string,
+  private: boolean,
 };
 
 export const normalizeRepoModel = (raw: RepoApiModel): RepoModel => ({
@@ -28,6 +31,9 @@ export const normalizeRepoModel = (raw: RepoApiModel): RepoModel => ({
   stargazersCount: raw.stargazers_count,
   watchersCount: raw.watchers_count,
   forksCount: raw.forks_count,
+  languages: raw.languages,
+  language: raw.language,
+  private: raw.private,
 });
 
 export const normalizeReposToCollection = (rawList: RepoApiModel[]): Collection<number, RepoModel> => {

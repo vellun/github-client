@@ -1,5 +1,6 @@
 @use "styles/variables" as *;
 @use "styles/mixins" as mixins;
+@use "styles/funcs" as funcs;
 
 .navbar {
   @include mixins.flex;
@@ -8,21 +9,46 @@
   padding-left: $content-margin;
   padding-right: $content-margin;
   border-bottom: 2px solid $brand-secondary;
-  // margin-bottom: $space-xl;
+  background-color: var(--body-background);
 
-  &__logo {
+  &__logo,
+  &__side-menu {
     @include mixins.flex;
 
     justify-content: space-between;
-    gap: $space-xl;
+    gap: $space-s;
   }
 
   &__menu {
     @include mixins.flex;
-    gap: 40px;
+    gap: funcs.rem(40);
   }
 }
 
 .panel__check {
   display: none;
+}
+
+@media (max-width: funcs.rem(1440)) {
+  .navbar {
+    padding-left: funcs.rem(50);
+    padding-right: funcs.rem(50);
+  }
+}
+
+@media (max-width: funcs.rem(460)) {
+  .navbar {
+    padding-left: funcs.rem(20);
+    padding-right: funcs.rem(20);
+  }
+}
+
+@media (max-width: funcs.rem(600)) {
+  .navbar__logo-text {
+    display: none;
+  }
+
+  .navbar__menu {
+    gap: funcs.rem(20);
+  }
 }

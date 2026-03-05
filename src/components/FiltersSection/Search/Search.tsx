@@ -1,34 +1,22 @@
 import searchLogo from "assets/icons/search.svg";
 import { Button } from "components/Button";
-import { useFiltersContext, useSearchStore } from "components/FiltersSection/context";
+import { useFiltersContext, useFilterStore } from "components/FiltersSection/context";
 import { Input } from "components/Input";
 import { observer } from "mobx-react-lite";
-import { FiltersType } from "store/RootStore";
 import styles from "./Search.module.scss";
-import { useEffect } from "react";
 
 export const Search = observer(() => {
-  const context = useFiltersContext()
-  const store = useSearchStore()
-  const pageStore = context?.pageStore
-
-  useEffect(() => {
-    return () => { store?.setSearch(""); }
-  }, []);
+  const context = useFiltersContext();
+  const store = useFilterStore();
+  const pageStore = context?.pageStore;
 
   const handleInputChange = (value: string) => {
-    if (context?.filterType === FiltersType.repos) {
-      store?.setReposSearch(value);
-    }
-
-    if (context?.filterType === FiltersType.users) {
-      store?.setUsersSearch(value);
-    }
+    store?.setSearch(value);
   };
 
   const handleButtonClick = () => {
     pageStore?.fetch();
-    pageStore?.pagination.setPage(1)
+    pageStore?.pagination.setPage(1);
   };
 
   return (
@@ -37,7 +25,7 @@ export const Search = observer(() => {
         className={styles.search__input}
         value={store.search}
         onChange={handleInputChange}
-        placeholder="Enter organization name"
+        placeholder={context?.inputPlaceholder}
       ></Input>
       <Button onClick={handleButtonClick}>
         <img src={searchLogo} alt="Search Icon" width="24px" height="24px" />

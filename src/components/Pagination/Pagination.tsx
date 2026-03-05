@@ -6,9 +6,10 @@ import cn from "classnames";
 import { ArrowRightIcon } from "components/icons/ArrowRightIcon";
 import { useEffect, useState } from "react";
 import { AllReposStore } from "store/AllReposStore";
+import { autorun } from "mobx";
 
 export const Pagination = observer(({ store }: { store: AllReposStore }) => {
-  const paginationStore = store.pagination
+  const paginationStore = store.pagination;
 
   const [buttonActive, setbuttonActive] = useState<number | string>(paginationStore.page);
   const [leftArrowColor, setLeftArrowColor] = useState<"primary" | "secondary" | "accent">("secondary");
@@ -16,42 +17,24 @@ export const Pagination = observer(({ store }: { store: AllReposStore }) => {
 
   const totalPages = paginationStore.totalPages;
 
-  const setArrowsColors = () => {
-    if (paginationStore.page === 1) {
-      setLeftArrowColor("secondary")
-    } else {
-      setLeftArrowColor("primary")
-    }
-
-    if (paginationStore.page === totalPages) {
-      setRightArrowColor("secondary")
-    } else {
-      setRightArrowColor("primary")
-    }
-  }
+  useEffect(() => {
+    return autorun(() => {
+      setbuttonActive(paginationStore.page);
+      setLeftArrowColor(paginationStore.page === 1 ? "secondary" : "primary");
+      setRightArrowColor(paginationStore.page === totalPages ? "secondary" : "primary");
+    });
+  }, [paginationStore.page, totalPages]);
 
   const handlePageChange = (newPage: number) => {
-    if (newPage > 3) {
-
-    }
     setbuttonActive(newPage);
     paginationStore.setPage(newPage);
-    setArrowsColors()
   };
 
   const handleClick = (value: number | string) => {
-    if (value === "...") {
-      setbuttonActive(value);
-    } else {
+    if (typeof value === "number") {
       handlePageChange(value);
     }
   };
-
-  useEffect(() => {
-    setArrowsColors()
-    console.log("KKKdK", paginationStore.page)
-  }, []);
-
 
   return (
     <div className={styles.pagination}>
@@ -71,20 +54,19 @@ export const Pagination = observer(({ store }: { store: AllReposStore }) => {
             })}
             onClick={() => handleClick(value)}
           >
-            <Text className={styles.pagination__numbers__text} view="p-18">
+            <Text className={styles.pagination__numbers__text} color="primary" view="p-18">
               {value}
             </Text>
           </button>
         ))}
       </div>
-      <button className={cn(styles.pagination__arrow, styles.pagination__item)} onClick={() => handlePageChange(paginationStore.page + 1)} disabled={paginationStore.page === totalPages}>
-        <ArrowRightIcon
-          className={styles["pagination__arrow-right"]}
-          width="32"
-          height="32"
-          color={rightArrowColor}
-        />
+      <button
+        className={cn(styles.pagination__arrow, styles.pagination__item)}
+        onClick={() => handlePageChange(paginationStore.page + 1)}
+        disabled={paginationStore.page === totalPages}
+      >
+        <ArrowRightIcon className={styles["pagination__arrow-right"]} width="32" height="32" color={rightArrowColor} />
       </button>
-    </div >
+    </div>
   );
 });

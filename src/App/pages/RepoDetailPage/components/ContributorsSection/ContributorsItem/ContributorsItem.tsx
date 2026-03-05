@@ -15,7 +15,7 @@ export const ContributorsItem: React.FC<ContributorsItemProps> = ({ login, avata
     <Link className="link" to={routesConfig.userDetail.create(login)}>
       <div className={styles.root}>
         <UserLogo src={avatarUrl} alt="Contributor Avatar" />
-        <Text className={styles.root__name} weight="bold" view="p-16">
+        <Text className={styles.root__name} color="primary" weight="bold" view="p-16">
           {login}
         </Text>
         <Text className={styles.root__name} weight="bold" view="p-16" color="secondary">

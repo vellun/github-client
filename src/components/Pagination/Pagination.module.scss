@@ -1,11 +1,11 @@
 @use "styles/variables" as *;
 @use "styles/mixins" as mixins;
+@use "styles/funcs" as funcs;
 
 .pagination {
   @include mixins.flex;
 
   justify-content: space-between;
-  row-gap: 40px;
   margin-bottom: 22px;
 
   &__item {
@@ -33,6 +33,12 @@
   &__numbers-item {
     width: 42px;
     height: 100%;
+
+    @media (max-width: funcs.rem(480)) {
+      & {
+        width: funcs.rem(38);
+      }
+    }
 
     &_active {
       background-color: $button-primary-bg;
