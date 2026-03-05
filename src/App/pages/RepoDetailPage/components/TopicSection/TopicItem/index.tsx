@@ -1,2 +1,1 @@
-export { default } from "./TopicItem";
-export * from "./TopicItem";
+export { TopicItem } from "./TopicItem";

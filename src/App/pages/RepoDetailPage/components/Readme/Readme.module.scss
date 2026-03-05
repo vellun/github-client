@@ -1,14 +1,40 @@
 @use "styles/variables" as *;
 
-.Readme {
+.root {
   border: 1px solid $brand-secondary;
   border-radius: 4px;
+  max-width: 900px;
+  color: var(--text-primary);
+
+  &__title {
+    margin: $space-m;
+  }
+
+  &__content {
+    margin: 32px;
+
+    img {
+      max-width: 100%;
+    }
+
+    pre {
+      background-color: var(--body-background);
+      padding: 16px;
+      border-radius: 4px;
+      width: 100%;
+      overflow-x: auto;
+    }
+  }
 }
 
-.readmeText {
-  margin: $space-m;
+@media (max-width: 500px) {
+  .root__content {
+    margin: 22px;
+  }
 }
 
-.ReadmeContent {
-  margin: 32px;
+@media (max-width: 400px) {
+  .root__content {
+    word-break: break-all;
+  }
 }

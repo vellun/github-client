@@ -1,0 +1,75 @@
+@use "./Roboto/fonts.scss";
+@use "styles/variables" as *;
+@use "styles/funcs" as funcs;
+
+html,
+body {
+  font-family: "Roboto";
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  padding: 0;
+  box-sizing: border-box;
+}
+
+button {
+  background: none;
+  border: none;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+}
+
+.noMarginText {
+  margin: 0;
+}
+
+.flex-container {
+  margin-left: $content-margin;
+  margin-right: $content-margin;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 1440px;
+}
+
+.container {
+  margin-left: $content-margin;
+  margin-right: $content-margin;
+  margin-top: 0;
+  max-width: 1440px;
+}
+
+.form {
+  text-align: center;
+  background-color: var(--card-background);
+  border-radius: $border-radius;
+  padding: $space-xl $content-margin;
+  border: 1px solid $brand-secondary;
+  @media (max-width: 720px) {
+    & {
+      padding: $space-xl $content-margin-xs;
+    }
+  }
+}
+
+@media (max-width: funcs.rem(1440)) {
+  .flex-container,
+  .container {
+    margin-left: funcs.rem(50);
+    margin-right: funcs.rem(50);
+  }
+}
+
+@media (max-width: funcs.rem(460)) {
+  .flex-container,
+  .container {
+    margin-left: funcs.rem(20);
+    margin-right: funcs.rem(20);
+  }
+}

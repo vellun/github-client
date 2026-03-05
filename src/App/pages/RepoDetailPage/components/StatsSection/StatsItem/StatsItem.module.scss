@@ -1,15 +1,11 @@
 @use "styles/mixins" as mixins;
 
-.StatsItem {
+.root {
   @include mixins.flex;
 
   gap: 8px;
 
-  &ItemText {
+  &__text {
     @include mixins.flex;
-  }
-
-  &Item {
-    margin: 0;
   }
 }

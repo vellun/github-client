@@ -1,18 +1,17 @@
-import Text from "components/Text";
+import { Text } from "components/Text";
 import styles from "./topicItem.module.scss";
 
 interface TopicItemProps {
   topicName: string;
 }
 
-const TopicItem: React.FC<TopicItemProps> = ({ topicName }) => {
+export const TopicItem: React.FC<TopicItemProps> = ({ topicName }) => {
   return (
-    <div className={styles.TopicItem}>
-      <Text className={styles.TopicName} weight="bold" view="p-12">
+    <div className={styles.topic}>
+      <Text className={styles.topic__name} weight="bold" view="p-12">
         {topicName}
       </Text>
     </div>
   );
 };
 
-export default TopicItem;

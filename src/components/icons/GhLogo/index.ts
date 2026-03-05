@@ -1,0 +1,1 @@
+export { GhLogo } from './Ghlogo';

@@ -1,2 +1,1 @@
-export { default } from "./ContributorsItem";
-export * from "./ContributorsItem";
+export { ContributorsItem } from "./ContributorsItem";

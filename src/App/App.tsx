@@ -1,14 +1,8 @@
-import Navbar from "components/Navbar";
-import { Outlet } from "react-router";
-import "styles/_styles.scss";
+import { Layout } from "components/Layout";
+import "styles/styles.scss";
 
 const App = () => {
-  return (
-    <div>
-      <Navbar />
-      <Outlet />
-    </div>
-  );
+  return <Layout />;
 };
 
 export default App;

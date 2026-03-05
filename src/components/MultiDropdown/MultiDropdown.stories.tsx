@@ -1,18 +1,18 @@
-import React from 'react';
-import MultiDropdown, { MultiDropdownProps, Option } from './MultiDropdown';
+import React from "react";
+import { MultiDropdown, MultiDropdownProps, Option } from "./MultiDropdown";
 
 const OPTIONS = [
-  { key: 'msk', value: 'Moscow' },
-  { key: 'spb', value: 'Saint Petersburg' },
-  { key: 'ekb', value: 'Ekaterinburg' },
+  { key: "msk", value: "Moscow" },
+  { key: "spb", value: "Saint Petersburg" },
+  { key: "ekb", value: "Ekaterinburg" },
 ];
 
 export default {
-  title: 'MultiDropdown',
+  title: "MultiDropdown",
   component: MultiDropdown,
   argTypes: {
     className: {
-      control: 'text',
+      control: "text",
     },
     value: {
       mapping: String,
@@ -20,12 +20,12 @@ export default {
     },
     disabled: {
       mapping: {
-        'true': true,
-        'false': false,
-        'undefined': undefined,
+        true: true,
+        false: false,
+        undefined: undefined,
       },
-      control: 'boolean'
-    }
+      control: "boolean",
+    },
   },
 };
 
@@ -39,7 +39,9 @@ export const Default = (props: MultiDropdownProps) => {
       options={OPTIONS}
       onChange={setValue}
       value={value}
-      getTitle={(values: Option[]) => values.length === 0 ? 'Выберите города': values.map(({ value }) => value).join(', ')}
-  />
+      getTitle={(values: Option[]) =>
+        values.length === 0 ? "Выберите города" : values.map(({ value }) => value).join(", ")
+      }
+    />
   );
 };

@@ -1,2 +1,1 @@
-export { default } from "./RepoLink";
-export * from "./RepoLink";
+export { RepoLink } from "./RepoLink";

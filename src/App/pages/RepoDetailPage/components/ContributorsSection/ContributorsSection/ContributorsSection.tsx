@@ -1,51 +1,33 @@
-import UsersService, { Contributor, User } from "api/UsersService";
-import Text from "components/Text";
-import { useFetching } from "hooks/useFetching";
-import { useEffect, useState } from "react";
+import { Loader } from "components/Loader";
+import { Text } from "components/Text";
+import { observer } from "mobx-react-lite";
+import { RepoStore } from "store/RepoStore";
+import { Meta } from "utils/meta";
+import { ContributorsItem } from "../ContributorsItem";
 import styles from "./ContributorsSection.module.scss";
-import ContributorsItem from "../ContributorsItem";
+import { Link } from "react-router";
 
-interface ContributorsProps {
-  repoName: string;
-}
-
-const ContributorsSection: React.FC<ContributorsProps> = ({ repoName }) => {
-  const [contributors, setContributors] = useState<Contributor[]>([]);
-  const [user, setUser] = useState<User | null>(null);
-
-  const [login, setLogin] = useState<string>("");
-
-  const [fetchContributors, _] = useFetching(async (): Promise<void> => {
-    const contributors = await UsersService.getContributors(repoName);
-    setContributors(contributors);
-  });
-
-  // const [fetchUser, _] = useFetching(async (): Promise<void> => {
-  //   const user = await UsersService.getByLogin(login);
-  //   setUser(user);
-  // });
-
-  useEffect(() => {
-    fetchContributors();
-  }, []);
+export const ContributorsSection: React.FC<{ store: RepoStore }> = observer(({ store }) => {
+  const contributorsCnt = store.contributors?.length
+  const contributors = store.contributors?.slice(0, 4);
 
   return (
-    <div className={styles.Contributors}>
-      <div className={styles.title}>
-        <Text className={styles.text} view="p-18" weight="bold" color="primary">
+    <div className={styles.root}>
+      {store.contributorsMeta === Meta.loading && <Loader />}
+      <div className={styles.root__section}>
+        <Text className={styles.root__title} view="p-18" weight="bold" color="primary">
           Contributors
         </Text>
-        <div className={styles.ContributorsCount}>
-          <Text className={styles.countText} tag="span" weight="bold">
-            {contributors.length}
+        <div className={styles.root__count}>
+          <Text className={styles["root__count-text"]} tag="span" weight="bold">
+            {contributorsCnt}
           </Text>
         </div>
       </div>
-      {contributors.map((contributor, index) => {
-        return <ContributorsItem key={index} login={contributor.login} avatarUrl={contributor.avatar_url} />;
+      {contributors.map((contributor) => {
+        return <ContributorsItem key={contributor.id} login={contributor.login} avatarUrl={contributor.avatarUrl} />;
       })}
+      {contributorsCnt - 4 > 0 && <Link><Text>+ {contributorsCnt - 4} contributors</Text></Link>}
     </div>
   );
-};
-
-export default ContributorsSection;
+});

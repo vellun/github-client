@@ -1,0 +1,17 @@
+@use "styles/variables" as *;
+
+.layout {
+  max-width: 1440px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+.background {
+  &-normal {
+    background-color: var(--body-background);
+  }
+
+  &-accent {
+    background-color: var(--background-accent);
+  }
+}

@@ -1,2 +1,1 @@
-export { default } from "./Readme";
-export * from "./Readme";
+export { Readme } from "./Readme";

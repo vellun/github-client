@@ -18,8 +18,13 @@
     background-color: $brand-hover;
   }
 
-  &.ButtonLoading:hover {
-    background-color: $brand;
+  &-loading {
+    &:hover {
+      background-color: $brand;
+    }
+    &-disabled:disabled {
+      background-color: $brand;
+    }
   }
 
   &:active {
@@ -32,9 +37,5 @@
     &:hover {
       background-color: #d9d9d9;
     }
-  }
-
-  &.ButtonLoadingDisabled:disabled {
-    background-color: $brand;
   }
 }

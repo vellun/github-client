@@ -1,32 +1,20 @@
-import { useEffect, useState } from "react";
+import { Text } from "components/Text";
+import { observer } from "mobx-react-lite";
+import ReactMarkdown from "react-markdown";
+import rehypeSanitize from "rehype-sanitize";
+import remarkGfm from "remark-gfm";
+import { RepoStore } from "store/RepoStore";
 import styles from "./Readme.module.scss";
-import { useFetching } from "hooks/useFetching";
-import RepsService from "api/RepsService";
-import Text from "components/Text";
 
-interface ReadmeProps {
-  repoName: string;
-}
-
-const Readme: React.FC<ReadmeProps> = ({ repoName }) => {
-  const [readmeHtml, setReadmeHtml] = useState<string>("");
-
-  const [fetchReadme, _] = useFetching(async (): Promise<void> => {
-    const readme = await RepsService.getReadme(repoName);
-    setReadmeHtml(readme);
-  });
-
-  useEffect(() => {
-    fetchReadme();
-  }, []);
+export const Readme: React.FC<{ store: RepoStore }> = observer(({ store }) => {
   return (
-    <div className={styles.Readme}>
-      <Text className={styles.readmeText} view="p-12" weight="bold" color="primary">
+    <div className={styles.root}>
+      <Text className={styles.root__title} view="p-12" weight="bold" color="primary">
         README.md
       </Text>
-      <div className={styles.ReadmeContent} dangerouslySetInnerHTML={{ __html: readmeHtml }} />
+      <div className={styles.root__content}>
+        <ReactMarkdown children={store.readme} remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeSanitize]} />
+      </div>
     </div>
   );
-};
-
-export default Readme;
+});

@@ -1,0 +1,19 @@
+@use "styles/variables" as *;
+@use "styles/funcs" as funcs;
+
+.root {
+  margin-bottom: $space-xl;
+  width: 100%;
+
+  &__repos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $space-s;
+  }
+}
+
+@media (max-width: funcs.rem(650)) {
+  .root__repos {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

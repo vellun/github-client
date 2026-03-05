@@ -1,0 +1,53 @@
+@use "styles/mixins" as mixins;
+@use "styles/variables" as *;
+
+.panel {
+  background-color: var(--body-background);
+  width: 320px;
+
+  border-radius: $border-radius;
+
+  &__close {
+    transform: rotate(45deg);
+    align-self: flex-start;
+    cursor: pointer;
+    font-size: 30px;
+    color: gray;
+  }
+
+  &__content {
+    padding: 20px;
+  }
+
+  &__title {
+    @include mixins.flex;
+    gap: 10px;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    &__name {
+      @include mixins.flex;
+      gap: 10px;
+    }
+  }
+
+  &__menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__link {
+    display: block;
+    padding: 10px 0;
+    text-decoration: none;
+  }
+
+  &__link:hover {
+    background-color: #f0f0f0;
+  }
+
+  &__link:hover {
+    color: $brand;
+  }
+}
